@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물댄동산교회 - God's Love Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 text-center">
+                        <div class="hero-text">
+                            <h1>새 일을 이루는 교회</h1>
+                            <p class="hero-description">
+                                "너희 안에서 착한 일을 시작하신 이가 그리스도 예수의 날까지 이루실 줄을 우리는 확신하노라"<br>
+                                <span class="bible-reference">(빌 1:6)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Latest Sermon -->
+    <section class="latest-sermon">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3>이번주일설교</h3>
+                    <p class="sermon-info">
+                        <span class="sermon-title loading">최신 설교 정보를 불러오는 중...</span>
+                        <span class="sermon-details">│물댄동산교회│정종한목사│</span>
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="sermon-icons">
+                        <a href="#" id="youtube-popup" class="icon-btn" title="YouTube에서 보기"><i class="fas fa-video"></i></a>
+                        <a href="#" id="audio-popup" class="icon-btn" title="음성만 듣기"><i class="fas fa-headphones"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Popup Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="video-container">
+                <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Popup Modal -->
+    <div id="audioModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="audio-container">
+                <iframe id="audioFrame" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="audio-info">
+                <i class="fas fa-headphones"></i>
+                <p>음성이 백그라운드에서 재생되고 있습니다.</p>
+                <small>닫기 버튼을 클릭하면 음성이 중지됩니다.</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Church Services -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>물댄동산 교회는</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop" alt="환영">
+                        </div>
+                        <div class="service-content">
+                            <h3>우리의 예배는</h3>
+                            <p>예배는 우리의 삶의 목적입니다.함꼐 모여 하나님을 예배하는 것은 우리 교회의 가장 중요한 이유입니다.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&h=300&fit=crop" alt="주일 예배">
+                        </div>
+                        <div class="service-content">
+                            <h3>말씀과찬양</h3>
+                            <p>매주 주일 오전 11시에 드리는 예배입니다. 하나님의 말씀을 통해 은혜를 받고 함께 찬양하며 예배합니다.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="청년부">
+                        </div>
+                        <div class="service-content">
+                            <h3>양육과훈련</h3>
+                            <p>청년들을 위한 다양한 프로그램을 제공합니다. 함께 성장하며 영적으로 성숙해가는 공동체입니다.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=300&fit=crop" alt="선교">
+                        </div>
+                        <div class="service-content">
+                            <h3>다음세대</h3>
+                            <p>하나님의 사랑을 전하는 선교 사역을 통해 지역사회와 세계에 복음을 전파합니다.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- More Events -->
+    <section id="events" class="events-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>More Events</h2>
+                <div class="event-nav">
+                    <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop" alt="봄맞이 캠핑">
+                        </div>
+                        <div class="event-content">
+                            <h3>봄맞이 캠핑</h3>
+                            <div class="event-date">27 Apr 2024 | 09:00 am</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=250&fit=crop" alt="하나님을 위한 음악">
+                        </div>
+                        <div class="event-content">
+                            <h3>하나님을 위한 음악</h3>
+                            <div class="event-date">26 Apr 2024 | 01:00 pm</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop" alt="야외 모임">
+                        </div>
+                        <div class="event-content">
+                            <h3>야외 모임</h3>
+                            <div class="event-date">26 Apr 2024 | 09:30 am</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop" alt="성경 공부">
+                        </div>
+                        <div class="event-content">
+                            <h3>성경 공부</h3>
+                            <div class="event-date">24 Apr 2024 | 10:00 am</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="header-loader.js"></script>
+    <script src="footer-loader.js"></script>
+</body>
+</html>

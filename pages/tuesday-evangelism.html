@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화요전도팀 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .evangelism-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .intro-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .intro-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .intro-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .intro-content {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .activities-section {
+            padding: 80px 0;
+        }
+        
+        .activity-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .activity-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .activity-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .activity-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .activity-content {
+            padding: 25px;
+        }
+        
+        .activity-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .activity-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .activity-details li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .activity-details li:before {
+            content: '📖';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+        }
+        
+        .schedule-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .schedule-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .schedule-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .schedule-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .schedule-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            padding: 80px 0;
+        }
+        
+        .team-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .team-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .team-role {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .team-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .testimonials-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .testimonial-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .testimonial-date {
+            color: #dc3545;
+            font-size: 0.9rem;
+        }
+        
+        .join-section {
+            padding: 80px 0;
+        }
+        
+        .join-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .join-icon {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .join-btn {
+            padding: 15px 30px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .join-btn:hover {
+            background: #b02a37;
+        }
+        
+        .stats-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="evangelism-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">화요전도팀</h1>
+            <p class="lead">복음을 전하며 영혼을 구원하는 전도사역</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">팀원 수</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">52</div>
+                        <div class="stat-label">연간 전도활동</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">127</div>
+                        <div class="stat-label">구원받은 영혼</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">전도지역</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="intro-card">
+                        <div class="intro-icon">
+                            <i class="fas fa-cross"></i>
+                        </div>
+                        <div class="intro-title">화요전도팀 소개</div>
+                        <div class="intro-content">
+                            화요전도팀은 매주 화요일 저녁에 모여 복음을 전하며 영혼을 구원하는 
+                            전도사역을 담당하는 팀입니다. 개인전도, 가정방문, 거리전도 등 
+                            다양한 방법으로 복음을 전파하며, 전도훈련과 기도를 통해 
+                            전도자의 영적 성장을 도모합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="activities-section">
+        <div class="container">
+            <h2 class="text-center mb-5">전도활동</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <div class="activity-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="activity-title">가정방문 전도</div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-description">
+                                지역 내 가정을 방문하여 복음을 전하고 영적 돌봄을 제공합니다.
+                            </div>
+                            <ul class="activity-details">
+                                <li>매주 화요일 오후 7시 - 9시</li>
+                                <li>2-3명씩 팀을 구성하여 활동</li>
+                                <li>전도지역: 송도동, 연수동, 청학동</li>
+                                <li>전도 자료와 성경책 제공</li>
+                                <li>후속 전도 및 교회 초대</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <div class="activity-icon">
+                                <i class="fas fa-street-view"></i>
+                            </div>
+                            <div class="activity-title">거리전도</div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-description">
+                                공공장소에서 복음을 전하며 전도지와 성경책을 나눠줍니다.
+                            </div>
+                            <ul class="activity-details">
+                                <li>매주 토요일 오후 2시 - 4시</li>
+                                <li>송도역, 인천대입구역 주변</li>
+                                <li>전도지, 성경책, 기도카드 배포</li>
+                                <li>복음성가 공연 및 간증</li>
+                                <li>상담 및 기도 요청 접수</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <div class="activity-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="activity-title">개인전도</div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-description">
+                                일상생활 속에서 만나는 사람들에게 개인적으로 복음을 전합니다.
+                            </div>
+                            <ul class="activity-details">
+                                <li>직장, 학교, 이웃을 통한 전도</li>
+                                <li>전도훈련을 통한 전도기술 습득</li>
+                                <li>간증과 기도를 통한 전도</li>
+                                <li>전도일지 작성 및 공유</li>
+                                <li>전도 성과 분석 및 개선</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <div class="activity-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="activity-title">전도훈련</div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-description">
+                                체계적인 전도훈련을 통해 효과적인 전도자가 되도록 돕습니다.
+                            </div>
+                            <ul class="activity-details">
+                                <li>매주 화요일 오후 6시 - 7시</li>
+                                <li>전도 이론 및 실습 교육</li>
+                                <li>성경공부 및 기도훈련</li>
+                                <li>전도사례 분석 및 토론</li>
+                                <li>전도자 영적 성장 지도</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <div class="activity-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <div class="activity-title">후속 전도</div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-description">
+                                전도한 사람들과 지속적인 관계를 유지하며 영적 돌봄을 제공합니다.
+                            </div>
+                            <ul class="activity-details">
+                                <li>정기적인 연락 및 방문</li>
+                                <li>성경공부 및 기도 지도</li>
+                                <li>교회 생활 적응 도움</li>
+                                <li>새가족반 연결 및 안내</li>
+                                <li>영적 성장 동반자 역할</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="activity-card">
+                        <div class="activity-header">
+                            <div class="activity-icon">
+                                <i class="fas fa-pray"></i>
+                            </div>
+                            <div class="activity-title">전도기도</div>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-description">
+                                전도사역을 위한 기도와 영적 준비를 통해 하나님의 은혜를 구합니다.
+                            </div>
+                            <ul class="activity-details">
+                                <li>매주 화요일 오후 5시 - 6시</li>
+                                <li>전도대상자를 위한 중보기도</li>
+                                <li>전도자의 영적 준비 기도</li>
+                                <li>전도지역을 위한 기도</li>
+                                <li>전도 성과를 위한 감사기도</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="text-center mb-5">활동 일정</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="schedule-title">화요일 활동</div>
+                        <div class="schedule-content">
+                            오후 5시 - 6시: 전도기도<br>
+                            오후 6시 - 7시: 전도훈련<br>
+                            오후 7시 - 9시: 가정방문 전도<br>
+                            오후 9시 - 9시 30분: 활동 정리 및 기도
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="schedule-title">토요일 활동</div>
+                        <div class="schedule-content">
+                            오후 2시 - 4시: 거리전도<br>
+                            장소: 송도역, 인천대입구역<br>
+                            활동: 전도지 배포, 복음성가 공연<br>
+                            상담 및 기도 요청 접수
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="schedule-title">참여 안내</div>
+                        <div class="schedule-content">
+                            모든 성도들이 참여 가능<br>
+                            전도훈련 후 활동 참여<br>
+                            팀별로 활동 지역 배정<br>
+                            문의: 전도부 담당 목사님
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="text-center mb-5">전도팀 구성원</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">김전도 목사</div>
+                            <div class="team-role">전도팀 지도목사</div>
+                            <div class="team-description">
+                                전도사역의 중요성을 강조하며, 
+                                팀원들이 효과적으로 복음을 전할 수 있도록 
+                                지도하는 담당 목사입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">이복음 집사</div>
+                            <div class="team-role">전도팀장</div>
+                            <div class="team-description">
+                                전도팀의 전체적인 운영을 담당하며, 
+                                팀원들의 전도활동을 조율하고 
+                                전도훈련을 인도합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">박구원 집사</div>
+                            <div class="team-role">후속전도 담당</div>
+                            <div class="team-description">
+                                전도한 사람들과의 후속관계를 담당하며, 
+                                새가족들의 교회 적응을 돕고 
+                                영적 성장을 지도합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">최사랑 자매</div>
+                            <div class="team-role">가정방문 전도 담당</div>
+                            <div class="team-description">
+                                가정방문 전도를 주로 담당하며, 
+                                가정의 특성에 맞는 전도 방법을 
+                                연구하고 실천합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">정희망 집사</div>
+                            <div class="team-role">거리전도 담당</div>
+                            <div class="team-description">
+                                거리전도 활동을 주로 담당하며, 
+                                복음성가 공연과 전도지 배포를 
+                                통해 복음을 전합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="team-content">
+                            <div class="team-name">한은혜 자매</div>
+                            <div class="team-role">전도훈련 담당</div>
+                            <div class="team-description">
+                                전도훈련을 담당하며, 
+                                팀원들의 전도기술 향상과 
+                                영적 성장을 돕습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center mb-5">전도 체험담</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "화요전도팀 활동을 통해 복음을 전하는 기쁨을 경험했고, 
+                            하나님께서 전도사역을 통해 크게 사용하신 것을 보았습니다."
+                        </div>
+                        <div class="testimonial-author">김○○ 집사</div>
+                        <div class="testimonial-date">2024년 2월</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "가정방문 전도를 통해 한 가정이 구원받는 것을 보며 
+                            전도의 중요성을 깨달았습니다."
+                        </div>
+                        <div class="testimonial-author">이○○ 자매</div>
+                        <div class="testimonial-date">2024년 1월</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "거리전도에서 만난 한 분이 교회에 나오게 되었고, 
+                            지금은 적극적으로 교회생활을 하고 있습니다."
+                        </div>
+                        <div class="testimonial-author">박○○ 집사</div>
+                        <div class="testimonial-date">2023년 12월</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section class="join-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="join-card">
+                        <div class="join-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>화요전도팀 참여하기</h3>
+                        <p class="lead">복음을 전하며 영혼을 구원하는 전도사역에 함께 참여하세요.</p>
+                        <p>전화: 02-1234-5678 (전도부)</p>
+                        <p>이메일: evangelism@songdochurch.org</p>
+                        <button class="join-btn">전도팀 참여 신청</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../header-loader.js"></script>
+    <script src="../footer-loader.js"></script>
+</body>
+</html>

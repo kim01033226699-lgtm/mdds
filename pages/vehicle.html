@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차량 운행안내 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .vehicle-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .vehicle-info {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .info-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .info-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+        
+        .info-label {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .routes-section {
+            padding: 80px 0;
+        }
+        
+        .route-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .route-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .route-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .route-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .route-name {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .route-content {
+            padding: 25px;
+        }
+        
+        .route-schedule {
+            margin-bottom: 20px;
+        }
+        
+        .schedule-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .schedule-times {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .route-stops {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .stops-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .stop-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .stop-list li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .stop-list li:before {
+            content: '📍';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+        }
+        
+        .schedule-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .schedule-table {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .schedule-header {
+            background: #dc3545;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .schedule-body {
+            padding: 0;
+        }
+        
+        .schedule-row {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .schedule-row:last-child {
+            border-bottom: none;
+        }
+        
+        .schedule-day {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .schedule-time {
+            flex: 2;
+            padding: 15px;
+            color: #666;
+        }
+        
+        .notice-section {
+            padding: 80px 0;
+        }
+        
+        .notice-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .notice-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .notice-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .notice-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .notice-content {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+         <!-- Header Container -->
+     <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="vehicle-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">차량 운행안내</h1>
+            <p class="lead">편리한 교회 차량 서비스로 함께 예배하세요</p>
+        </div>
+    </section>
+
+    <!-- Vehicle Info -->
+    <section class="vehicle-info">
+        <div class="container">
+            <h2 class="text-center mb-5">차량 정보</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <div class="info-number">3</div>
+                        <div class="info-label">운행 차량</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="info-number">5</div>
+                        <div class="info-label">운행 **노선</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="info-number">150</div>
+                        <div class="info-label">수용인원</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-number">7</div>
+                        <div class="info-label">운행횟수</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Routes Section -->
+    <section class="routes-section">
+        <div class="container">
+                            <h2 class="text-center mb-5">운행 **노선</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="route-card">
+                        <div class="route-header">
+                            <div class="route-number">1호차</div>
+                            <div class="route-name">@@ **노선</div>
+                        </div>
+                        <div class="route-content">
+                            <div class="route-schedule">
+                                <div class="schedule-title">운행시간</div>
+                                <div class="schedule-times">
+                                    주일: 오전 8시 30분, 10시 30분<br>
+                                    수요: 오후 7시<br>
+                                    금요: 오후 7시 30분
+                                </div>
+                            </div>
+                            <div class="route-stops">
+                                <div class="stops-title">정차장소</div>
+                                <ul class="stop-list">
+                                                                         <li>## 1번 출구</li>
+                                     <li>## 2번 출구</li>
+                                     <li>## 3번 출구</li>
+                                     <li>## 4번 출구</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="route-card">
+                        <div class="route-header">
+                            <div class="route-number">2호차</div>
+                            <div class="route-name">@@ **노선</div>
+                        </div>
+                        <div class="route-content">
+                            <div class="route-schedule">
+                                <div class="schedule-title">운행시간</div>
+                                <div class="schedule-times">
+                                    주일: 오전 8시 45분, 10시 45분<br>
+                                    수요: 오후 7시 15분<br>
+                                    금요: 오후 7시 45분
+                                </div>
+                            </div>
+                            <div class="route-stops">
+                                <div class="stops-title">정차장소</div>
+                                <ul class="stop-list">
+                                                                         <li>## 1번 출구</li>
+                                     <li>## 2번 출구</li>
+                                     <li>## 정문</li>
+                                     <li>## 후문</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="route-card">
+                        <div class="route-header">
+                            <div class="route-number">3호차</div>
+                            <div class="route-name">@@ **노선</div>
+                        </div>
+                        <div class="route-content">
+                            <div class="route-schedule">
+                                <div class="schedule-title">운행시간</div>
+                                <div class="schedule-times">
+                                    주일: 오전 9시, 11시<br>
+                                    수요: 오후 7시 30분<br>
+                                    금요: 오후 8시
+                                </div>
+                            </div>
+                            <div class="route-stops">
+                                <div class="stops-title">정차장소</div>
+                                <ul class="stop-list">
+                                                                         <li>##청</li>
+                                     <li>##민체육관</li>
+                                     <li>##도서관</li>
+                                     <li>##보건소</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="route-card">
+                        <div class="route-header">
+                            <div class="route-number">4호차</div>
+                            <div class="route-name">@@ **노선</div>
+                        </div>
+                        <div class="route-content">
+                            <div class="route-schedule">
+                                <div class="schedule-title">운행시간</div>
+                                <div class="schedule-times">
+                                    주일: 오전 8시 15분, 10시 15분<br>
+                                    수요: 오후 6시 45분<br>
+                                    금요: 오후 7시 15분
+                                </div>
+                            </div>
+                            <div class="route-stops">
+                                <div class="stops-title">정차장소</div>
+                                <ul class="stop-list">
+                                                                         <li>##청</li>
+                                     <li>##민체육관</li>
+                                     <li>##도서관</li>
+                                     <li>##보건소</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="text-center mb-5">운행 시간표</h2>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="schedule-table">
+                        <div class="schedule-header">
+                            <h3>주일 운행 시간표</h3>
+                        </div>
+                        <div class="schedule-body">
+                            <div class="schedule-row">
+                                                                 <div class="schedule-day">1호차 (@@)</div>
+                                <div class="schedule-time">오전 8시 30분, 10시 30분</div>
+                            </div>
+                            <div class="schedule-row">
+                                                                 <div class="schedule-day">2호차 (@@)</div>
+                                <div class="schedule-time">오전 8시 45분, 10시 45분</div>
+                            </div>
+                            <div class="schedule-row">
+                                                                 <div class="schedule-day">3호차 (@@)</div>
+                                <div class="schedule-time">오전 9시, 11시</div>
+                            </div>
+                            <div class="schedule-row">
+                                                                 <div class="schedule-day">4호차 (@@)</div>
+                                <div class="schedule-time">오전 8시 15분, 10시 15분</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notice Section -->
+    <section class="notice-section">
+        <div class="container">
+            <h2 class="text-center mb-5">이용 안내</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="notice-card">
+                        <div class="notice-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="notice-title">시간 준수</div>
+                        <div class="notice-content">
+                            차량은 정시에 출발합니다. 
+                            출발 시간 5분 전까지 정차장소에 도착해 주시기 바랍니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="notice-card">
+                        <div class="notice-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="notice-title">무료 서비스</div>
+                        <div class="notice-content">
+                            교회 차량은 무료로 제공되는 서비스입니다. 
+                            예배 참석을 위한 편의를 제공합니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="notice-card">
+                        <div class="notice-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="notice-title">선착순</div>
+                        <div class="notice-content">
+                            좌석이 제한되어 있으므로 선착순으로 탑승합니다. 
+                            만석 시 다음 차량을 이용해 주세요.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="notice-card">
+                        <div class="notice-icon">
+                            <i class="fas fa-volume-mute"></i>
+                        </div>
+                        <div class="notice-title">매너</div>
+                        <div class="notice-content">
+                            차량 내에서는 조용히 해주시고, 
+                            다른 승객들을 배려해 주시기 바랍니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="notice-card">
+                        <div class="notice-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="notice-title">안전</div>
+                        <div class="notice-content">
+                            차량 운행 중에는 안전벨트를 착용해 주시고, 
+                            차량 내에서 뛰거나 장난치지 마세요.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="notice-card">
+                        <div class="notice-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="notice-title">문의</div>
+                        <div class="notice-content">
+                            차량 운행 관련 문의사항이 있으시면 
+                            교회 사무실로 연락해 주시기 바랍니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="../script.js"></script>
+     <script src="../header-loader.js"></script>
+     <script src="../footer-loader.js"></script>
+</body>
+</html>

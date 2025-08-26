@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유치부 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .kindergarten-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .intro-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .intro-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .intro-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .intro-content {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .programs-section {
+            padding: 80px 0;
+        }
+        
+        .program-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .program-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .program-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .program-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .program-content {
+            padding: 25px;
+        }
+        
+        .program-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .program-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .program-details li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .program-details li:before {
+            content: '🎨';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+        }
+        
+        .schedule-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .schedule-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .schedule-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .schedule-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .schedule-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .teachers-section {
+            padding: 80px 0;
+        }
+        
+        .teacher-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .teacher-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .teacher-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .teacher-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .teacher-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .teacher-role {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .teacher-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .testimonials-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .testimonial-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .testimonial-date {
+            color: #dc3545;
+            font-size: 0.9rem;
+        }
+        
+        .join-section {
+            padding: 80px 0;
+        }
+        
+        .join-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .join-icon {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .join-btn {
+            padding: 15px 30px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .join-btn:hover {
+            background: #b02a37;
+        }
+        
+        .stats-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .gallery-section {
+            padding: 80px 0;
+        }
+        
+        .gallery-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .gallery-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .gallery-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="kindergarten-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">유치부</h1>
+            <p class="lead">하나님의 사랑을 배우는 어린이들의 천국</p>
+        </div>
+    </section>
+
+
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="intro-card">
+                        <div class="intro-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <div class="intro-title">유치부 소개</div>
+                        <div class="intro-content">
+                            유치부는 3-6세 어린이들이 하나님의 사랑을 배우고 
+                            신앙의 기초를 다지는 곳입니다. 놀이와 노래, 그림 그리기 등을 통해 
+                            어린이들이 즐겁게 하나님을 알아가며, 
+                            따뜻하고 안전한 환경에서 함께 성장합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section">
+        <div class="container">
+            <h2 class="text-center mb-5">프로그램</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="program-title">어린이 성경공부</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                어린이들이 이해할 수 있는 방법으로 성경을 가르칩니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>매주 주일 오전 9시 - 10시 30분</li>
+                                <li>어린이 전용 성경 교재 사용</li>
+                                <li>그림과 이야기로 성경 배우기</li>
+                                <li>간단한 기도 가르치기</li>
+                                <li>성경 인물 이야기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="program-title">어린이 찬양</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                어린이들이 즐겁게 노래하며 하나님을 찬양합니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>어린이 찬양 가르치기</li>
+                                <li>손유희와 함께하는 찬양</li>
+                                <li>악기 연주 배우기</li>
+                                <li>찬양 공연 준비</li>
+                                <li>음악을 통한 신앙 교육</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="program-title">미술활동</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                그림 그리기와 만들기를 통해 창의성을 키웁니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>성경 이야기 그림 그리기</li>
+                                <li>종이접기와 만들기</li>
+                                <li>색칠하기 활동</li>
+                                <li>공예품 만들기</li>
+                                <li>창의력 발달 활동</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="program-title">놀이활동</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                다양한 놀이를 통해 친구들과 함께 성장합니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>단체 놀이 활동</li>
+                                <li>성경 퀴즈 게임</li>
+                                <li>신체 활동 놀이</li>
+                                <li>협동 놀이</li>
+                                <li>사회성 발달 활동</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="program-title">특별활동</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                계절별 특별한 활동을 통해 즐거운 추억을 만듭니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>어린이날 행사</li>
+                                <li>여름 캠프</li>
+                                <li>가을 소풍</li>
+                                <li>크리스마스 행사</li>
+                                <li>부모님과 함께하는 행사</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="program-title">인성교육</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                하나님의 사랑을 배우며 올바른 인성을 기릅니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>사랑과 나눔 가르치기</li>
+                                <li>예의와 질서 교육</li>
+                                <li>친구와의 우정</li>
+                                <li>부모님 사랑하기</li>
+                                <li>하나님의 자녀 됨</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="text-center mb-5">활동 일정</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="schedule-title">주일 활동</div>
+                        <div class="schedule-content">
+                            오전 9시 - 9시 30분: 등원 및 인사<br>
+                            오전 9시 30분 - 10시: 찬양과 기도<br>
+                            오전 10시 - 10시 30분: 성경공부<br>
+                            오전 10시 30분 - 11시: 놀이활동<br>
+                            오전 11시 - 11시 30분: 하원
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="schedule-title">활동 장소</div>
+                        <div class="schedule-content">
+                            교회 1층 유치부실<br>
+                            안전하고 쾌적한 환경<br>
+                            다양한 교구와 장난감<br>
+                            어린이 전용 화장실
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="schedule-title">참여 안내</div>
+                        <div class="schedule-content">
+                            3-6세 어린이<br>
+                            언제든지 자유롭게 참여<br>
+                            부모님 동반 가능<br>
+                            문의: 유치부 담당 교사
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="teachers-section">
+        <div class="container">
+            <h2 class="text-center mb-5">교사 소개</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="teacher-card">
+                        <div class="teacher-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="teacher-content">
+                            <div class="teacher-name">김유치 교사</div>
+                            <div class="teacher-role">유치부 담당교사</div>
+                            <div class="teacher-description">
+                                유아교육을 전공한 전문 교사로, 
+                                어린이들이 즐겁게 하나님을 알아갈 수 있도록 
+                                다양한 방법으로 가르치고 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="teacher-card">
+                        <div class="teacher-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="teacher-content">
+                            <div class="teacher-name">이사랑 교사</div>
+                            <div class="teacher-role">찬양 담당교사</div>
+                            <div class="teacher-description">
+                                음악을 전공한 교사로, 
+                                어린이들이 노래를 통해 하나님을 찬양할 수 있도록 
+                                지도하고 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="teacher-card">
+                        <div class="teacher-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="teacher-content">
+                            <div class="teacher-name">박미술 교사</div>
+                            <div class="teacher-role">미술 담당교사</div>
+                            <div class="teacher-description">
+                                미술을 전공한 교사로, 
+                                어린이들의 창의성을 키우고 
+                                예술을 통해 하나님을 표현할 수 있도록 돕습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center mb-5">부모님 체험담</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "아이가 유치부에서 하나님의 사랑을 배우며 
+                            정말 즐겁게 다니고 있어서 감사합니다."
+                        </div>
+                        <div class="testimonial-author">김○○ 어머니</div>
+                        <div class="testimonial-date">2024년 2월</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "교사님들이 정말 따뜻하게 아이들을 돌봐주시고, 
+                            신앙교육도 체계적으로 해주셔서 감사합니다."
+                        </div>
+                        <div class="testimonial-author">이○○ 아버지</div>
+                        <div class="testimonial-date">2024년 1월</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "아이가 유치부에서 친구들과 함께 성장하며 
+                            사회성도 많이 발달한 것 같습니다."
+                        </div>
+                        <div class="testimonial-author">박○○ 어머니</div>
+                        <div class="testimonial-date">2023년 12월</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="text-center mb-5">활동 갤러리</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">성경공부</div>
+                            <div class="gallery-description">어린이들이 성경을 배우는 시간</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">찬양시간</div>
+                            <div class="gallery-description">즐겁게 찬양하는 어린이들</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">미술활동</div>
+                            <div class="gallery-description">창의적인 미술 활동</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section class="join-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="join-card">
+                        <div class="join-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3>유치부 참여하기</h3>
+                        <p class="lead">어린이들이 하나님의 사랑을 배우며 함께 성장합니다.</p>
+                        <p>전화: 02-1234-5678 (유치부 담당)</p>
+                        <p>이메일: kindergarten@songdochurch.org</p>
+                        <button class="join-btn">참여 신청하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../footer-loader.js"></script>
+    <script src="../header-loader.js"></script>
+</body>
+</html>
