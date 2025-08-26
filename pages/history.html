@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교회발자취 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dc3545;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: 50%;
+            padding-right: 20px;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 50%;
+            margin-right: 0;
+            padding-left: 20px;
+            text-align: left;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 15px;
+            width: 16px;
+            height: 16px;
+            background: #dc3545;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            background: #fff;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-year {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #333;
+        }
+        
+        .timeline-description {
+            color: #666;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-events {
+            margin-top: 8px;
+        }
+        
+        .timeline-event {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 4px;
+            padding-left: 10px;
+            border-left: 2px solid #eee;
+        }
+        
+        .history-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .history-stats {
+            background: #f8f9fa;
+            padding: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item::before {
+                left: 30px;
+            }
+            
+            .timeline-item .timeline-content {
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+                text-align: left !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="history-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">교회발자취</h1>
+            <p class="lead">하나님의 은혜로 걸어온 물댄동산교회의 역사</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="history-stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">1961</div>
+                        <div class="stat-label">설립년도</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">500</div>
+                        <div class="stat-label">등록교인</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">섬기는 분들</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">선교지</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline">
+        <div class="container">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023년 9월</div>
+                    <div class="timeline-title">정종한 목사 담임 목사로 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">17일 - 정종한 목사 담임 목사로 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023년 5월</div>
+                    <div class="timeline-title">박혜진 청소년부 교육 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">7일 - 박혜진 청소년부 교육 목사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023년 4월</div>
+                    <div class="timeline-title">고난 주간 특별 새벽 기도회</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">3일~7일 - 고난 주간 특별 새벽 기도회 (빛과 소금 교회 '최삼경 원로목사' 인도)</div>
+                        <div class="timeline-event">2일 - 한명복 부목사 부임 (청년부, 찬양 담당)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023년 1월</div>
+                    <div class="timeline-title">신년 특별 새벽 기도회</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">2일~6일 - 신년 특별 새벽 기도회</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022년 12월</div>
+                    <div class="timeline-title">교육부 성탄 축하 발표회</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">24일 - 교육부 성탄 축하 발표회 (유치부 주관)</div>
+                        <div class="timeline-event">4일 - 김은순 유치부 교육전도사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022년 5월</div>
+                    <div class="timeline-title">2453 전 가족 출석 주일</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">29일 - 2453 전 가족 출석 주일</div>
+                        <div class="timeline-event">23일~25일 - 부모와 자녀가 함께 하는 신앙 부흥회 (강사- 임우현 목사)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022년 4월</div>
+                    <div class="timeline-title">고난주간 특별 새벽기도회</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">11일~15일 - 고난주간 특별 새벽기도회</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022년 1월</div>
+                    <div class="timeline-title">신년특별새벽기도회</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">3일~7일 - 신년특별새벽기도회</div>
+                        <div class="timeline-event">2일 - 조지현 유치부 교육 전도사 부임 (11. 27. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 12월</div>
+                    <div class="timeline-title">박용규 청년부 준 전임전도사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">31일 - 박용규 청년부 준 전임전도사(찬양) 부임 (22. 12. 25. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 11월</div>
+                    <div class="timeline-title">은퇴 및 임직 감사 예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">14일 - 은퇴 및 임직 감사 예배</div>
+                        <div class="timeline-event">은퇴: 윤종용 안수집사 / 전영주 조정숙 권사</div>
+                        <div class="timeline-event">임직: 장로 김종인, 안수집사 안종림 유전희 최병규, 권사 이지영 김순옥 김미라 원해숙 김충숙 이인경 정복례</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 10월</div>
+                    <div class="timeline-title">창립 60주년 기념사진 전시</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">17일 - 창립 60주년 기념사진 전시</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 7월</div>
+                    <div class="timeline-title">장규형 부목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">11일 - 장규형 부목사 부임</div>
+                        <div class="timeline-event">4일~9월 19일 - 항존직 피택자 교육</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 6월</div>
+                    <div class="timeline-title">항존직 피택자</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">20일 - 항존직 피택자</div>
+                        <div class="timeline-event">장로: 김종인, 안수집사: 김학범 조공동 안종림 유전희 최병규 김승준, 권사: 이지영 김순옥 김미라 원해숙 김충숙 박윤경 이인경 장정신 정복례</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 5월</div>
+                    <div class="timeline-title">세대 통합 예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">30일 - 세대 통합 예배</div>
+                        <div class="timeline-event">23일~25일 - 부모와 자녀가 함께하는 영상신앙부흥회</div>
+                        <div class="timeline-event">16일 - 교사교육 영상세미나</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 4월</div>
+                    <div class="timeline-title">CTS 부흥어게인 랜선 찬양 기도회 참가</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">28일 - CTS 부흥어게인 랜선 찬양 기도회 참가</div>
+                        <div class="timeline-event">29일~4월 2일 - 고난주간 특별새벽기도회</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 3월</div>
+                    <div class="timeline-title">전세대 통합예배 시작</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">28일 - 전세대 통합예배 시작</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 2월</div>
+                    <div class="timeline-title">재의 수요일 예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">17일 - 재의 수요일 예배</div>
+                        <div class="timeline-event">1일 - 월삭새벽기도회 시작</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021년 1월</div>
+                    <div class="timeline-title">구역장 영상세미나</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">31일 - 구역장 영상세미나</div>
+                        <div class="timeline-event">4일~8일 - 신년특별새벽기도회</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2020년 12월</div>
+                    <div class="timeline-title">강희성 청소년부 교육 전도사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">27일 - 강희성 청소년부 교육 전도사 부임 (21. 4. 10 목사(백석교단) 안수, 23. 1. 1. 사임)</div>
+                        <div class="timeline-event">20일 - 고성주 청년부 준 전임전도사(찬양) 부임 (21. 4. 10 목사(백석교단) 안수, 21. 12. 20 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2020년 5월</div>
+                    <div class="timeline-title">2453 전교인 출석주일 시작</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">31일 - 2453 전교인 출석주일 시작</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2020년 3월</div>
+                    <div class="timeline-title">교회 홈페이지 개설</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">15일 - 교회 홈페이지 개설 (www.mdds.or.kr)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2019년 12월</div>
+                    <div class="timeline-title">제 9대 담임 목사 공인배 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">1일 - 제 9대 담임 목사 공인배 목사 부임 (23. 2. 26. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2019년 6월</div>
+                    <div class="timeline-title">김유단 부목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">9일 - 김유단 부목사 부임 (20. 11. 29. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2019년 2월</div>
+                    <div class="timeline-title">정종한 부목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">17일 - 정종한 부목사 부임 (21. 6. 27. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2018년 11월</div>
+                    <div class="timeline-title">추대 / 은퇴 / 임직 감사 예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">25일 - 추대 / 은퇴 / 임직 감사 예배</div>
+                        <div class="timeline-event">추대: 김광율 장로 원로</div>
+                        <div class="timeline-event">은퇴: 전 풍 안수집사, 김재심 양재화 이옥자 이경자 박정숙 권사</div>
+                        <div class="timeline-event">임직: 장로 김형곤, 안수집사 이성기 이왕재 윤종용, 권사 우재윤 김현숙 강영란 임경자 김향숙 정은하 신연순 이명옥 이서례 조정숙 유영자 한정숙 유효순</div>
+                        <div class="timeline-event">취임: 안수집사 김상수, 권사 신임순</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2018년 4월</div>
+                    <div class="timeline-title">새 예배당 입당 감사예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">29일 - 새 예배당 입당 감사예배</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2018년 1월</div>
+                    <div class="timeline-title">새 예배당 준공허가</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">16일 - 새 예배당 준공허가</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2017년 12월</div>
+                    <div class="timeline-title">별내면 청학리 414 주공프라자 제7층 701, 702호 1114.49m2 매매</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">청학리 353-1번지 청학주공아파트사택 매매</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2017년 5월</div>
+                    <div class="timeline-title">남양주 덕송2로 63 새 예배당 건축기공예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">14일 - 남양주 덕송2로 63 새 예배당 건축기공예배</div>
+                        <div class="timeline-event">14일 - 별내동 새 예배당 건축기공예배 (덕송 2로 63)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2017년 1월</div>
+                    <div class="timeline-title">청학리 353-1번지 청학주공아파트711동1104호 사택 매입</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">청학리 353-1번지 청학주공아파트711동1104호 사택 매입</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2016년 12월</div>
+                    <div class="timeline-title">이호덕 부목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">25일 - 이호덕 부목사 부임 (18. 12. 30. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2016년 8월</div>
+                    <div class="timeline-title">별내동 812번지 종교부지 1,214.5㎡ 매입</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">별내동 812번지 종교부지 1,214.5㎡ 매입</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2015년 9월</div>
+                    <div class="timeline-title">광전리 237-15,240,241-1번지 전 3,922㎡ 매매</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">7일 - 광전리 237-15,240,241-1번지 전 3,922㎡ 매매</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2014년 1월</div>
+                    <div class="timeline-title">광전리 창고 150평 건축</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">24일 - 광전리 창고 150평 건축</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2012년 7월</div>
+                    <div class="timeline-title">별내면 청학리 414번지 주공프라자 701호 매입</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">6일 - 별내면 청학리 414번지 주공프라자 701호 매입</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2011년 10월</div>
+                    <div class="timeline-title">임직</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">23일 - 임직</div>
+                        <div class="timeline-event">안수집사: 김신득 안병욱 김 준 이지상 조영준 홍성길 안종하</div>
+                        <div class="timeline-event">권사: 탁순자 변명숙 김혜경 이용화 유숙자 이경자 정학례 이순임 김현경 신유순</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2011년 8월</div>
+                    <div class="timeline-title">별내면 264-0 종교부지 2,645㎡ 매입</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">26일 - 별내면 264-0 종교부지 2,645㎡ 매입</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2011년 3월</div>
+                    <div class="timeline-title">김진호 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">3일 - 김진호 목사 부임 (16. 6. 26. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2010년 12월</div>
+                    <div class="timeline-title">식당 확장 공사 / 찬양대실 공사</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">20일 - 식당 확장 공사 / 찬양대실 공사</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2010년 11월</div>
+                    <div class="timeline-title">제 1차 필리핀 비전트립</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">29일 - 제 1차 필리핀 비전트립</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2008년 11월</div>
+                    <div class="timeline-title">별내면 청학리 414 주공프라자 제7층 702호 1114.49m2 매입</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">12일 - 별내면 청학리 414 주공프라자 제7층 702호 1114.49m2 매입</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2008년 2월</div>
+                    <div class="timeline-title">조태훈 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">14일 - 조태훈 목사 부임 (11. 2. 6. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2006년 12월</div>
+                    <div class="timeline-title">청학리 예배당 이전 감사예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">10일 - 청학리 예배당 이전 감사예배</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2006년 11월</div>
+                    <div class="timeline-title">취임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">12일 - 취임 (장로: 이윤배)</div>
+                        <div class="timeline-event">6일 - 청학리 성전 인테리어 공사</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2006년 10월</div>
+                    <div class="timeline-title">광전리 237-15,240,241-1번지 전 3,922㎡ 매입</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">23일 - 광전리 237-15,240,241-1번지 전 3,922㎡ 매입</div>
+                        <div class="timeline-event">10일 - 청학리 교회 이전 계약</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2006년 5월</div>
+                    <div class="timeline-title">임직</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">21일 - 임직</div>
+                        <div class="timeline-event">장로: 이종학, 안수집사: 전 풍, 권사: 조경순</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2004년 11월</div>
+                    <div class="timeline-title">입당예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">14일 - 입당예배</div>
+                        <div class="timeline-event">정종락 목사 위임(19. 7. 21. 사임)</div>
+                        <div class="timeline-event">김유철 장로 원로 추대</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2004년 4월</div>
+                    <div class="timeline-title">전교인 기념식수</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">11일 - 전교인 기념식수</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2004년 2월</div>
+                    <div class="timeline-title">양동원 전도사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">1일 - 양동원 전도사 부임 (06. 5. 30 목사 안수, 08. 2. 7. 사임)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2003년 12월</div>
+                    <div class="timeline-title">새 예배당 입당</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">17일 - 새 예배당 입당</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2003년 4월</div>
+                    <div class="timeline-title">예배당 건축 기공예배</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">27일 - 예배당 건축 기공예배</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2002년 8월</div>
+                    <div class="timeline-title">제 8대 정종락 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">22일 - 제 8대 정종락 목사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2001년 10월</div>
+                    <div class="timeline-title">물댄동산교회로 교회명 변경</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">15일 - 물댄동산교회로 교회명 변경</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2000년 6월</div>
+                    <div class="timeline-title">제 7대 김성한 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">2일 - 제 7대 김성한 목사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1985년 8월</div>
+                    <div class="timeline-title">제 6대 송창식 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">5일 - 제 6대 송창식 목사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1982년 12월</div>
+                    <div class="timeline-title">제 5대 김정체 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">12일 - 제 5대 김정체 목사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1981년 5월</div>
+                    <div class="timeline-title">예배당 준공식</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">22일 - 예배당 준공식</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1976년 7월</div>
+                    <div class="timeline-title">제 4대 김종호 목사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">30일 - 제 4대 김종호 목사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1975년 9월</div>
+                    <div class="timeline-title">제 3대 황종옥 전도사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">제 3대 황종옥 전도사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1972년 7월</div>
+                    <div class="timeline-title">덕송교회로 교회명 변경</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">10일 - 덕송교회로 교회명 변경</div>
+                        <div class="timeline-event">5일 - 덕송교회 매입</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1968년</div>
+                    <div class="timeline-title">제 2대 이중기 전도사 부임</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">제 2대 이중기 전도사 부임</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1966년</div>
+                    <div class="timeline-title">식송교회 창립</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">식송교회 창립</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1961년 10월</div>
+                    <div class="timeline-title">식송에서 '박봉규' 전도사 및 청년 3명과 가정 예배로 시작</div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">15일 - 식송에서 '박봉규' 전도사 및 청년 3명과 가정 예배로 시작</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../footer-loader.js"></script>
+    <script src="../header-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성경아카데미 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .academy-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .intro-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .intro-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .intro-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .intro-content {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .courses-section {
+            padding: 80px 0;
+        }
+        
+        .course-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .course-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .course-level {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .course-content {
+            padding: 25px;
+        }
+        
+        .course-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .course-topics {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .course-topics li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .course-topics li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .schedule-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .schedule-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .schedule-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .schedule-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .schedule-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .teachers-section {
+            padding: 80px 0;
+        }
+        
+        .teacher-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .teacher-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .teacher-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .teacher-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .teacher-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .teacher-role {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .teacher-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .testimonials-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .testimonial-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .testimonial-date {
+            color: #dc3545;
+            font-size: 0.9rem;
+        }
+        
+        .contact-section {
+            padding: 80px 0;
+        }
+        
+        .contact-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .contact-btn {
+            padding: 15px 30px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .contact-btn:hover {
+            background: #b02a37;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="academy-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">성경아카데미</h1>
+            <p class="lead">성경을 깊이 있게 배우는 체계적인 교육과정</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="intro-card">
+                        <div class="intro-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="intro-title">성경아카데미 소개</div>
+                        <div class="intro-content">
+                            성경아카데미는 성경을 체계적이고 깊이 있게 배우는 교육과정입니다. 
+                            성경의 역사적 배경, 문학적 특징, 신학적 의미를 종합적으로 다루며, 
+                            성경을 통해 하나님의 말씀을 더욱 깊이 이해할 수 있도록 도와드립니다. 
+                            초급부터 고급까지 단계별로 구성되어 있어 모든 성도들이 참여할 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses-section">
+        <div class="container">
+            <h2 class="text-center mb-5">교육과정</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-level">초급 과정</div>
+                            <div class="course-title">성경 기초</div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-description">
+                                성경의 기본 구조와 내용을 이해하는 과정입니다.
+                            </div>
+                            <ul class="course-topics">
+                                <li>성경의 구조와 분류</li>
+                                <li>구약의 주요 이야기</li>
+                                <li>신약의 주요 이야기</li>
+                                <li>성경 읽기 방법</li>
+                                <li>성경 해석의 기본 원리</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-level">중급 과정</div>
+                            <div class="course-title">성경 심화</div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-description">
+                                성경의 역사적 배경과 문학적 특징을 배우는 과정입니다.
+                            </div>
+                            <ul class="course-topics">
+                                <li>성경의 역사적 배경</li>
+                                <li>성경의 문학적 특징</li>
+                                <li>구약의 예언서</li>
+                                <li>신약의 서신서</li>
+                                <li>성경의 신학적 주제</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-level">고급 과정</div>
+                            <div class="course-title">성경 전문</div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-description">
+                                성경의 깊은 의미와 신학적 통찰을 탐구하는 과정입니다.
+                            </div>
+                            <ul class="course-topics">
+                                <li>성경의 신학적 해석</li>
+                                <li>성경의 윤리적 가르침</li>
+                                <li>성경과 현대 사회</li>
+                                <li>성경의 영성적 의미</li>
+                                <li>성경의 실천적 적용</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="text-center mb-5">일정 안내</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="schedule-title">교육 일정</div>
+                        <div class="schedule-content">
+                            매주 토요일 오후 2시 - 5시<br>
+                            매주 수요일 오후 7시 - 9시<br>
+                            각 과정별 12주 과정
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="schedule-title">교육 장소</div>
+                        <div class="schedule-content">
+                            교회 3층 성경아카데미실<br>
+                            편안한 학습 환경<br>
+                            도서관과 연계된 학습 공간
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="schedule-title">모집 안내</div>
+                        <div class="schedule-content">
+                            분기별 모집 (3월, 6월, 9월, 12월)<br>
+                            선착순 접수<br>
+                            문의: 성경아카데미 담당 목사님
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="teachers-section">
+        <div class="container">
+            <h2 class="text-center mb-5">담당 교역자</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="teacher-card">
+                        <div class="teacher-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="teacher-content">
+                            <div class="teacher-name">박성경 목사</div>
+                            <div class="teacher-role">성경아카데미 원장</div>
+                            <div class="teacher-description">
+                                신학대학원에서 성경학을 전공하고, 
+                                20년간 성경 교육에 헌신해 온 전문가입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="teacher-card">
+                        <div class="teacher-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="teacher-content">
+                            <div class="teacher-name">김말씀 목사</div>
+                            <div class="teacher-role">초급과정 담당</div>
+                            <div class="teacher-description">
+                                성경의 기본을 쉽고 재미있게 가르치는 
+                                초급과정 전문 강사입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="teacher-card">
+                        <div class="teacher-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="teacher-content">
+                            <div class="teacher-name">이해석 목사</div>
+                            <div class="teacher-role">중급과정 담당</div>
+                            <div class="teacher-description">
+                                성경의 역사적 배경과 문학적 특징을 
+                                전문적으로 가르치는 중급과정 강사입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center mb-5">수강생들의 후기</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "성경아카데미를 통해 성경을 체계적으로 배울 수 있었어요. 
+                            이제 성경 읽기가 훨씬 재미있어졌습니다."
+                        </div>
+                        <div class="testimonial-author">김○○ 집사</div>
+                        <div class="testimonial-date">2024년 1월 수료</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "성경의 역사적 배경을 알게 되니 성경의 의미가 더욱 깊어졌어요. 
+                            신앙생활에 큰 도움이 되었습니다."
+                        </div>
+                        <div class="testimonial-author">이○○ 자매</div>
+                        <div class="testimonial-date">2023년 12월 수료</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "고급과정을 통해 성경의 깊은 의미를 이해할 수 있었어요. 
+                            이제 성경을 통해 더욱 풍성한 삶을 살 수 있습니다."
+                        </div>
+                        <div class="testimonial-author">박○○ 집사</div>
+                        <div class="testimonial-date">2023년 11월 수료</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>성경아카데미 수강 문의</h3>
+                        <p class="lead">성경아카데미에 참여하고 싶으시거나 궁금한 점이 있으시면 언제든지 연락해 주세요.</p>
+                        <p>전화: 02-1234-5678 (성경아카데미)</p>
+                        <p>이메일: bibleacademy@songdochurch.org</p>
+                        <button class="contact-btn">수강 신청하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../header-loader.js"></script>
+    <script src="../footer-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교회시설안내 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .facilities-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .facilities-overview {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .overview-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .overview-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .overview-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .overview-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+        
+        .overview-label {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .facilities-detail {
+            padding: 80px 0;
+        }
+        
+        .facility-section {
+            margin-bottom: 80px;
+        }
+        
+        .facility-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .facility-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .facility-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .facility-image {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .facility-content {
+            padding: 25px;
+        }
+        
+        .facility-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .facility-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .facility-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .facility-features li {
+            padding: 5px 0;
+            color: #666;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .facility-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .floor-plan {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .floor-plan-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .floor-plan-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .floor-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .floor-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .floor-level {
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 5px;
+        }
+        
+        .floor-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .usage-guide {
+            padding: 80px 0;
+        }
+        
+        .guide-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .guide-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .guide-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .guide-content {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+
+
+    <!-- Page Header -->
+    <section class="facilities-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">교회시설안내</h1>
+            <p class="lead">하나님의 영광을 위한 아름다운 교회 시설들</p>
+        </div>
+    </section>
+
+    <!-- Facilities Overview -->
+    <section class="facilities-overview">
+        <div class="container">
+            <h2 class="text-center mb-5">시설 개요</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="overview-number">5</div>
+                        <div class="overview-label">층수</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="overview-number">500</div>
+                        <div class="overview-label">수용인원</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-parking"></i>
+                        </div>
+                        <div class="overview-number">50</div>
+                        <div class="overview-label">주차대수</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <div class="overview-number">15</div>
+                        <div class="overview-label">교육실</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Facilities -->
+    <section class="facilities-detail">
+        <div class="container">
+            <div class="facility-section">
+                <h2 class="facility-title">주요 시설</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <i class="fas fa-church"></i>
+                            </div>
+                            <div class="facility-content">
+                                <div class="facility-name">대예배당</div>
+                                <div class="facility-description">
+                                    주일예배와 주요 집회가 열리는 메인 예배당입니다.
+                                </div>
+                                <ul class="facility-features">
+                                    <li>수용인원: 300명</li>
+                                    <li>음향시스템 완비</li>
+                                    <li>대형 스크린</li>
+                                    <li>에어컨 및 난방</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="facility-content">
+                                <div class="facility-name">찬양실</div>
+                                <div class="facility-description">
+                                    찬양대 연습과 음악 사역을 위한 전용 공간입니다.
+                                </div>
+                                <ul class="facility-features">
+                                    <li>피아노 및 악기 완비</li>
+                                    <li>음향시스템</li>
+                                    <li>연습 공간</li>
+                                    <li>악보 보관함</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="facility-content">
+                                <div class="facility-name">도서관</div>
+                                <div class="facility-description">
+                                    성경과 신앙 관련 도서를 보관하는 도서관입니다.
+                                </div>
+                                <ul class="facility-features">
+                                    <li>신학서적 1,000여권</li>
+                                    <li>독서 공간</li>
+                                    <li>대출 서비스</li>
+                                    <li>무료 이용</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="facility-content">
+                                <div class="facility-name">식당</div>
+                                <div class="facility-description">
+                                    교회 식사와 교제를 위한 식당입니다.
+                                </div>
+                                <ul class="facility-features">
+                                    <li>수용인원: 100명</li>
+                                    <li>전용 주방</li>
+                                    <li>식기류 완비</li>
+                                    <li>에어컨 및 난방</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <i class="fas fa-pray"></i>
+                            </div>
+                            <div class="facility-content">
+                                <div class="facility-name">기도실</div>
+                                <div class="facility-description">
+                                    개인 기도와 소그룹 기도를 위한 공간입니다.
+                                </div>
+                                <ul class="facility-features">
+                                    <li>개인 기도실 5개</li>
+                                    <li>소그룹 기도실 2개</li>
+                                    <li>24시간 이용 가능</li>
+                                    <li>조용한 환경</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <i class="fas fa-baby"></i>
+                            </div>
+                            <div class="facility-content">
+                                <div class="facility-name">유아실</div>
+                                <div class="facility-description">
+                                    어린 아이들을 위한 안전하고 편안한 공간입니다.
+                                </div>
+                                <ul class="facility-features">
+                                    <li>안전한 놀이시설</li>
+                                    <li>전담 보육사</li>
+                                    <li>예배 중 이용</li>
+                                    <li>깨끗한 환경</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floor Plan -->
+    <section class="floor-plan">
+        <div class="container">
+            <h2 class="text-center mb-5">층별 안내</h2>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="floor-plan-card">
+                        <div class="floor-plan-image">
+                            <i class="fas fa-map"></i>
+                        </div>
+                        <div class="floor-info">
+                            <div class="floor-item">
+                                <div class="floor-level">5층</div>
+                                <div class="floor-description">기도실, 도서관</div>
+                            </div>
+                            <div class="floor-item">
+                                <div class="floor-level">4층</div>
+                                <div class="floor-description">교육실, 회의실</div>
+                            </div>
+                            <div class="floor-item">
+                                <div class="floor-level">3층</div>
+                                <div class="floor-description">청년부, 청소년부</div>
+                            </div>
+                            <div class="floor-item">
+                                <div class="floor-level">2층</div>
+                                <div class="floor-description">유치부, 아동부</div>
+                            </div>
+                            <div class="floor-item">
+                                <div class="floor-level">1층</div>
+                                <div class="floor-description">대예배당, 찬양실</div>
+                            </div>
+                            <div class="floor-item">
+                                <div class="floor-level">지하1층</div>
+                                <div class="floor-description">주차장, 식당</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Guide -->
+    <section class="usage-guide">
+        <div class="container">
+            <h2 class="text-center mb-5">이용 안내</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="guide-title">이용시간</div>
+                        <div class="guide-content">
+                            평일: 오전 9시 - 오후 10시<br>
+                            주말: 오전 8시 - 오후 9시<br>
+                            (기도실은 24시간 이용 가능)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="guide-title">예약</div>
+                        <div class="guide-content">
+                            교육실과 회의실은 사전 예약이 필요합니다. 
+                            교회 사무실에 전화로 문의하시거나 
+                            온라인으로 예약하실 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-shoe-prints"></i>
+                        </div>
+                        <div class="guide-title">신발</div>
+                        <div class="guide-content">
+                            교육실과 기도실은 실내화를 착용해 주세요. 
+                            신발장이 각 층에 마련되어 있습니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-volume-mute"></i>
+                        </div>
+                        <div class="guide-title">소음</div>
+                        <div class="guide-content">
+                            다른 사람들의 예배와 기도를 방해하지 않도록 
+                            조용히 이용해 주시기 바랍니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-broom"></i>
+                        </div>
+                        <div class="guide-title">정리정돈</div>
+                        <div class="guide-content">
+                            시설 이용 후에는 깨끗하게 정리해 주시기 바랍니다. 
+                            쓰레기는 지정된 곳에 버려주세요.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="guide-card">
+                        <div class="guide-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="guide-title">안전</div>
+                        <div class="guide-content">
+                            화재나 비상상황 시에는 비상구를 이용해 주세요. 
+                            소화기 위치를 미리 확인해 두시기 바랍니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../header-loader.js"></script>
+</body>
+</html>

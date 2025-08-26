@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선교후원 및 기관 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .mission-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .intro-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .intro-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .intro-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .intro-content {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .organizations-section {
+            padding: 80px 0;
+        }
+        
+        .org-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .org-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .org-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .org-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .org-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .org-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .org-content {
+            padding: 30px;
+        }
+        
+        .org-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .org-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .org-details li {
+            padding: 10px 0;
+            color: #666;
+            position: relative;
+            padding-left: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .org-details li:last-child {
+            border-bottom: none;
+        }
+        
+        .org-details li:before {
+            content: '🌍';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+            font-size: 1.2rem;
+        }
+        
+        .support-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .support-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .support-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .support-icon {
+            width: 70px;
+            height: 70px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .support-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .support-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .missionaries-section {
+            padding: 80px 0;
+        }
+        
+        .missionary-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .missionary-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .missionary-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .missionary-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .missionary-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .missionary-location {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .missionary-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .missionary-prayer {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .stats-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .donation-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .donation-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .donation-icon {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .donation-btn {
+            padding: 15px 30px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .donation-btn:hover {
+            background: #b02a37;
+        }
+        
+        .prayer-section {
+            padding: 80px 0;
+        }
+        
+        .prayer-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .prayer-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .prayer-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .prayer-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .prayer-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .gallery-section {
+            padding: 80px 0;
+        }
+        
+        .gallery-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .gallery-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .gallery-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="mission-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">선교후원 및 기관</h1>
+            <p class="lead">하나님의 사랑을 전 세계에 전하는 선교사역</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">후원 선교사</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">선교지</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">선교기관</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">연간 선교활동</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="intro-card">
+                        <div class="intro-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="intro-title">선교후원 소개</div>
+                        <div class="intro-content">
+                            송도교회는 하나님의 사랑을 전 세계에 전하는 선교사역을 
+                            적극적으로 후원하고 있습니다. 다양한 선교기관과 선교사들을 
+                            통해 복음이 전파되도록 기도와 물질로 후원하며, 
+                            선교사들의 사역을 돕고 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizations Section -->
+    <section class="organizations-section">
+        <div class="container">
+            <h2 class="text-center mb-5">후원 선교기관</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="org-card">
+                        <div class="org-header">
+                            <div class="org-icon">
+                                <i class="fas fa-cross"></i>
+                            </div>
+                            <div class="org-title">한국기독교선교회</div>
+                            <div class="org-subtitle">Korea Christian Mission</div>
+                        </div>
+                        <div class="org-content">
+                            <div class="org-description">
+                                한국기독교선교회는 아시아 지역을 중심으로 
+                                선교사역을 펼치고 있는 기관입니다.
+                            </div>
+                            <ul class="org-details">
+                                <li>선교지: 동남아시아, 중앙아시아</li>
+                                <li>주요 사역: 교회 개척, 의료선교</li>
+                                <li>후원 선교사: 3명</li>
+                                <li>월 후원금: 300만원</li>
+                                <li>연락처: 02-1234-5678</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="org-card">
+                        <div class="org-header">
+                            <div class="org-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="org-title">사랑의 선교회</div>
+                            <div class="org-subtitle">Mission of Love</div>
+                        </div>
+                        <div class="org-content">
+                            <div class="org-description">
+                                사랑의 선교회는 아프리카 지역에서 
+                                의료선교와 교육선교를 담당하고 있습니다.
+                            </div>
+                            <ul class="org-details">
+                                <li>선교지: 동아프리카, 서아프리카</li>
+                                <li>주요 사역: 의료선교, 교육선교</li>
+                                <li>후원 선교사: 2명</li>
+                                <li>월 후원금: 250만원</li>
+                                <li>연락처: 02-2345-6789</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="org-card">
+                        <div class="org-header">
+                            <div class="org-icon">
+                                <i class="fas fa-dove"></i>
+                            </div>
+                            <div class="org-title">평화의 선교회</div>
+                            <div class="org-subtitle">Mission of Peace</div>
+                        </div>
+                        <div class="org-content">
+                            <div class="org-description">
+                                평화의 선교회는 중동 지역에서 
+                                평화와 화해의 메시지를 전하고 있습니다.
+                            </div>
+                            <ul class="org-details">
+                                <li>선교지: 중동 지역</li>
+                                <li>주요 사역: 평화선교, 대화사역</li>
+                                <li>후원 선교사: 2명</li>
+                                <li>월 후원금: 200만원</li>
+                                <li>연락처: 02-3456-7890</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="org-card">
+                        <div class="org-header">
+                            <div class="org-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="org-title">말씀의 선교회</div>
+                            <div class="org-subtitle">Mission of the Word</div>
+                        </div>
+                        <div class="org-content">
+                            <div class="org-description">
+                                말씀의 선교회는 성경 번역과 
+                                성경 교육에 특화된 선교기관입니다.
+                            </div>
+                            <ul class="org-details">
+                                <li>선교지: 전 세계</li>
+                                <li>주요 사역: 성경 번역, 성경 교육</li>
+                                <li>후원 선교사: 3명</li>
+                                <li>월 후원금: 350만원</li>
+                                <li>연락처: 02-4567-8901</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="org-card">
+                        <div class="org-header">
+                            <div class="org-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <div class="org-title">섬김의 선교회</div>
+                            <div class="org-subtitle">Mission of Service</div>
+                        </div>
+                        <div class="org-content">
+                            <div class="org-description">
+                                섬김의 선교회는 구호활동과 
+                                지역개발을 통해 하나님의 사랑을 실천합니다.
+                            </div>
+                            <ul class="org-details">
+                                <li>선교지: 남아시아, 동남아시아</li>
+                                <li>주요 사역: 구호활동, 지역개발</li>
+                                <li>후원 선교사: 2명</li>
+                                <li>월 후원금: 280만원</li>
+                                <li>연락처: 02-5678-9012</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="container">
+            <h2 class="text-center mb-5">후원 방법</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="support-title">정기후원</div>
+                        <div class="support-content">
+                            매월 정기적으로 선교사역을 후원합니다. 
+                            후원금은 선교사들의 생활비와 사역비로 사용됩니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="support-title">일시후원</div>
+                        <div class="support-content">
+                            특별한 선교사역이나 프로젝트를 위해 
+                            일시적으로 후원할 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <div class="support-title">기도후원</div>
+                        <div class="support-content">
+                            선교사들과 선교사역을 위해 
+                            기도로 후원하는 방법입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Missionaries Section -->
+    <section class="missionaries-section">
+        <div class="container">
+            <h2 class="text-center mb-5">후원 선교사</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="missionary-card">
+                        <div class="missionary-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="missionary-content">
+                            <div class="missionary-name">김선교 선교사</div>
+                            <div class="missionary-location">태국 치앙마이</div>
+                            <div class="missionary-description">
+                                태국 치앙마이에서 교회 개척과 
+                                의료선교를 담당하고 있습니다.
+                            </div>
+                            <div class="missionary-prayer">
+                                "태국 사람들이 예수님을 믿고 구원받기를 기도해주세요."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="missionary-card">
+                        <div class="missionary-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="missionary-content">
+                            <div class="missionary-name">이사랑 선교사</div>
+                            <div class="missionary-location">케냐 나이로비</div>
+                            <div class="missionary-description">
+                                케냐 나이로비에서 의료선교와 
+                                교육선교를 담당하고 있습니다.
+                            </div>
+                            <div class="missionary-prayer">
+                                "케냐의 아이들이 건강하게 자라며 예수님을 알기를 기도해주세요."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="missionary-card">
+                        <div class="missionary-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="missionary-content">
+                            <div class="missionary-name">박평화 선교사</div>
+                            <div class="missionary-location">요르단 암만</div>
+                            <div class="missionary-description">
+                                요르단 암만에서 평화선교와 
+                                대화사역을 담당하고 있습니다.
+                            </div>
+                            <div class="missionary-prayer">
+                                "중동 지역에 평화가 임하고 화해가 이루어지기를 기도해주세요."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prayer Section -->
+    <section class="prayer-section">
+        <div class="container">
+            <h2 class="text-center mb-5">기도제목</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="prayer-card">
+                        <div class="prayer-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="prayer-title">선교지 기도</div>
+                        <div class="prayer-content">
+                            각 선교지에서 복음이 효과적으로 전파되고, 
+                            현지인들이 예수님을 믿고 구원받기를 기도합니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="prayer-card">
+                        <div class="prayer-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="prayer-title">선교사 기도</div>
+                        <div class="prayer-content">
+                            선교사들의 건강과 안전, 그리고 
+                            사역의 열매를 위해 기도합니다.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="prayer-card">
+                        <div class="prayer-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div class="prayer-title">후원 기도</div>
+                        <div class="prayer-content">
+                            선교사역을 위한 충분한 후원금이 
+                            마련되도록 기도합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="text-center mb-5">선교활동 갤러리</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">교회 개척</div>
+                            <div class="gallery-description">선교지에서 교회를 개척하는 모습</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-medkit"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">의료선교</div>
+                            <div class="gallery-description">의료봉사를 통해 하나님의 사랑을 전하는 모습</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">교육선교</div>
+                            <div class="gallery-description">아이들에게 교육을 제공하는 모습</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donation-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="donation-card">
+                        <div class="donation-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>선교후원 참여하기</h3>
+                        <p class="lead">하나님의 사랑을 전 세계에 전하는 선교사역을 후원해주세요.</p>
+                        <p>후원계좌: 신한은행 123-456-789012 (송도교회)</p>
+                        <p>문의: 02-1234-5678 (선교부 담당)</p>
+                        <p>이메일: mission@songdochurch.org</p>
+                        <button class="donation-btn">후원하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../footer-loader.js"></script>
+    <script src="../header-loader.js"></script>
+</body>
+</html>

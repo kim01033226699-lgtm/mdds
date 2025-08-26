@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교회소식 & 이달의 행사 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #0C4A60 0%, #EF6C33 100%);
+            color: #fff;
+            padding: 60px 0 40px;
+            margin-top: 120px;
+        }
+        
+        .news-item {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .news-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .news-category {
+            background: #EF6C33;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .news-excerpt {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .event-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-header {
+            background: linear-gradient(135deg, #0C4A60, #EF6C33);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .event-date {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .event-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .event-category {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .event-content {
+            padding: 25px;
+        }
+        
+        .event-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .event-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .event-details li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .event-details li:before {
+            content: '📅';
+            position: absolute;
+            left: 0;
+            color: #EF6C33;
+        }
+        
+        .event-actions {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .action-btn {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: #EF6C33;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0C4A60;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+            color: white;
+        }
+        
+        .filter-buttons {
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            color: #666;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #EF6C33;
+            border-color: #EF6C33;
+            color: #fff;
+        }
+        
+        .sidebar-widget {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-widget h4 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .popular-news {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .popular-news:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .popular-news img {
+            width: 80px;
+            height: 60px;
+            border-radius: 5px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .popular-news-info h5 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .popular-news-info p {
+            font-size: 0.8rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .calendar-section {
+            padding: 40px 0;
+            background: #f8f9fa;
+        }
+        
+        .calendar-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .calendar-subtitle {
+            color: #EF6C33;
+            font-weight: bold;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-day {
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .calendar-day.calendar-header {
+            background: #EF6C33;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .calendar-day.other-month {
+            color: #ccc;
+        }
+        
+        .calendar-day.has-event {
+            background: #EF6C33;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .calendar-day.has-event:hover {
+            background: #0C4A60;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>교회소식 & 이달의 행사</h1>
+                    <p class="lead">물댄동산교회의 최신 소식과 행사 안내</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Buttons -->
+    <section class="py-4">
+        <div class="container">
+            <div class="filter-buttons text-center">
+                <a href="#" class="filter-btn active" data-category="all">전체</a>
+                <a href="#" class="filter-btn" data-category="news">교회소식</a>
+                <a href="#" class="filter-btn" data-category="event">이달의 행사</a>
+                <a href="#" class="filter-btn" data-category="notice">공지사항</a>
+                <a href="#" class="filter-btn" data-category="ministry">사역소식</a>
+                <a href="#" class="filter-btn" data-category="mission">선교소식</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- 교회소식 섹션 -->
+                    <div class="news-item" data-category="news notice">
+                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&h=200&fit=crop" alt="2024년 교회 정기총회 안내" class="news-image">
+                        <div class="news-content">
+                            <div class="news-category">공지사항</div>
+                            <h3>2024년 교회 정기총회 안내</h3>
+                            <div class="news-meta">
+                                <i class="fas fa-calendar"></i> 2024년 3월 15일
+                                <i class="fas fa-user ms-3"></i> 관리자
+                            </div>
+                            <div class="news-excerpt">
+                                2024년 교회 정기총회가 3월 24일 주일 오후 2시에 예배실에서 개최됩니다. 
+                                모든 성도님들의 참석을 부탁드립니다. 총회에서는 2023년도 결산과 2024년도 
+                                예산안, 그리고 각종 안건들이 논의될 예정입니다...
+                            </div>
+                            <a href="#" class="btn btn-outline-primary">자세히 보기</a>
+                        </div>
+                    </div>
+
+                    <div class="news-item" data-category="news event">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop" alt="봄맞이 교회 나들이" class="news-image">
+                        <div class="news-content">
+                            <div class="news-category">행사안내</div>
+                            <h3>봄맞이 교회 나들이 안내</h3>
+                            <div class="news-meta">
+                                <i class="fas fa-calendar"></i> 2024년 3월 10일
+                                <i class="fas fa-user ms-3"></i> 행사팀
+                            </div>
+                            <div class="news-excerpt">
+                                봄의 시작을 맞아 교회 나들이를 계획했습니다. 4월 6일 토요일 오전 9시에 
+                                교회에서 출발하여 남산타워와 한강공원을 둘러보는 일정으로 진행됩니다. 
+                                많은 성도님들의 참여를 기다립니다...
+                            </div>
+                            <a href="#" class="btn btn-outline-primary">자세히 보기</a>
+                        </div>
+                    </div>
+
+                    <div class="news-item" data-category="news ministry">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=200&fit=crop" alt="청년부 선교여행" class="news-image">
+                        <div class="news-content">
+                            <div class="news-category">사역소식</div>
+                            <h3>청년부 선교여행 후기</h3>
+                            <div class="news-meta">
+                                <i class="fas fa-calendar"></i> 2024년 3월 5일
+                                <i class="fas fa-user ms-3"></i> 청년부
+                            </div>
+                            <div class="news-excerpt">
+                                지난 2월 24일부터 26일까지 2박 3일간 청년부 선교여행이 진행되었습니다. 
+                                강원도 지역의 작은 교회들을 방문하여 봉사활동을 하며 하나님의 사랑을 
+                                나누는 소중한 시간을 가졌습니다...
+                            </div>
+                            <a href="#" class="btn btn-outline-primary">자세히 보기</a>
+                        </div>
+                    </div>
+
+                    <div class="news-item" data-category="news mission">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=200&fit=crop" alt="해외선교사 파송" class="news-image">
+                        <div class="news-content">
+                            <div class="news-category">선교소식</div>
+                            <h3>해외선교사 파송식 안내</h3>
+                            <div class="news-meta">
+                                <i class="fas fa-calendar"></i> 2024년 3월 1일
+                                <i class="fas fa-user ms-3"></i> 선교부
+                            </div>
+                            <div class="news-excerpt">
+                                우리 교회에서 파송하는 해외선교사 파송식이 3월 17일 주일 오후 3시에 
+                                예배실에서 개최됩니다. 선교사님과 가족들을 위한 기도와 격려의 시간이 
+                                될 것입니다...
+                            </div>
+                            <a href="#" class="btn btn-outline-primary">자세히 보기</a>
+                        </div>
+                    </div>
+
+                    <!-- 이달의 행사 섹션 -->
+                    <div class="event-card" data-category="event">
+                        <div class="event-header">
+                            <div class="event-date">2024년 3월 24일 (주일)</div>
+                            <div class="event-title">주일예배</div>
+                            <div class="event-category">예배</div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-description">
+                                매주 주일마다 드리는 정기 예배입니다.
+                            </div>
+                            <ul class="event-details">
+                                <li>시간: 오전 9시, 11시</li>
+                                <li>장소: 본당</li>
+                                <li>설교자: 정종한 목사</li>
+                                <li>찬양: 샤론찬양대</li>
+                            </ul>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="action-btn btn-primary">참여하기</a>
+                            <a href="#" class="action-btn btn-secondary">자세히 보기</a>
+                        </div>
+                    </div>
+
+                    <div class="event-card" data-category="event">
+                        <div class="event-header">
+                            <div class="event-date">2024년 3월 27일 (수요일)</div>
+                            <div class="event-title">수요중보기도</div>
+                            <div class="event-category">교육</div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-description">
+                                교회와 성도들을 위한 중보기도 시간입니다.
+                            </div>
+                            <ul class="event-details">
+                                <li>시간: 오후 7시 30분</li>
+                                <li>장소: 기도실</li>
+                                <li>인도: 박○○ 집사</li>
+                                <li>기도제목: 교회 부흥</li>
+                            </ul>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="action-btn btn-primary">참여하기</a>
+                            <a href="#" class="action-btn btn-secondary">자세히 보기</a>
+                        </div>
+                    </div>
+
+                    <div class="event-card" data-category="event">
+                        <div class="event-header">
+                            <div class="event-date">2024년 3월 15일 (금요일)</div>
+                            <div class="event-title">노인정 봉사활동</div>
+                            <div class="event-category">봉사</div>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-description">
+                                지역 노인정을 방문하여 봉사활동을 진행합니다.
+                            </div>
+                            <ul class="event-details">
+                                <li>시간: 오후 2시</li>
+                                <li>장소: 송도노인정</li>
+                                <li>담당: 봉사부</li>
+                                <li>준비물: 간식, 선물</li>
+                            </ul>
+                        </div>
+                        <div class="event-actions">
+                            <a href="#" class="action-btn btn-primary">참여하기</a>
+                            <a href="#" class="action-btn btn-secondary">자세히 보기</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- 이달의 행사 캘린더 -->
+                    <div class="sidebar-widget">
+                        <h4>이달의 행사 캘린더</h4>
+                        <div class="calendar-grid">
+                                                    <div class="calendar-day calendar-header">일</div>
+                        <div class="calendar-day calendar-header">월</div>
+                        <div class="calendar-day calendar-header">화</div>
+                        <div class="calendar-day calendar-header">수</div>
+                        <div class="calendar-day calendar-header">목</div>
+                        <div class="calendar-day calendar-header">금</div>
+                        <div class="calendar-day calendar-header">토</div>
+                            
+                            <div class="calendar-day other-month">25</div>
+                            <div class="calendar-day other-month">26</div>
+                            <div class="calendar-day other-month">27</div>
+                            <div class="calendar-day other-month">28</div>
+                            <div class="calendar-day other-month">29</div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day">4</div>
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day">8</div>
+                            <div class="calendar-day">9</div>
+                            
+                            <div class="calendar-day">10</div>
+                            <div class="calendar-day">11</div>
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day has-event">15</div>
+                            <div class="calendar-day">16</div>
+                            
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day">18</div>
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day">22</div>
+                            <div class="calendar-day">23</div>
+                            
+                            <div class="calendar-day has-event">24</div>
+                            <div class="calendar-day">25</div>
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day has-event">27</div>
+                            <div class="calendar-day">28</div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                        </div>
+                        <div class="text-center">
+                            <small class="text-muted">* 빨간색 날짜는 행사가 있는 날입니다.</small>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h4>인기 소식</h4>
+                        <div class="popular-news d-flex">
+                            <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=80&h=60&fit=crop" alt="정기총회">
+                            <div class="popular-news-info">
+                                <h5>2024년 교회 정기총회 안내</h5>
+                                <p>2024년 3월 15일</p>
+                            </div>
+                        </div>
+                        <div class="popular-news d-flex">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=80&h=60&fit=crop" alt="교회 나들이">
+                            <div class="popular-news-info">
+                                <h5>봄맞이 교회 나들이 안내</h5>
+                                <p>2024년 3월 10일</p>
+                            </div>
+                        </div>
+                        <div class="popular-news d-flex">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=80&h=60&fit=crop" alt="청년부 선교여행">
+                            <div class="popular-news-info">
+                                <h5>청년부 선교여행 후기</h5>
+                                <p>2024년 3월 5일</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h4>카테고리</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">교회소식 (15)</a></li>
+                            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">이달의 행사 (8)</a></li>
+                            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">공지사항 (12)</a></li>
+                            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">사역소식 (6)</a></li>
+                            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">선교소식 (4)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h4>최근 소식</h4>
+                        <div class="popular-news d-flex">
+                            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=80&h=60&fit=crop" alt="해외선교사 파송">
+                            <div class="popular-news-info">
+                                <h5>해외선교사 파송식 안내</h5>
+                                <p>2024년 3월 1일</p>
+                            </div>
+                        </div>
+                        <div class="popular-news d-flex">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&h=60&fit=crop" alt="리모델링">
+                            <div class="popular-news-info">
+                                <h5>교회 리모델링 공사 안내</h5>
+                                <p>2024년 2월 25일</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../footer-loader.js"></script>
+    <script src="../header-loader.js"></script>
+    <script>
+        // 필터 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const newsItems = document.querySelectorAll('.news-item');
+            const eventCards = document.querySelectorAll('.event-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 활성 버튼 변경
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // 뉴스 아이템 필터링
+                    newsItems.forEach(item => {
+                        const itemCategories = item.getAttribute('data-category').split(' ');
+                        if (category === 'all' || itemCategories.includes(category)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+
+                    // 이벤트 카드 필터링
+                    eventCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

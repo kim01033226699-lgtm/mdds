@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신혼부부모임 - 송도교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .newlywed-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .intro-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .intro-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .intro-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .intro-content {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .programs-section {
+            padding: 80px 0;
+        }
+        
+        .program-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .program-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .program-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .program-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .program-content {
+            padding: 25px;
+        }
+        
+        .program-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .program-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .program-details li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .program-details li:before {
+            content: '💕';
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+        }
+        
+        .schedule-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .schedule-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .schedule-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .schedule-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .schedule-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .leaders-section {
+            padding: 80px 0;
+        }
+        
+        .leader-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .leader-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .leader-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .leader-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .leader-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .leader-role {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .leader-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .testimonials-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .testimonial-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .testimonial-date {
+            color: #dc3545;
+            font-size: 0.9rem;
+        }
+        
+        .join-section {
+            padding: 80px 0;
+        }
+        
+        .join-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .join-icon {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .join-btn {
+            padding: 15px 30px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .join-btn:hover {
+            background: #b02a37;
+        }
+        
+        .stats-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .gallery-section {
+            padding: 80px 0;
+        }
+        
+        .gallery-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-photo {
+            height: 200px;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .gallery-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .gallery-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="newlywed-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">신혼부부모임</h1>
+            <p class="lead">새로운 가정의 시작을 함께 축복합니다</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">부부 수</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">개월 평균</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">24</div>
+                        <div class="stat-label">연간 모임</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">연차</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="intro-card">
+                        <div class="intro-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="intro-title">신혼부부모임 소개</div>
+                        <div class="intro-content">
+                            신혼부부모임은 결혼한 지 3년 이하의 신혼부부들이 모여 
+                            새로운 가정을 세우고 함께 성장하는 모임입니다. 
+                            결혼생활의 적응, 부부관계 형성, 신앙생활의 기초 등 
+                            신혼부부들이 꼭 알아야 할 내용들을 함께 배우고 나눕니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section">
+        <div class="container">
+            <h2 class="text-center mb-5">프로그램</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="program-title">신혼성경공부</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                신혼부부를 위한 특별한 성경공부 프로그램입니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>매주 금요일 오후 7시 - 9시</li>
+                                <li>신혼부부 전용 교재 사용</li>
+                                <li>부부별 성경 읽기와 나눔</li>
+                                <li>결혼생활에 적용하는 말씀</li>
+                                <li>신앙의 기초 다지기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="program-title">신혼상담</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                신혼생활의 적응과 문제 해결을 위한 상담을 제공합니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>월 1회 개별 부부상담</li>
+                                <li>신혼생활 적응 도움</li>
+                                <li>부부간 소통 방법 학습</li>
+                                <li>갈등 해결 기술 훈련</li>
+                                <li>가정의 기초 다지기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="program-title">신혼데이트</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                신혼부부들이 함께 즐거운 시간을 보내며 교제합니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>월 1회 신혼데이트</li>
+                                <li>다양한 활동과 프로그램</li>
+                                <li>부부간 대화 시간</li>
+                                <li>로맨틱한 분위기 조성</li>
+                                <li>서로를 알아가는 시간</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="program-title">가정관리</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                새로운 가정을 관리하는 방법을 함께 배웁니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>가정경제 관리법</li>
+                                <li>가정생활 스케줄링</li>
+                                <li>부부간 역할 분담</li>
+                                <li>가정의 규칙과 원칙</li>
+                                <li>가정의 문화 만들기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-baby"></i>
+                            </div>
+                            <div class="program-title">임신준비</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                임신과 출산에 대한 준비와 정보를 제공합니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>임신 준비 교육</li>
+                                <li>출산 준비 과정</li>
+                                <li>부모 역할 준비</li>
+                                <li>자녀 계획 세우기</li>
+                                <li>가족 계획 수립</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card">
+                        <div class="program-header">
+                            <div class="program-icon">
+                                <i class="fas fa-pray"></i>
+                            </div>
+                            <div class="program-title">신혼기도</div>
+                        </div>
+                        <div class="program-content">
+                            <div class="program-description">
+                                신혼부부가 함께 기도하며 영적 성장을 도모합니다.
+                            </div>
+                            <ul class="program-details">
+                                <li>매일 아침 부부기도</li>
+                                <li>주간 신혼기도 모임</li>
+                                <li>가정을 위한 기도</li>
+                                <li>부부간 화해기도</li>
+                                <li>신앙생활의 기초</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="text-center mb-5">모임 일정</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="schedule-title">정기 모임</div>
+                        <div class="schedule-content">
+                            매주 금요일 오후 7시 - 9시<br>
+                            신혼성경공부 및 나눔<br>
+                            매월 첫째 주: 신혼데이트<br>
+                            매월 셋째 주: 가정관리 세미나<br>
+                            매월 마지막 주: 신혼상담
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="schedule-title">모임 장소</div>
+                        <div class="schedule-content">
+                            교회 2층 신혼부부실<br>
+                            따뜻하고 편안한 분위기<br>
+                            커플 전용 공간<br>
+                            차와 간식이 준비됩니다
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="schedule-card">
+                        <div class="schedule-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="schedule-title">참여 안내</div>
+                        <div class="schedule-content">
+                            결혼 3년 이하 부부<br>
+                            언제든지 자유롭게 참여<br>
+                            신혼생활 적응 도움<br>
+                            문의: 신혼부부 담당 목사님
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaders Section -->
+    <section class="leaders-section">
+        <div class="container">
+            <h2 class="text-center mb-5">지도자</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="leader-card">
+                        <div class="leader-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="leader-content">
+                            <div class="leader-name">김신혼 목사</div>
+                            <div class="leader-role">신혼부부 담당목사</div>
+                            <div class="leader-description">
+                                신혼부부들의 신앙생활과 가정생활을 
+                                지도하며, 새로운 가정의 기초를 
+                                다지는 데 도움을 제공합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="leader-card">
+                        <div class="leader-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="leader-content">
+                            <div class="leader-name">이사랑 집사</div>
+                            <div class="leader-role">신혼부부 모임장</div>
+                            <div class="leader-description">
+                                신혼부부모임의 전체적인 운영을 담당하며, 
+                                신혼부부들의 소통과 교제를 돕고 
+                                다양한 프로그램을 기획합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="leader-card">
+                        <div class="leader-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="leader-content">
+                            <div class="leader-name">박신혼 자매</div>
+                            <div class="leader-role">신혼상담 담당</div>
+                            <div class="leader-description">
+                                신혼부부들을 위한 전문적인 상담을 제공하며, 
+                                신혼생활 적응과 문제 해결을 
+                                돕는 상담 서비스를 담당합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center mb-5">신혼부부 체험담</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "신혼부부모임을 통해 결혼생활에 대한 많은 도움을 받았고, 
+                            다른 신혼부부들과의 교제도 정말 소중합니다."
+                        </div>
+                        <div class="testimonial-author">김○○, 이○○ 부부</div>
+                        <div class="testimonial-date">2024년 2월</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "신혼성경공부를 통해 신앙생활의 기초를 다졌고, 
+                            부부관계도 더욱 깊어졌습니다."
+                        </div>
+                        <div class="testimonial-author">박○○, 최○○ 부부</div>
+                        <div class="testimonial-date">2024년 1월</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            "신혼데이트를 통해 서로를 더 깊이 알게 되었고, 
+                            결혼생활이 더욱 즐거워졌습니다."
+                        </div>
+                        <div class="testimonial-author">정○○, 한○○ 부부</div>
+                        <div class="testimonial-date">2023년 12월</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="text-center mb-5">모임 갤러리</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">신혼성경공부</div>
+                            <div class="gallery-description">함께 성경을 읽고 나누는 시간</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">신혼데이트</div>
+                            <div class="gallery-description">로맨틱한 신혼데이트 시간</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item">
+                        <div class="gallery-photo">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <div class="gallery-title">가정관리</div>
+                            <div class="gallery-description">가정관리 방법을 배우는 시간</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section class="join-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="join-card">
+                        <div class="join-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>신혼부부모임 참여하기</h3>
+                        <p class="lead">새로운 가정의 시작을 함께 축복받으세요.</p>
+                        <p>전화: 02-1234-5678 (신혼부부 담당)</p>
+                        <p>이메일: newlywed@songdochurch.org</p>
+                        <button class="join-btn">모임 참여 신청</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../header-loader.js"></script>
+    <script src="../footer-loader.js"></script>
+</body>
+</html>

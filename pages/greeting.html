@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인사말 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .greeting-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 120px 0 60px; /* 상단 패딩을 80px에서 120px로 증가 */
+            text-align: center;
+        }
+        
+        .intro-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .intro-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .pastor-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: block;
+            object-fit: cover;
+            border: 5px solid #dc3545;
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3);
+        }
+        
+        .pastor-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .pastor-title {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .greeting-text {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: left;
+        }
+        
+        .greeting-text p {
+            margin-bottom: 20px;
+        }
+        
+        .vision-section {
+            padding: 80px 0;
+        }
+        
+        .vision-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .vision-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .vision-header {
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .vision-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .vision-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .vision-content {
+            padding: 25px;
+        }
+        
+        .vision-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .stats-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #dc3545, #b02a37);
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .contact-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .contact-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .contact-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Page Header -->
+    <section class="greeting-header">
+        <div class="container">
+            <h1 class="display-4 mb-3">담임목사 인사말</h1>
+            <p class="lead">하나님의 사랑 안에서 함께하는 교회로 초대합니다</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="intro-card">
+                        <img src="../pastor01.png" alt="정종한 목사" class="pastor-image">
+                        
+                        <div class="pastor-name">정종한</div>
+                        <div class="pastor-title">담임목사</div>
+                        
+                        <div class="greeting-text">
+                            <p>샬롬! 물댄동산교회 홈페이지에 오신 모든 분들을 환영하며 축복합니다.</p>
+                            
+                            <p>물댄동산교회는 대한예수교 장로회(통합)에 소속된 교회로 영락, 새문안, 연동, 남대문, 무학교회 등과 형제교회로 올해 63주년(2024년)의 역사를 가지고 있으며 지역의 동네 교회로 자리 잡고 있는 교회입니다.</p>
+                            
+                            <p>물댄동산교회는 순수한 사랑을 앞세우는 예수 그리스도의 몸 된 교회로 성도들 모두가 함께 행복한 교회를 만들어 가고 있습니다. 또한, 하나님께서 기뻐하시는 교회 되기 위해 말씀과 찬양과 기도가 어우러진 살아있는 예배를 드리고 있습니다.</p>
+                            
+                            <p>예배의 감동을 꿈꾸며 좋은 교회를 소망하는 모든 이들에게 작은 쉼을 주기를 바라며 주님의 이름으로 여러분을 사랑하며 축복합니다.</p>
+                            
+                            <p>감사합니다.</p>
+                            
+                            <p class="text-end mt-4">
+                                <strong>물댄동산교회 담임목사 정종한 목사</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="text-center mb-5">우리 교회의 비전</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="vision-card">
+                        <div class="vision-header">
+                            <div class="vision-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="vision-title">하나님의 사랑을 전하는 교회</div>
+                        </div>
+                        <div class="vision-content">
+                            <div class="vision-description">
+                                예수 그리스도의 사랑을 실천하며, 모든 사람에게 하나님의 은혜를 전하는 교회
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="vision-card">
+                        <div class="vision-header">
+                            <div class="vision-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="vision-title">함께 성장하는 교회</div>
+                        </div>
+                        <div class="vision-content">
+                            <div class="vision-description">
+                                모든 성도가 하나님의 말씀을 통해 영적으로 성장하며, 서로를 격려하는 교회
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="vision-card">
+                        <div class="vision-header">
+                            <div class="vision-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <div class="vision-title">섬김의 교회</div>
+                        </div>
+                        <div class="vision-content">
+                            <div class="vision-description">
+                                지역사회와 세계에 하나님의 사랑을 실천하며 섬기는 교회
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="text-center mb-5">교회 연락처</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-title">전화</div>
+                        <div class="contact-info">02-1234-5678</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-title">이메일</div>
+                        <div class="contact-info">info@muldaen.org</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-title">주소</div>
+                        <div class="contact-info">서울특별시 강남구 물댄동산로 123</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../footer-loader.js"></script>
+    <script src="../header-loader.js"></script>
+</body>
+</html>
