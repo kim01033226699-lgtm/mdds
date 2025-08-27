@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 현재 페이지에 맞는 active 클래스 설정
                 setActiveNavItem();
+
+                // 헤더 상호작용 초기화 (모바일 토글/드롭다운)
+                initHeaderInteractions();
             })
             .catch(error => {
                 console.error('헤더 로드 중 오류:', error);
@@ -77,5 +80,48 @@ function setActiveNavItem() {
                 }
             }
         }
+    });
+}
+
+// 헤더 상호작용 초기화: 헤더가 동적으로 주입된 이후에 호출되어야 함
+function initHeaderInteractions() {
+    // Bootstrap 드롭다운 초기화 (데이터 API와 병행 가능)
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggleEl => {
+        try {
+            // eslint-disable-next-line no-undef
+            new bootstrap.Dropdown(toggleEl);
+        } catch (e) {
+            // bootstrap이 없는 경우 무시
+        }
+    });
+
+    // 모바일 토글 버튼으로 네비게이션 펼치기/접기
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarToggler && navbarCollapse) {
+        navbarToggler.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+
+        // 모바일에서 링크 클릭 시 닫기
+        navbarCollapse.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                navbarCollapse.classList.remove('show');
+            });
+        });
+    }
+
+    // 모바일에서 드롭다운 토글 클릭 시 하위 메뉴 펼치기 (992px 미만일 때만)
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth < 992) {
+                e.preventDefault();
+                const dropdownMenu = this.nextElementSibling;
+                if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                    dropdownMenu.classList.toggle('show');
+                }
+            }
+        });
     });
 }
