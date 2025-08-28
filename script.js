@@ -181,49 +181,18 @@ document.addEventListener('DOMContentLoaded', function() {
             navbarCollapse.classList.toggle('show');
         });
         
-        // 모바일 메뉴에서 링크 클릭 시 메뉴 닫기
+        // 모바일 메뉴에서 일반 링크 클릭 시 메뉴 닫기 (드롭다운 토글은 제외)
         const mobileNavLinks = navbarCollapse.querySelectorAll('.nav-link');
         mobileNavLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function(e) {
+                if (this.classList.contains('dropdown-toggle')) {
+                    return;
+                }
                 navbarCollapse.classList.remove('show');
             });
         });
     }
     
-    // Bootstrap 드롭다운 초기화
-    const dropdownElementList = document.querySelectorAll('.dropdown-toggle');
-    dropdownElementList.forEach(dropdownToggleEl => {
-        new bootstrap.Dropdown(dropdownToggleEl);
-    });
-    
-    // 모바일에서 드롭다운 메뉴 클릭 이벤트
-    const dropdownMenus = document.querySelectorAll('.dropdown-menu');
-    dropdownMenus.forEach(menu => {
-        const dropdownItems = menu.querySelectorAll('.dropdown-item');
-        dropdownItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                // 모바일에서 드롭다운 메뉴 닫기
-                const navbarCollapse = document.querySelector('.navbar-collapse');
-                if (navbarCollapse && window.innerWidth < 992) {
-                    navbarCollapse.classList.remove('show');
-                }
-            });
-        });
-    });
-    
-    // 모바일에서 드롭다운 토글 버튼 클릭 이벤트
-    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-    dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-            if (window.innerWidth < 992) {
-                e.preventDefault();
-                const dropdownMenu = this.nextElementSibling;
-                if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-                    dropdownMenu.classList.toggle('show');
-                }
-            }
-        });
-    });
     
     // 스크롤 시 헤더 스타일 변경
     const header = document.querySelector('.header');

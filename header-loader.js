@@ -1,34 +1,27 @@
-// 헤더 로더 스크립트
-document.addEventListener('DOMContentLoaded', function() {
-    // 헤더를 로드할 요소 찾기
-    const headerContainer = document.getElementById('header-container');
-    
-    if (headerContainer) {
-        // 현재 페이지 경로 확인
+// 헤더 로더 스크립트 (DOM 상태에 따라 즉시/지연 실행)
+(function initHeaderLoader() {
+    const run = () => {
+        const headerContainer = document.getElementById('header-container');
+        if (!headerContainer) return;
+
         const isInPagesFolder = window.location.pathname.includes('/pages/');
         const headerPath = isInPagesFolder ? '../header.html' : 'header.html';
-        
-        // 헤더 HTML 파일 로드
+
         fetch(headerPath)
             .then(response => response.text())
             .then(data => {
-                // 현재 페이지 위치에 따라 링크 경로 조정
                 if (isInPagesFolder) {
                     data = data.replace(/href="pages\//g, 'href="');
                     data = data.replace(/href="index\.html"/g, 'href="../index.html"');
                 }
-                
-                headerContainer.innerHTML = data;
-                
-                // 현재 페이지에 맞는 active 클래스 설정
-                setActiveNavItem();
 
-                // 헤더 상호작용 초기화 (모바일 토글/드롭다운)
+                headerContainer.innerHTML = data;
+
+                setActiveNavItem();
                 initHeaderInteractions();
             })
             .catch(error => {
                 console.error('헤더 로드 중 오류:', error);
-                // 오류 시 기본 헤더 표시
                 headerContainer.innerHTML = `
                     <header class="header">
                         <div class="main-header">
@@ -51,8 +44,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     </header>
                 `;
             });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run);
+    } else {
+        run();
     }
-});
+})();
 
 // 현재 페이지에 맞는 네비게이션 아이템에 active 클래스 설정
 function setActiveNavItem() {
@@ -85,43 +84,113 @@ function setActiveNavItem() {
 
 // 헤더 상호작용 초기화: 헤더가 동적으로 주입된 이후에 호출되어야 함
 function initHeaderInteractions() {
-    // Bootstrap 드롭다운 초기화 (데이터 API와 병행 가능)
-    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-    dropdownToggles.forEach(toggleEl => {
-        try {
-            // eslint-disable-next-line no-undef
-            new bootstrap.Dropdown(toggleEl);
-        } catch (e) {
-            // bootstrap이 없는 경우 무시
-        }
-    });
-
     // 모바일 토글 버튼으로 네비게이션 펼치기/접기
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
+    
     if (navbarToggler && navbarCollapse) {
-        navbarToggler.addEventListener('click', function() {
+        // 기존 이벤트 리스너 제거 후 새로 추가
+        navbarToggler.replaceWith(navbarToggler.cloneNode(true));
+        const newToggler = document.querySelector('.navbar-toggler');
+        
+        newToggler.addEventListener('click', function(e) {
+            e.preventDefault();
             navbarCollapse.classList.toggle('show');
         });
 
-        // 모바일에서 링크 클릭 시 닫기
-        navbarCollapse.querySelectorAll('.nav-link').forEach(link => {
+        // 모바일에서 일반 링크 클릭 시 메뉴 닫기 (드롭다운 토글은 제외)
+        navbarCollapse.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
             link.addEventListener('click', function() {
                 navbarCollapse.classList.remove('show');
             });
         });
+
+        // 모바일에서 드롭다운 아이템 클릭 시 메뉴 닫기
+        navbarCollapse.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function() {
+                if (window.innerWidth < 992) {
+                    navbarCollapse.classList.remove('show');
+                }
+            });
+        });
     }
 
-    // 모바일에서 드롭다운 토글 클릭 시 하위 메뉴 펼치기 (992px 미만일 때만)
+    // 모바일에서 드롭다운 토글 처리 (Bootstrap 데이터 속성 무시하고 커스텀 로직 사용)
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
     dropdownToggles.forEach(toggle => {
+        // 기존 이벤트 제거
+        toggle.replaceWith(toggle.cloneNode(true));
+    });
+
+    // 새로운 드롭다운 토글에 이벤트 추가
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
         toggle.addEventListener('click', function(e) {
-            if (window.innerWidth < 992) {
-                e.preventDefault();
-                const dropdownMenu = this.nextElementSibling;
-                if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-                    dropdownMenu.classList.toggle('show');
+            // 데스크톱에서는 Bootstrap 기본 동작 허용
+            if (window.innerWidth >= 992) {
+                return;
+            }
+
+            // 모바일에서는 커스텀 로직 사용
+            e.preventDefault();
+            e.stopPropagation();
+
+            const parentDropdown = this.closest('.dropdown');
+            const dropdownMenu = this.nextElementSibling;
+            
+            if (!dropdownMenu || !dropdownMenu.classList.contains('dropdown-menu')) {
+                return;
+            }
+
+            const isCurrentlyShown = dropdownMenu.classList.contains('show');
+
+            // 모든 드롭다운 닫기
+            document.querySelectorAll('.navbar-collapse .dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+                const menuToggle = menu.previousElementSibling;
+                if (menuToggle && menuToggle.classList.contains('dropdown-toggle')) {
+                    menuToggle.setAttribute('aria-expanded', 'false');
                 }
+                const menuParent = menu.closest('.dropdown');
+                if (menuParent) menuParent.classList.remove('show');
+            });
+
+            // 현재 드롭다운이 닫혀있었다면 열기
+            if (!isCurrentlyShown) {
+                dropdownMenu.classList.add('show');
+                if (parentDropdown) parentDropdown.classList.add('show');
+                this.setAttribute('aria-expanded', 'true');
             }
         });
+    });
+
+    // Bootstrap 드롭다운 초기화 (데스크톱용)
+    if (typeof bootstrap !== 'undefined') {
+        dropdownToggles.forEach(toggleEl => {
+            try {
+                new bootstrap.Dropdown(toggleEl, {
+                    boundary: 'viewport'
+                });
+            } catch (e) {
+                console.log('Bootstrap dropdown initialization failed:', e);
+            }
+        });
+    }
+
+    // 모바일에서 바깥 영역 클릭 시 드롭다운 닫기
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth < 992) {
+            // 네비게이션 영역 외부 클릭 시에만 닫기
+            if (!e.target.closest('.navbar-collapse')) {
+                document.querySelectorAll('.navbar-collapse .dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                    const toggleEl = menu.previousElementSibling;
+                    if (toggleEl && toggleEl.classList.contains('dropdown-toggle')) {
+                        toggleEl.setAttribute('aria-expanded', 'false');
+                    }
+                    const pd = menu.closest('.dropdown');
+                    if (pd) pd.classList.remove('show');
+                });
+            }
+        }
     });
 }
