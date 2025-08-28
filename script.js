@@ -172,6 +172,38 @@ document.addEventListener('DOMContentLoaded', function() {
         searchIconTop.parentElement.addEventListener('click', openSearch);
     }
     
+    // 드롭다운 메뉴 기능 (데스크탑)
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const dropdown = this.closest('.dropdown');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+            
+            // 다른 모든 드롭다운 닫기
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                if (menu !== dropdownMenu) {
+                    menu.classList.remove('show');
+                }
+            });
+            
+            // 현재 드롭다운 토글
+            dropdownMenu.classList.toggle('show');
+        });
+    });
+    
+    // 드롭다운 외부 클릭 시 닫기
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('show');
+            });
+        }
+    });
+    
     // 모바일 메뉴 토글
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarCollapse = document.querySelector('.navbar-collapse');
