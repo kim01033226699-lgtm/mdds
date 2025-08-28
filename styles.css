@@ -86,7 +86,21 @@ body {
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     padding: 10px 0;
-    margin-top: 5px;
+    margin-top: 0;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.nav-item.dropdown {
+    position: relative;
+}
+
+.dropdown-menu.show {
+    display: block;
 }
 
 .dropdown-item {
@@ -94,6 +108,8 @@ body {
     padding: 10px 20px;
     font-size: 14px;
     transition: all 0.3s ease;
+    display: block;
+    text-decoration: none;
 }
 
 .dropdown-item:hover,
@@ -105,6 +121,13 @@ body {
 .dropdown-item:focus {
     background: #EF6C33;
     color: #fff;
+}
+
+/* 데스크탑에서 드롭다운 호버 효과 */
+@media (min-width: 992px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
 }
 
 /* Stats Section */
