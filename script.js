@@ -172,58 +172,173 @@ document.addEventListener('DOMContentLoaded', function() {
         searchIconTop.parentElement.addEventListener('click', openSearch);
     }
     
-    // 드롭다운 메뉴 기능 (데스크탑)
-    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-    
-    dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+    // 통합 드롭다운 메뉴 기능 (PC/모바일)
+    function initDropdowns() {
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        
+        dropdownToggles.forEach(toggle => {
+            // 기존 이벤트 리스너 제거
+            const newToggle = toggle.cloneNode(true);
+            toggle.parentNode.replaceChild(newToggle, toggle);
             
-            const dropdown = this.closest('.dropdown');
-            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-            
-            // 다른 모든 드롭다운 닫기
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                if (menu !== dropdownMenu) {
-                    menu.classList.remove('show');
+            newToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const dropdown = this.closest('.dropdown');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                const isMobile = window.innerWidth < 992;
+                
+                // 다른 모든 드롭다운 닫기
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    if (menu !== dropdownMenu) {
+                        menu.classList.remove('show');
+                        const menuToggle = menu.previousElementSibling;
+                        if (menuToggle && menuToggle.classList.contains('dropdown-toggle')) {
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                        }
+                        const menuParent = menu.closest('.dropdown');
+                        if (menuParent) menuParent.classList.remove('show');
+                    }
+                });
+                
+                // 현재 드롭다운 토글
+                const isCurrentlyShown = dropdownMenu.classList.contains('show');
+                
+                if (!isCurrentlyShown) {
+                    dropdownMenu.classList.add('show');
+                    dropdown.classList.add('show');
+                    this.setAttribute('aria-expanded', 'true');
+                } else {
+                    dropdownMenu.classList.remove('show');
+                    dropdown.classList.remove('show');
+                    this.setAttribute('aria-expanded', 'false');
                 }
             });
-            
-            // 현재 드롭다운 토글
-            dropdownMenu.classList.toggle('show');
-        });
-    });
-    
-    // 드롭다운 외부 클릭 시 닫기
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                menu.classList.remove('show');
-            });
-        }
-    });
-    
-    // 모바일 메뉴 토글
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    const navbarCollapse = document.querySelector('.navbar-collapse');
-    
-    if (navbarToggler && navbarCollapse) {
-        navbarToggler.addEventListener('click', function() {
-            navbarCollapse.classList.toggle('show');
         });
         
-        // 모바일 메뉴에서 일반 링크 클릭 시 메뉴 닫기 (드롭다운 토글은 제외)
-        const mobileNavLinks = navbarCollapse.querySelectorAll('.nav-link');
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.classList.contains('dropdown-toggle')) {
-                    return;
+        // 드롭다운 외부 클릭 시 닫기 (데스크탑에서만)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth >= 992 && !e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                    const menuToggle = menu.previousElementSibling;
+                    if (menuToggle && menuToggle.classList.contains('dropdown-toggle')) {
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                    const menuParent = menu.closest('.dropdown');
+                    if (menuParent) menuParent.classList.remove('show');
+                });
+            }
+        });
+    }
+    
+    // 모바일 전용 드롭다운 초기화 (전역 함수로 설정)
+    window.initMobileDropdowns = function() {
+        const mobileDropdownToggles = document.querySelectorAll('.navbar-collapse .dropdown-toggle');
+        
+        mobileDropdownToggles.forEach(toggle => {
+            // 기존 이벤트 리스너 제거
+            const newToggle = toggle.cloneNode(true);
+            toggle.parentNode.replaceChild(newToggle, toggle);
+            
+            newToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const dropdown = this.closest('.dropdown');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                
+                // 다른 모든 모바일 드롭다운 닫기
+                document.querySelectorAll('.navbar-collapse .dropdown-menu').forEach(menu => {
+                    if (menu !== dropdownMenu) {
+                        menu.classList.remove('show');
+                        const menuToggle = menu.previousElementSibling;
+                        if (menuToggle && menuToggle.classList.contains('dropdown-toggle')) {
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                        }
+                        const menuParent = menu.closest('.dropdown');
+                        if (menuParent) menuParent.classList.remove('show');
+                    }
+                });
+                
+                // 현재 드롭다운 토글
+                const isCurrentlyShown = dropdownMenu.classList.contains('show');
+                
+                if (!isCurrentlyShown) {
+                    dropdownMenu.classList.add('show');
+                    dropdown.classList.add('show');
+                    this.setAttribute('aria-expanded', 'true');
+                } else {
+                    dropdownMenu.classList.remove('show');
+                    dropdown.classList.remove('show');
+                    this.setAttribute('aria-expanded', 'false');
                 }
-                navbarCollapse.classList.remove('show');
             });
         });
     }
+    
+    // 초기 드롭다운 설정
+    initDropdowns();
+    
+    // 헤더 로드 후 드롭다운 재초기화
+    const headerContainer = document.getElementById('header-container');
+    if (headerContainer) {
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    // 헤더가 로드되면 드롭다운 재초기화
+                    setTimeout(() => {
+                        initDropdowns();
+                        initMobileDropdowns();
+                    }, 100);
+                }
+            });
+        });
+        
+        observer.observe(headerContainer, {
+            childList: true,
+            subtree: true
+        });
+    }
+    
+    // 모바일 메뉴 토글 (전역 함수로 설정)
+    window.initMobileMenu = function() {
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+        if (navbarToggler && navbarCollapse) {
+            // 기존 이벤트 리스너 제거
+            const newToggler = navbarToggler.cloneNode(true);
+            navbarToggler.parentNode.replaceChild(newToggler, navbarToggler);
+            
+            newToggler.addEventListener('click', function(e) {
+                e.preventDefault();
+                navbarCollapse.classList.toggle('show');
+            });
+            
+            // 모바일 메뉴에서 일반 링크 클릭 시 메뉴 닫기 (드롭다운 토글은 제외)
+            const mobileNavLinks = navbarCollapse.querySelectorAll('.nav-link:not(.dropdown-toggle)');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navbarCollapse.classList.remove('show');
+                });
+            });
+            
+            // 모바일에서 드롭다운 아이템 클릭 시 메뉴 닫기
+            const dropdownItems = navbarCollapse.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (window.innerWidth < 992) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                });
+            });
+        }
+    }
+    
+    // 초기 모바일 메뉴 설정
+    initMobileMenu();
     
     
     // 스크롤 시 헤더 스타일 변경
