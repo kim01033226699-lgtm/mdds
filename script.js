@@ -1,5 +1,23 @@
+// GitHub Pages에서 CSS 경로 처리
+function fixCSSPaths() {
+    const isGitHubPages = window.location.hostname.includes('github.io') || window.location.hostname.includes('github.com');
+    if (isGitHubPages) {
+        const repoName = window.location.pathname.split('/')[1] || '';
+        const cssLinks = document.querySelectorAll('link[rel="stylesheet"]');
+        
+        cssLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('../') && href.includes('styles.css')) {
+                link.setAttribute('href', `/${repoName}/styles.css`);
+            }
+        });
+    }
+}
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
+    // CSS 경로 수정
+    fixCSSPaths();
     
     // 네비게이션 활성화
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');

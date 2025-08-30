@@ -5,12 +5,28 @@
         if (!headerContainer) return;
 
         const isInPagesFolder = window.location.pathname.includes('/pages/');
-        const headerPath = isInPagesFolder ? '../header.html' : 'header.html';
+        const isGitHubPages = window.location.hostname.includes('github.io') || window.location.hostname.includes('github.com');
+        
+        let headerPath;
+        if (isGitHubPages) {
+            // GitHub Pages에서는 절대 경로 사용
+            const repoName = window.location.pathname.split('/')[1] || '';
+            headerPath = `/${repoName}/header.html`;
+        } else {
+            // 로컬에서는 상대 경로 사용
+            headerPath = isInPagesFolder ? '../header.html' : 'header.html';
+        }
 
         fetch(headerPath)
             .then(response => response.text())
             .then(data => {
-                if (isInPagesFolder) {
+                if (isGitHubPages) {
+                    // GitHub Pages에서 링크 수정
+                    const repoName = window.location.pathname.split('/')[1] || '';
+                    data = data.replace(/href="pages\//g, `href="/${repoName}/pages/`);
+                    data = data.replace(/href="index\.html"/g, `href="/${repoName}/index.html"`);
+                } else if (isInPagesFolder) {
+                    // 로컬에서 pages 폴더일 때
                     data = data.replace(/href="pages\//g, 'href="');
                     data = data.replace(/href="index\.html"/g, 'href="../index.html"');
                 }
