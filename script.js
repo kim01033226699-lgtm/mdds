@@ -395,24 +395,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 로딩 완료 후 애니메이션 시작
     window.addEventListener('load', function() {
         document.body.classList.add('loaded');
-        
-        // 히어로 섹션 텍스트 타이핑 효과
-        const heroTitle = document.querySelector('.hero-text h1');
-        if (heroTitle) {
-            const text = heroTitle.textContent;
-            heroTitle.textContent = '';
-            
-            let i = 0;
-            const typeWriter = () => {
-                if (i < text.length) {
-                    heroTitle.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            };
-            
-            setTimeout(typeWriter, 500);
-        }
     });
     
     // 툴팁 기능
