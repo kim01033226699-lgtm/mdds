@@ -28,10 +28,11 @@
             transform: translateY(-5px);
         }
         
-        .news-image {
+        .news-divider {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin-bottom: 0;
         }
         
         .news-content {
@@ -212,13 +213,7 @@
             margin-bottom: 0;
         }
         
-        .popular-news img {
-            width: 80px;
-            height: 60px;
-            border-radius: 5px;
-            margin-right: 15px;
-            object-fit: cover;
-        }
+
         
         .popular-news-info h5 {
             font-size: 0.9rem;
@@ -336,7 +331,7 @@
                 <div class="col-lg-8">
                     <!-- 교회소식 섹션 -->
                     <div class="news-item" data-category="news notice">
-                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&h=200&fit=crop" alt="2024년 교회 정기총회 안내" class="news-image">
+                        <div class="news-divider"></div>
                         <div class="news-content">
                             <div class="news-category">공지사항</div>
                             <h3>2024년 교회 정기총회 안내</h3>
@@ -354,7 +349,7 @@
                     </div>
 
                     <div class="news-item" data-category="news event">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop" alt="봄맞이 교회 나들이" class="news-image">
+                        <div class="news-divider"></div>
                         <div class="news-content">
                             <div class="news-category">행사안내</div>
                             <h3>봄맞이 교회 나들이 안내</h3>
@@ -372,7 +367,7 @@
                     </div>
 
                     <div class="news-item" data-category="news ministry">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=200&fit=crop" alt="청년부 선교여행" class="news-image">
+                        <div class="news-divider"></div>
                         <div class="news-content">
                             <div class="news-category">사역소식</div>
                             <h3>청년부 선교여행 후기</h3>
@@ -390,7 +385,7 @@
                     </div>
 
                     <div class="news-item" data-category="news mission">
-                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=200&fit=crop" alt="해외선교사 파송" class="news-image">
+                        <div class="news-divider"></div>
                         <div class="news-content">
                             <div class="news-category">선교소식</div>
                             <h3>해외선교사 파송식 안내</h3>
@@ -539,22 +534,19 @@
 
                     <div class="sidebar-widget">
                         <h4>인기 소식</h4>
-                        <div class="popular-news d-flex">
-                            <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=80&h=60&fit=crop" alt="정기총회">
+                        <div class="popular-news">
                             <div class="popular-news-info">
                                 <h5>2024년 교회 정기총회 안내</h5>
                                 <p>2024년 3월 15일</p>
                             </div>
                         </div>
-                        <div class="popular-news d-flex">
-                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=80&h=60&fit=crop" alt="교회 나들이">
+                        <div class="popular-news">
                             <div class="popular-news-info">
                                 <h5>봄맞이 교회 나들이 안내</h5>
                                 <p>2024년 3월 10일</p>
                             </div>
                         </div>
-                        <div class="popular-news d-flex">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=80&h=60&fit=crop" alt="청년부 선교여행">
+                        <div class="popular-news">
                             <div class="popular-news-info">
                                 <h5>청년부 선교여행 후기</h5>
                                 <p>2024년 3월 5일</p>
@@ -575,15 +567,13 @@
 
                     <div class="sidebar-widget">
                         <h4>최근 소식</h4>
-                        <div class="popular-news d-flex">
-                            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=80&h=60&fit=crop" alt="해외선교사 파송">
+                        <div class="popular-news">
                             <div class="popular-news-info">
                                 <h5>해외선교사 파송식 안내</h5>
                                 <p>2024년 3월 1일</p>
                             </div>
                         </div>
-                        <div class="popular-news d-flex">
-                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&h=60&fit=crop" alt="리모델링">
+                        <div class="popular-news">
                             <div class="popular-news-info">
                                 <h5>교회 리모델링 공사 안내</h5>
                                 <p>2024년 2월 25일</p>

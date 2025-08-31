@@ -982,12 +982,42 @@ body {
     /* 모바일에서 드롭다운 메뉴 표시 강제 */
     .navbar-collapse .dropdown-menu {
         display: none;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        position: static !important;
+        float: none !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+        background-color: rgba(255,255,255,0.1) !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     .navbar-collapse .dropdown-menu.show {
         display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        position: static !important;
+        float: none !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+        background-color: rgba(255,255,255,0.1) !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     .dropdown.show > .dropdown-menu {
         display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        position: static !important;
+        float: none !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+        background-color: rgba(255,255,255,0.1) !important;
+        border: none !important;
+        box-shadow: none !important;
     }
     
     .stat-number {
@@ -1111,4 +1141,179 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #c82333;
+}
+
+/* 우상단 큰글씨 모드 버튼 스타일 */
+.large-font-control {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.large-font-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0C4A60;
+    white-space: nowrap;
+}
+
+.large-font-toggle {
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.large-font-toggle.active {
+    background: #EF6C33;
+}
+
+.large-font-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.large-font-toggle.active::after {
+    transform: translateX(20px);
+}
+
+/* 큰글씨 모드 활성화 시 스타일 */
+body.large-font-mode {
+    font-size: 22px !important;
+    line-height: 1.9 !important;
+}
+
+body.large-font-mode h1 {
+    font-size: 4rem !important;
+}
+
+body.large-font-mode h2 {
+    font-size: 3.5rem !important;
+}
+
+body.large-font-mode h3 {
+    font-size: 3rem !important;
+}
+
+body.large-font-mode h4 {
+    font-size: 2.5rem !important;
+}
+
+body.large-font-mode p {
+    font-size: 22px !important;
+    line-height: 1.9 !important;
+}
+
+body.large-font-mode .nav-link {
+    font-size: 22px !important;
+    padding: 22px 28px !important;
+}
+
+body.large-font-mode .dropdown-item {
+    font-size: 20px !important;
+    padding: 16px 28px !important;
+}
+
+body.large-font-mode .hero-text h1 {
+    font-size: 5rem !important;
+}
+
+body.large-font-mode .hero-text p {
+    font-size: 2.2rem !important;
+}
+
+body.large-font-mode .section-header h2 {
+    font-size: 4rem !important;
+}
+
+body.large-font-mode .service-content h3 {
+    font-size: 2.5rem !important;
+}
+
+body.large-font-mode .event-content h3 {
+    font-size: 2rem !important;
+}
+
+body.large-font-mode .pastor-info h3 {
+    font-size: 3rem !important;
+}
+
+body.large-font-mode .sermon-info h4 {
+    font-size: 1.8rem !important;
+}
+
+body.large-font-mode .footer-section h3 {
+    font-size: 2.2rem !important;
+}
+
+body.large-font-mode .footer-section p {
+    font-size: 20px !important;
+}
+
+body.large-font-mode .footer-links a {
+    font-size: 20px !important;
+}
+
+/* 모바일에서 큰글씨 모드 버튼 크기 조정 */
+@media (max-width: 768px) {
+    .large-font-control {
+        top: 70px;
+        right: 15px;
+        padding: 8px 12px;
+    }
+    
+    .large-font-text {
+        font-size: 12px;
+    }
+    
+    .large-font-toggle {
+        width: 35px;
+        height: 18px;
+    }
+    
+    .large-font-toggle::after {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .large-font-toggle.active::after {
+        transform: translateX(17px);
+    }
+}
+
+/* 태블릿에서 큰글씨 모드 버튼 위치 조정 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .large-font-control {
+        top: 90px;
+        right: 20px;
+    }
+}
+
+/* 데스크톱에서 큰글씨 모드 버튼 위치 조정 */
+@media (min-width: 1025px) {
+    .large-font-control {
+        top: 100px;
+        right: 30px;
+    }
 }

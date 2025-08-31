@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         searchIconTop.parentElement.addEventListener('click', openSearch);
     }
     
-    // 통합 드롭다운 메뉴 기능 (PC/모바일)
+    // 드롭다운 메뉴 초기화 (데스크톱용)
     function initDropdowns() {
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         
@@ -205,9 +205,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const dropdown = this.closest('.dropdown');
                 const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-                const isMobile = window.innerWidth < 992;
                 
-                // 다른 모든 드롭다운 닫기
+                // 다른 드롭다운 메뉴들 닫기
                 document.querySelectorAll('.dropdown-menu').forEach(menu => {
                     if (menu !== dropdownMenu) {
                         menu.classList.remove('show');
@@ -216,26 +215,27 @@ document.addEventListener('DOMContentLoaded', function() {
                             menuToggle.setAttribute('aria-expanded', 'false');
                         }
                         const menuParent = menu.closest('.dropdown');
-                        if (menuParent) menuParent.classList.remove('show');
+                        if (menuParent) {
+                            menuParent.classList.remove('show');
+                        }
                     }
                 });
                 
-                // 현재 드롭다운 토글
                 const isCurrentlyShown = dropdownMenu.classList.contains('show');
                 
-                if (!isCurrentlyShown) {
-                    dropdownMenu.classList.add('show');
-                    dropdown.classList.add('show');
-                    this.setAttribute('aria-expanded', 'true');
-                } else {
+                if (isCurrentlyShown) {
                     dropdownMenu.classList.remove('show');
                     dropdown.classList.remove('show');
                     this.setAttribute('aria-expanded', 'false');
+                } else {
+                    dropdownMenu.classList.add('show');
+                    dropdown.classList.add('show');
+                    this.setAttribute('aria-expanded', 'true');
                 }
             });
         });
         
-        // 드롭다운 외부 클릭 시 닫기 (데스크탑에서만)
+        // 데스크톱에서 드롭다운 외부 클릭 시 닫기
         document.addEventListener('click', function(e) {
             if (window.innerWidth >= 992 && !e.target.closest('.dropdown')) {
                 document.querySelectorAll('.dropdown-menu').forEach(menu => {
@@ -245,54 +245,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         menuToggle.setAttribute('aria-expanded', 'false');
                     }
                     const menuParent = menu.closest('.dropdown');
-                    if (menuParent) menuParent.classList.remove('show');
-                });
-            }
-        });
-    }
-    
-    // 모바일 전용 드롭다운 초기화 (전역 함수로 설정)
-    window.initMobileDropdowns = function() {
-        const mobileDropdownToggles = document.querySelectorAll('.navbar-collapse .dropdown-toggle');
-        
-        mobileDropdownToggles.forEach(toggle => {
-            // 기존 이벤트 리스너 제거
-            const newToggle = toggle.cloneNode(true);
-            toggle.parentNode.replaceChild(newToggle, toggle);
-            
-            newToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const dropdown = this.closest('.dropdown');
-                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-                
-                // 다른 모든 모바일 드롭다운 닫기
-                document.querySelectorAll('.navbar-collapse .dropdown-menu').forEach(menu => {
-                    if (menu !== dropdownMenu) {
-                        menu.classList.remove('show');
-                        const menuToggle = menu.previousElementSibling;
-                        if (menuToggle && menuToggle.classList.contains('dropdown-toggle')) {
-                            menuToggle.setAttribute('aria-expanded', 'false');
-                        }
-                        const menuParent = menu.closest('.dropdown');
-                        if (menuParent) menuParent.classList.remove('show');
+                    if (menuParent) {
+                        menuParent.classList.remove('show');
                     }
                 });
-                
-                // 현재 드롭다운 토글
-                const isCurrentlyShown = dropdownMenu.classList.contains('show');
-                
-                if (!isCurrentlyShown) {
-                    dropdownMenu.classList.add('show');
-                    dropdown.classList.add('show');
-                    this.setAttribute('aria-expanded', 'true');
-                } else {
-                    dropdownMenu.classList.remove('show');
-                    dropdown.classList.remove('show');
-                    this.setAttribute('aria-expanded', 'false');
-                }
-            });
+            }
         });
     }
     
@@ -308,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 헤더가 로드되면 드롭다운 재초기화
                     setTimeout(() => {
                         initDropdowns();
-                        initMobileDropdowns();
                     }, 100);
                 }
             });
@@ -335,6 +291,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 navbarCollapse.classList.toggle('show');
             });
             
+            // 모바일에서 드롭다운 토글 클릭 시 하위 메뉴 열기/닫기
+            const mobileDropdownToggles = navbarCollapse.querySelectorAll('.dropdown-toggle');
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const dropdown = this.closest('.dropdown');
+                    const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                    const isCurrentlyShown = dropdownMenu.classList.contains('show');
+                    
+                    // 다른 드롭다운 메뉴들 닫기
+                    navbarCollapse.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        if (menu !== dropdownMenu) {
+                            menu.classList.remove('show');
+                            const menuParent = menu.closest('.dropdown');
+                            if (menuParent) {
+                                menuParent.classList.remove('show');
+                            }
+                        }
+                    });
+                    
+                    // 현재 드롭다운 토글
+                    if (isCurrentlyShown) {
+                        dropdownMenu.classList.remove('show');
+                        dropdown.classList.remove('show');
+                        this.setAttribute('aria-expanded', 'false');
+                    } else {
+                        dropdownMenu.classList.add('show');
+                        dropdown.classList.add('show');
+                        this.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+            
             // 모바일 메뉴에서 일반 링크 클릭 시 메뉴 닫기 (드롭다운 토글은 제외)
             const mobileNavLinks = navbarCollapse.querySelectorAll('.nav-link:not(.dropdown-toggle)');
             mobileNavLinks.forEach(link => {
@@ -357,6 +348,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 초기 모바일 메뉴 설정
     initMobileMenu();
+    
+    // 큰글씨 모드 토글 기능
+    initLargeFontMode();
+    
+    // 우상단 큰글씨 모드 버튼 생성
+    createLargeFontControl();
     
     
     // 스크롤 시 헤더 스타일 변경
@@ -618,14 +615,71 @@ function initPopupModals() {
         }
     });
     
-    // ESC 키로 모달 닫기
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            videoModal.style.display = 'none';
-            audioModal.style.display = 'none';
-            videoFrame.src = '';
-            audioFrame.src = '';
-            document.body.style.overflow = 'auto';
+         // ESC 키로 모달 닫기
+     document.addEventListener('keydown', function(e) {
+         if (e.key === 'Escape') {
+             videoModal.style.display = 'none';
+             audioModal.style.display = 'none';
+             videoFrame.src = '';
+             audioFrame.src = '';
+             document.body.style.overflow = 'auto';
+         }
+     });
+ }
+ 
+ // 우상단 큰글씨 모드 컨트롤 생성
+function createLargeFontControl() {
+    // 기존 컨트롤이 있다면 제거
+    const existingControl = document.querySelector('.large-font-control');
+    if (existingControl) {
+        existingControl.remove();
+    }
+    
+    // 새로운 컨트롤 생성
+    const control = document.createElement('div');
+    control.className = 'large-font-control';
+    control.innerHTML = `
+        <span class="large-font-text">큰글씨</span>
+        <div class="large-font-toggle"></div>
+    `;
+    
+    // 페이지에 추가
+    document.body.appendChild(control);
+    
+    // 토글 버튼 이벤트 리스너
+    const toggle = control.querySelector('.large-font-toggle');
+    toggle.addEventListener('click', function() {
+        const isCurrentlyLarge = document.body.classList.contains('large-font-mode');
+        
+        if (isCurrentlyLarge) {
+            // 큰글씨 모드 비활성화
+            document.body.classList.remove('large-font-mode');
+            localStorage.setItem('largeFontMode', 'false');
+            toggle.classList.remove('active');
+        } else {
+            // 큰글씨 모드 활성화
+            document.body.classList.add('large-font-mode');
+            localStorage.setItem('largeFontMode', 'true');
+            toggle.classList.add('active');
         }
     });
+    
+    // 초기 상태 설정
+    const isLargeFontMode = localStorage.getItem('largeFontMode') === 'true';
+    if (isLargeFontMode) {
+        toggle.classList.add('active');
+    }
 }
+
+// 큰글씨 모드 초기화 함수
+function initLargeFontMode() {
+    // 로컬 스토리지에서 큰글씨 모드 상태 확인
+    const isLargeFontMode = localStorage.getItem('largeFontMode') === 'true';
+    
+    // 페이지 로드 시 저장된 상태 적용
+    if (isLargeFontMode) {
+        document.body.classList.add('large-font-mode');
+    }
+}
+ 
+ 
