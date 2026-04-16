@@ -477,7 +477,7 @@
                 <div class="col-12">
                     <h3 class="text-center mb-4">이번 주 성가대 찬양</h3>
                     <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 30px;">
-                        <iframe width="100%" height="600" 
+                        <iframe id="sharonPlaylistFrame" width="100%" height="600"
                                 src="https://www.youtube.com/embed/videoseries?list=PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y&autoplay=0" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -625,7 +625,11 @@
          <script>
      // 샤론찬양대 영상을 필터링하여 가져오는 함수
      async function loadSharonVideos() {
-         const PLAYLIST_ID = 'PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y';
+         const adminConfig = JSON.parse(localStorage.getItem('mdds_admin_config') || '{}');
+         const PLAYLIST_ID = adminConfig.sharon?.playlistId || 'PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y';
+         // iframe도 업데이트
+         const frame = document.getElementById('sharonPlaylistFrame');
+         if (frame) frame.src = `https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}&autoplay=0`;
          const sharonVideos = document.getElementById('sharon-videos');
          
          try {

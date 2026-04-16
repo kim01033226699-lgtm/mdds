@@ -1,0 +1,21 @@
+{
+  "sermon": {
+    "playlistId": "PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H",
+    "label": "물댄동산교회 설교 재생목록"
+  },
+  "sharon": {
+    "playlistId": "PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y",
+    "label": "샤론찬양대 재생목록"
+  },
+  "youtube": {
+    "channelUrl": "https://www.youtube.com/@mdds",
+    "label": "물댄동산교회 YouTube 채널"
+  },
+  "church": {
+    "name": "물댄동산교회",
+    "pastor": "정종한 목사",
+    "phone": "031-553-0191",
+    "address": "경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층"
+  },
+  "updatedAt": ""
+}

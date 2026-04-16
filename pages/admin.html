@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 설정 - 물댄동산교회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f5f7fa; color: #333; }
+
+        .admin-header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 100%);
+            color: #fff; padding: 24px 0;
+        }
+        .admin-header h1 { font-size: 22px; font-weight: 700; }
+        .admin-header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+
+        .login-container {
+            max-width: 400px; margin: 80px auto; padding: 0 20px;
+        }
+        .login-box {
+            background: #fff; border-radius: 16px; padding: 40px 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;
+        }
+        .login-box h2 { font-size: 20px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
+        .login-box p { font-size: 13px; color: #999; margin-bottom: 24px; }
+
+        .admin-container { max-width: 800px; margin: 0 auto; padding: 24px 20px 60px; }
+
+        .config-card {
+            background: #fff; border-radius: 16px; padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px;
+            border: 1px solid #f0f0f0;
+        }
+        .config-card h3 {
+            font-size: 16px; font-weight: 700; color: #1e3a5f;
+            margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #f0f0f0;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .config-card h3 i { font-size: 18px; opacity: 0.7; }
+
+        .form-label { font-size: 13px; font-weight: 600; color: #555; margin-bottom: 4px; }
+        .form-control {
+            border: 1px solid #e0e6f0; border-radius: 10px; padding: 10px 14px;
+            font-size: 14px; transition: border-color 0.2s;
+        }
+        .form-control:focus { border-color: #1e3a5f; box-shadow: 0 0 0 3px rgba(30,58,95,0.1); }
+        .form-text { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+        .btn-save {
+            background: #1e3a5f; color: #fff; border: none; border-radius: 12px;
+            padding: 14px 32px; font-size: 15px; font-weight: 700; cursor: pointer;
+            transition: all 0.3s; width: 100%;
+        }
+        .btn-save:hover { background: #2d5a8e; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30,58,95,0.3); }
+
+        .btn-login {
+            background: #1e3a5f; color: #fff; border: none; border-radius: 10px;
+            padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer;
+            width: 100%; transition: background 0.2s;
+        }
+        .btn-login:hover { background: #2d5a8e; }
+
+        .toast-msg {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: #1e3a5f; color: #fff; padding: 14px 28px; border-radius: 12px;
+            font-size: 14px; font-weight: 600; z-index: 9999;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none;
+        }
+
+        .preview-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 12px; color: #2563eb; text-decoration: none; margin-top: 8px;
+        }
+        .preview-link:hover { text-decoration: underline; }
+
+        .back-link {
+            color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .back-link:hover { color: #fff; }
+
+        .last-saved { font-size: 12px; color: #aaa; text-align: center; margin-top: 16px; }
+    </style>
+</head>
+<body>
+
+<!-- 로그인 화면 -->
+<div id="loginScreen">
+    <div class="login-container">
+        <div class="login-box">
+            <div style="width:48px;height:48px;background:#1e3a5f;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#fff;font-size:20px;font-weight:700;">물</div>
+            <h2>관리자 로그인</h2>
+            <p>관리자 비밀번호를 입력하세요</p>
+            <input type="password" id="adminPassword" class="form-control" placeholder="비밀번호" style="margin-bottom:16px;text-align:center;"
+                   onkeypress="if(event.key==='Enter')doLogin()">
+            <button class="btn-login" onclick="doLogin()">로그인</button>
+            <p id="loginError" style="color:#e53e3e;font-size:13px;margin-top:12px;display:none;">비밀번호가 올바르지 않습니다.</p>
+        </div>
+    </div>
+</div>
+
+<!-- 관리자 화면 -->
+<div id="adminScreen" style="display:none;">
+    <div class="admin-header">
+        <div class="admin-container" style="padding-top:0;padding-bottom:0;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                    <h1><i class="fas fa-cog"></i> 관리자 설정</h1>
+                    <p>홈페이지 설정값을 관리합니다</p>
+                </div>
+                <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> 홈으로</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-container">
+        <!-- 설교 설정 -->
+        <div class="config-card">
+            <h3><i class="fab fa-youtube" style="color:#e53e3e;"></i> 설교 YouTube 설정</h3>
+            <div class="mb-3">
+                <label class="form-label">메인 설교 재생목록 ID</label>
+                <input type="text" id="sermonPlaylistId" class="form-control" placeholder="PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H">
+                <div class="form-text">YouTube 재생목록 URL에서 list= 뒤의 값 (메인 페이지 최신 설교에 사용)</div>
+                <a class="preview-link" href="#" id="sermonPreview" target="_blank"><i class="fas fa-external-link-alt"></i> 재생목록 확인</a>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">설교 재생목록 라벨</label>
+                <input type="text" id="sermonLabel" class="form-control" placeholder="물댄동산교회 설교 재생목록">
+            </div>
+        </div>
+
+        <!-- 샤론찬양대 설정 -->
+        <div class="config-card">
+            <h3><i class="fas fa-music" style="color:#9333ea;"></i> 샤론찬양대 YouTube 설정</h3>
+            <div class="mb-3">
+                <label class="form-label">샤론찬양대 재생목록 ID</label>
+                <input type="text" id="sharonPlaylistId" class="form-control" placeholder="PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y">
+                <div class="form-text">샤론찬양대 페이지에서 사용되는 재생목록</div>
+                <a class="preview-link" href="#" id="sharonPreview" target="_blank"><i class="fas fa-external-link-alt"></i> 재생목록 확인</a>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">샤론찬양대 라벨</label>
+                <input type="text" id="sharonLabel" class="form-control" placeholder="샤론찬양대 재생목록">
+            </div>
+        </div>
+
+        <!-- YouTube 채널 설정 -->
+        <div class="config-card">
+            <h3><i class="fas fa-link" style="color:#2563eb;"></i> YouTube 채널 설정</h3>
+            <div class="mb-3">
+                <label class="form-label">YouTube 채널 URL</label>
+                <input type="text" id="channelUrl" class="form-control" placeholder="https://www.youtube.com/@mdds">
+                <div class="form-text">푸터 및 링크에 사용되는 채널 주소</div>
+            </div>
+        </div>
+
+        <!-- 교회 기본 정보 -->
+        <div class="config-card">
+            <h3><i class="fas fa-church" style="color:#16a34a;"></i> 교회 기본 정보</h3>
+            <div class="mb-3">
+                <label class="form-label">교회명</label>
+                <input type="text" id="churchName" class="form-control" placeholder="물댄동산교회">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">담임목사</label>
+                <input type="text" id="churchPastor" class="form-control" placeholder="정종한 목사">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">전화번호</label>
+                <input type="text" id="churchPhone" class="form-control" placeholder="031-553-0191">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">주소</label>
+                <input type="text" id="churchAddress" class="form-control" placeholder="경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층">
+            </div>
+        </div>
+
+        <!-- 저장 버튼 -->
+        <button class="btn-save" onclick="saveConfig()">
+            <i class="fas fa-save"></i> 설정 저장
+        </button>
+        <div class="last-saved" id="lastSaved"></div>
+    </div>
+</div>
+
+<!-- 토스트 메시지 -->
+<div class="toast-msg" id="toast">✅ 설정이 저장되었습니다</div>
+
+<script>
+const ADMIN_PASSWORD = 'mdds2025!';
+const CONFIG_KEY = 'mdds_admin_config';
+
+function doLogin() {
+    const pw = document.getElementById('adminPassword').value;
+    if (pw === ADMIN_PASSWORD) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminScreen').style.display = 'block';
+        loadConfig();
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+    }
+}
+
+function loadConfig() {
+    // localStorage에서 로드, 없으면 기본값
+    let config;
+    const saved = localStorage.getItem(CONFIG_KEY);
+    if (saved) {
+        config = JSON.parse(saved);
+    } else {
+        config = {
+            sermon: { playlistId: 'PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H', label: '물댄동산교회 설교 재생목록' },
+            sharon: { playlistId: 'PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y', label: '샤론찬양대 재생목록' },
+            youtube: { channelUrl: 'https://www.youtube.com/@mdds' },
+            church: { name: '물댄동산교회', pastor: '정종한 목사', phone: '031-553-0191', address: '경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층' },
+        };
+    }
+
+    // 필드에 값 세팅
+    document.getElementById('sermonPlaylistId').value = config.sermon?.playlistId || '';
+    document.getElementById('sermonLabel').value = config.sermon?.label || '';
+    document.getElementById('sharonPlaylistId').value = config.sharon?.playlistId || '';
+    document.getElementById('sharonLabel').value = config.sharon?.label || '';
+    document.getElementById('channelUrl').value = config.youtube?.channelUrl || '';
+    document.getElementById('churchName').value = config.church?.name || '';
+    document.getElementById('churchPastor').value = config.church?.pastor || '';
+    document.getElementById('churchPhone').value = config.church?.phone || '';
+    document.getElementById('churchAddress').value = config.church?.address || '';
+
+    // 미리보기 링크
+    updatePreviewLinks();
+
+    // 마지막 저장 시간
+    if (config.updatedAt) {
+        document.getElementById('lastSaved').textContent = '마지막 저장: ' + new Date(config.updatedAt).toLocaleString('ko-KR');
+    }
+}
+
+function updatePreviewLinks() {
+    const sermonId = document.getElementById('sermonPlaylistId').value;
+    const sharonId = document.getElementById('sharonPlaylistId').value;
+    document.getElementById('sermonPreview').href = sermonId ? `https://www.youtube.com/playlist?list=${sermonId}` : '#';
+    document.getElementById('sharonPreview').href = sharonId ? `https://www.youtube.com/playlist?list=${sharonId}` : '#';
+}
+
+// 입력 변경 시 미리보기 링크 업데이트
+document.addEventListener('input', function(e) {
+    if (e.target.id === 'sermonPlaylistId' || e.target.id === 'sharonPlaylistId') {
+        updatePreviewLinks();
+    }
+});
+
+function saveConfig() {
+    const config = {
+        sermon: {
+            playlistId: document.getElementById('sermonPlaylistId').value.trim(),
+            label: document.getElementById('sermonLabel').value.trim(),
+        },
+        sharon: {
+            playlistId: document.getElementById('sharonPlaylistId').value.trim(),
+            label: document.getElementById('sharonLabel').value.trim(),
+        },
+        youtube: {
+            channelUrl: document.getElementById('channelUrl').value.trim(),
+        },
+        church: {
+            name: document.getElementById('churchName').value.trim(),
+            pastor: document.getElementById('churchPastor').value.trim(),
+            phone: document.getElementById('churchPhone').value.trim(),
+            address: document.getElementById('churchAddress').value.trim(),
+        },
+        updatedAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+
+    // 토스트 표시
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2500);
+
+    // 마지막 저장 시간 업데이트
+    document.getElementById('lastSaved').textContent = '마지막 저장: ' + new Date().toLocaleString('ko-KR');
+}
+</script>
+</body>
+</html>

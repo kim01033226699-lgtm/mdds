@@ -14,10 +14,24 @@ function fixCSSPaths() {
     }
 }
 
+// 관리자 설정 로드 및 적용
+function applyAdminConfig() {
+    const config = JSON.parse(localStorage.getItem('mdds_admin_config') || '{}');
+
+    // 푸터 YouTube 링크 업데이트
+    const ytLink = document.getElementById('footer-youtube-link');
+    if (ytLink && config.youtube?.channelUrl) {
+        ytLink.href = config.youtube.channelUrl;
+    }
+}
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
     // CSS 경로 수정
     fixCSSPaths();
+
+    // 관리자 설정 적용
+    setTimeout(applyAdminConfig, 500); // 푸터 로드 후 적용
     
     // 네비게이션 활성화
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
@@ -449,7 +463,9 @@ function initPopupModals() {
     
     // YouTube 재생목록에서 최신 설교 정보를 가져오는 함수
     async function loadLatestSermon() {
-        const PLAYLIST_ID = 'PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H'; // 물댄동산교회 설교 재생목록
+        // 관리자 설정에서 재생목록 ID 로드 (없으면 기본값)
+        const adminConfig = JSON.parse(localStorage.getItem('mdds_admin_config') || '{}');
+        const PLAYLIST_ID = adminConfig.sermon?.playlistId || 'PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H';
         
         try {
             // RSS2JSON API를 사용하여 재생목록 정보 가져오기
