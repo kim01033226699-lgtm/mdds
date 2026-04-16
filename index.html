@@ -3,16 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>물댄동산교회 - God's Love Church</title>
+    <title>물댄동산교회 - 새 일을 이루는 교회</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ===== 메인 페이지 전용 스타일 ===== */
+
+        /* 퀵 배너 */
+        .quick-banner { background: #fff; border-bottom: 1px solid #eee; }
+        .quick-banner .banner-item {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            padding: 20px 16px; text-decoration: none; color: #333;
+            transition: all 0.3s; border-right: 1px solid #f0f0f0;
+        }
+        .quick-banner .banner-item:last-child { border-right: none; }
+        .quick-banner .banner-item:hover { background: #f8f9fc; color: #1e3a5f; }
+        .quick-banner .banner-item i {
+            font-size: 24px; color: #1e3a5f; width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            background: #f0f4ff; border-radius: 50%;
+        }
+        .quick-banner .banner-item span { font-size: 14px; font-weight: 600; }
+
+        /* 섹션 공통 */
+        .section-block { padding: 60px 0; }
+        .section-block.bg-light { background: #f8f9fc; }
+        .section-title { font-size: 24px; font-weight: 800; color: #1a2a4a; margin-bottom: 8px; }
+        .section-subtitle { font-size: 14px; color: #888; margin-bottom: 32px; }
+        .section-more { font-size: 13px; color: #1e3a5f; text-decoration: none; font-weight: 600; }
+        .section-more:hover { text-decoration: underline; }
+        .section-header-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; }
+
+        /* 예배안내 테이블 */
+        .worship-table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .worship-table th { background: #1e3a5f; color: #fff; padding: 14px 20px; font-size: 14px; font-weight: 600; text-align: left; }
+        .worship-table td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid #f0f0f0; background: #fff; }
+        .worship-table tr:last-child td { border-bottom: none; }
+        .worship-table tr:hover td { background: #f8f9fc; }
+
+        /* 교회소식 리스트 */
+        .news-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+        .news-item:last-child { border-bottom: none; }
+        .news-item .news-tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-right: 10px; background: #e8f0fe; color: #1e3a5f; }
+        .news-item .news-title { font-size: 14px; color: #333; }
+        .news-item .news-date { font-size: 12px; color: #aaa; white-space: nowrap; }
+
+        /* 소개 카드 */
+        .intro-card {
+            background: #fff; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: all 0.3s; height: 100%;
+        }
+        .intro-card:hover { transform: translateY(-6px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        .intro-card .card-icon { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 48px; color: #fff; }
+        .intro-card .card-body-custom { padding: 24px; }
+        .intro-card .card-body-custom h4 { font-size: 16px; font-weight: 700; color: #1a2a4a; margin-bottom: 8px; }
+        .intro-card .card-body-custom p { font-size: 13px; color: #777; line-height: 1.7; margin: 0; }
+
+        /* 새가족 프로세스 */
+        .process-section { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 100%); color: #fff; padding: 60px 0; }
+        .process-step { text-align: center; padding: 20px 10px; }
+        .process-step .step-num {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; font-size: 20px; font-weight: 700;
+        }
+        .process-step h5 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+        .process-step p { font-size: 12px; opacity: 0.7; margin: 0; }
+
+        /* 오시는길 미니 */
+        .location-mini { background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .location-mini .loc-info { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
+        .location-mini .loc-info i { color: #1e3a5f; margin-top: 3px; width: 20px; }
+        .location-mini .loc-info span { font-size: 14px; color: #555; line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .quick-banner .banner-item { border-right: none; border-bottom: 1px solid #f0f0f0; }
+            .section-block { padding: 40px 0; }
+            .process-step { margin-bottom: 16px; }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Container -->
     <div id="header-container"></div>
 
-    <!-- Hero Section -->
+    <!-- 히어로 (기존 유지) -->
     <section id="home" class="hero-section">
         <div class="hero-content">
             <div class="container">
@@ -31,9 +111,35 @@
         </div>
     </section>
 
+    <!-- 퀵 배너 -->
+    <section class="quick-banner">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-3 col-6">
+                    <a href="pages/sunday-sermon.html" class="banner-item">
+                        <i class="fab fa-youtube"></i><span>주일설교</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="pages/bulletin.html" class="banner-item">
+                        <i class="fas fa-newspaper"></i><span>주보보기</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="pages/church-news-events.html" class="banner-item">
+                        <i class="fas fa-bullhorn"></i><span>교회소식</span>
+                    </a>
+                </div>
+                <div class="col-md-3 col-6">
+                    <a href="pages/directions.html" class="banner-item">
+                        <i class="fas fa-map-marker-alt"></i><span>오시는길</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-    <!-- Latest Sermon -->
+    <!-- 이번주 설교 (기존 방식 유지) -->
     <section class="latest-sermon">
         <div class="container">
             <div class="row align-items-center">
@@ -54,7 +160,162 @@
         </div>
     </section>
 
-    <!-- Video Popup Modal -->
+    <!-- 예배안내 + 교회소식 2단 -->
+    <section class="section-block bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="section-header-row">
+                        <div class="section-title">예배안내</div>
+                        <a href="pages/worship-guide.html" class="section-more">자세히 &rarr;</a>
+                    </div>
+                    <table class="worship-table" id="mainWorshipTable">
+                        <thead><tr><th>예배</th><th>시간</th></tr></thead>
+                        <tbody>
+                            <tr><td>주일예배</td><td>오전 9시, 11시</td></tr>
+                            <tr><td>수요예배</td><td>오후 7시 30분</td></tr>
+                            <tr><td>금요기도회</td><td>오후 8시</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+                        <a href="pages/worship-guide.html" style="padding:8px 16px;background:#1e3a5f;color:#fff;border-radius:6px;font-size:12px;text-decoration:none;">예배안내</a>
+                        <a href="pages/serving.html" style="padding:8px 16px;background:#fff;color:#1e3a5f;border:1px solid #d0d5dd;border-radius:6px;font-size:12px;text-decoration:none;">섬기는사람들</a>
+                        <a href="pages/new-family.html" style="padding:8px 16px;background:#fff;color:#1e3a5f;border:1px solid #d0d5dd;border-radius:6px;font-size:12px;text-decoration:none;">새가족반</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="section-header-row">
+                        <div class="section-title">교회소식</div>
+                        <a href="pages/church-news-events.html" class="section-more">더보기 &rarr;</a>
+                    </div>
+                    <div style="background:#fff;border-radius:12px;padding:8px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+                        <div class="news-item">
+                            <div><span class="news-tag">공지</span><span class="news-title">주일예배 안내</span></div>
+                            <span class="news-date">2026.04.16</span>
+                        </div>
+                        <div class="news-item">
+                            <div><span class="news-tag">행사</span><span class="news-title">부활절 감사예배</span></div>
+                            <span class="news-date">2026.04.13</span>
+                        </div>
+                        <div class="news-item">
+                            <div><span class="news-tag">공지</span><span class="news-title">수요기도회 안내</span></div>
+                            <span class="news-date">2026.04.09</span>
+                        </div>
+                        <div class="news-item">
+                            <div><span class="news-tag">소식</span><span class="news-title">교회학교 봄소풍</span></div>
+                            <span class="news-date">2026.04.06</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 교회소개 카드 (기존 콘텐츠 유지) -->
+    <section class="section-block">
+        <div class="container">
+            <div class="text-center" style="margin-bottom:40px;">
+                <div class="section-title">물댄동산 교회는</div>
+                <div class="section-subtitle">하나님의 사랑 안에서 함께하는 교회입니다</div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <a href="pages/worship-guide.html" style="text-decoration:none;">
+                        <div class="intro-card">
+                            <div class="card-icon" style="background:linear-gradient(135deg,#667eea,#764ba2);"><i class="fas fa-pray"></i></div>
+                            <div class="card-body-custom">
+                                <h4>우리의 예배는</h4>
+                                <p>예배는 우리의 삶의 목적입니다. 함께 모여 하나님을 예배하는 것은 우리 교회의 가장 중요한 이유입니다.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="pages/sunday-sermon.html" style="text-decoration:none;">
+                        <div class="intro-card">
+                            <div class="card-icon" style="background:linear-gradient(135deg,#f093fb,#f5576c);"><i class="fas fa-music"></i></div>
+                            <div class="card-body-custom">
+                                <h4>말씀과찬양</h4>
+                                <p>매주 주일 오전 11시에 드리는 예배입니다. 하나님의 말씀을 통해 은혜를 받고 함께 찬양하며 예배합니다.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="pages/bible-academy.html" style="text-decoration:none;">
+                        <div class="intro-card">
+                            <div class="card-icon" style="background:linear-gradient(135deg,#4facfe,#00f2fe);"><i class="fas fa-book-open"></i></div>
+                            <div class="card-body-custom">
+                                <h4>양육과훈련</h4>
+                                <p>청년들을 위한 다양한 프로그램을 제공합니다. 함께 성장하며 영적으로 성숙해가는 공동체입니다.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="pages/kindergarten.html" style="text-decoration:none;">
+                        <div class="intro-card">
+                            <div class="card-icon" style="background:linear-gradient(135deg,#43e97b,#38f9d7);"><i class="fas fa-child"></i></div>
+                            <div class="card-body-custom">
+                                <h4>다음세대</h4>
+                                <p>하나님의 사랑을 전하는 선교 사역을 통해 지역사회와 세계에 복음을 전파합니다.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 새가족 안내 -->
+    <section class="process-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom:40px;">
+                <div class="section-title" style="color:#fff;">처음 오셨나요?</div>
+                <div class="section-subtitle" style="color:rgba(255,255,255,0.6);">물댄동산교회는 여러분을 환영합니다</div>
+            </div>
+            <div class="row">
+                <div class="col-md col-6"><div class="process-step"><div class="step-num">1</div><h5>등록카드 작성</h5><p>안내데스크에서 등록</p></div></div>
+                <div class="col-md col-6"><div class="process-step"><div class="step-num">2</div><h5>예배 참석</h5><p>주일예배에 함께</p></div></div>
+                <div class="col-md col-6"><div class="process-step"><div class="step-num">3</div><h5>담임목사 면담</h5><p>예배 후 만남의 시간</p></div></div>
+                <div class="col-md col-6"><div class="process-step"><div class="step-num">4</div><h5>새가족 교육</h5><p>4주 새가족반 교육</p></div></div>
+                <div class="col-md col-12"><div class="process-step"><div class="step-num">5</div><h5>새가족 심방</h5><p>가정 방문 및 교제</p></div></div>
+            </div>
+            <div class="text-center" style="margin-top:24px;">
+                <a href="pages/new-family.html" style="display:inline-block;padding:12px 32px;background:#fff;color:#1e3a5f;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">새가족 안내 보기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 오시는길 + 바로가기 -->
+    <section class="section-block bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="section-header-row">
+                        <div class="section-title">오시는길</div>
+                        <a href="pages/directions.html" class="section-more">자세히 &rarr;</a>
+                    </div>
+                    <div class="location-mini">
+                        <div class="loc-info"><i class="fas fa-map-marker-alt"></i><span>경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층</span></div>
+                        <div class="loc-info"><i class="fas fa-phone"></i><span>031-553-0191</span></div>
+                        <div class="loc-info"><i class="fas fa-clock"></i><span>평일 오전 9시 - 오후 6시</span></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="section-header-row"><div class="section-title">바로가기</div></div>
+                    <div class="row g-3">
+                        <div class="col-6"><a href="pages/greeting.html" style="display:block;padding:20px;background:#fff;border-radius:12px;text-decoration:none;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'"><i class="fas fa-comment-dots" style="font-size:24px;color:#667eea;margin-bottom:8px;display:block;"></i><span style="font-size:13px;font-weight:600;color:#333;">인사말</span></a></div>
+                        <div class="col-6"><a href="pages/history.html" style="display:block;padding:20px;background:#fff;border-radius:12px;text-decoration:none;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'"><i class="fas fa-clock-rotate-left" style="font-size:24px;color:#f59e0b;margin-bottom:8px;display:block;"></i><span style="font-size:13px;font-weight:600;color:#333;">교회발자취</span></a></div>
+                        <div class="col-6"><a href="pages/facilities.html" style="display:block;padding:20px;background:#fff;border-radius:12px;text-decoration:none;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'"><i class="fas fa-building" style="font-size:24px;color:#16a34a;margin-bottom:8px;display:block;"></i><span style="font-size:13px;font-weight:600;color:#333;">시설안내</span></a></div>
+                        <div class="col-6"><a href="pages/vehicle.html" style="display:block;padding:20px;background:#fff;border-radius:12px;text-decoration:none;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'"><i class="fas fa-bus" style="font-size:24px;color:#dc3545;margin-bottom:8px;display:block;"></i><span style="font-size:13px;font-weight:600;color:#333;">차량안내</span></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video/Audio Popup Modal (기존 유지) -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -63,8 +324,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Audio Popup Modal -->
     <div id="audioModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -79,126 +338,6 @@
         </div>
     </div>
 
-    <!-- Church Services -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>물댄동산 교회는</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop" alt="환영">
-                        </div>
-                        <div class="service-content">
-                            <h3>우리의 예배는</h3>
-                            <p>예배는 우리의 삶의 목적입니다.함꼐 모여 하나님을 예배하는 것은 우리 교회의 가장 중요한 이유입니다.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=400&h=300&fit=crop" alt="주일 예배">
-                        </div>
-                        <div class="service-content">
-                            <h3>말씀과찬양</h3>
-                            <p>매주 주일 오전 11시에 드리는 예배입니다. 하나님의 말씀을 통해 은혜를 받고 함께 찬양하며 예배합니다.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="청년부">
-                        </div>
-                        <div class="service-content">
-                            <h3>양육과훈련</h3>
-                            <p>청년들을 위한 다양한 프로그램을 제공합니다. 함께 성장하며 영적으로 성숙해가는 공동체입니다.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="service-card">
-                        <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=300&fit=crop" alt="선교">
-                        </div>
-                        <div class="service-content">
-                            <h3>다음세대</h3>
-                            <p>하나님의 사랑을 전하는 선교 사역을 통해 지역사회와 세계에 복음을 전파합니다.</p>
-                            <a href="#" class="read-more">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- More Events -->
-    <section id="events" class="events-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>More Events</h2>
-                <div class="event-nav">
-                    <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="event-card">
-                        <div class="event-image">
-                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop" alt="봄맞이 캠핑">
-                        </div>
-                        <div class="event-content">
-                            <h3>봄맞이 캠핑</h3>
-                            <div class="event-date">27 Apr 2024 | 09:00 am</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="event-card">
-                        <div class="event-image">
-                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=250&fit=crop" alt="하나님을 위한 음악">
-                        </div>
-                        <div class="event-content">
-                            <h3>하나님을 위한 음악</h3>
-                            <div class="event-date">26 Apr 2024 | 01:00 pm</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="event-card">
-                        <div class="event-image">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop" alt="야외 모임">
-                        </div>
-                        <div class="event-content">
-                            <h3>야외 모임</h3>
-                            <div class="event-date">26 Apr 2024 | 09:30 am</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="event-card">
-                        <div class="event-image">
-                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop" alt="성경 공부">
-                        </div>
-                        <div class="event-content">
-                            <h3>성경 공부</h3>
-                            <div class="event-date">24 Apr 2024 | 10:00 am</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
     <!-- Footer Container -->
     <div id="footer-container"></div>
 
@@ -206,5 +345,18 @@
     <script src="script.js"></script>
     <script src="header-loader.js"></script>
     <script src="footer-loader.js"></script>
+    <script>
+    // 예배안내 D1 로드
+    (async function() {
+        try {
+            const res = await fetch('/api/contents/worship');
+            if (!res.ok) return;
+            const { data } = await res.json();
+            if (!data || !data.services) return;
+            const tbody = document.querySelector('#mainWorshipTable tbody');
+            tbody.innerHTML = data.services.map(s => '<tr><td>' + s.title + '</td><td>' + s.time + '</td></tr>').join('');
+        } catch(e) {}
+    })();
+    </script>
 </body>
 </html>
