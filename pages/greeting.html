@@ -196,22 +196,22 @@
                     <div class="intro-card">
                         <img src="../pastor01.png" alt="정종한 목사" class="pastor-image">
                         
-                        <div class="pastor-name">정종한</div>
-                        <div class="pastor-title">담임목사</div>
-                        
-                        <div class="greeting-text">
+                        <div class="pastor-name" id="pastorName">정종한</div>
+                        <div class="pastor-title" id="pastorTitle">담임목사</div>
+
+                        <div class="greeting-text" id="greetingText">
                             <p>샬롬! 물댄동산교회 홈페이지에 오신 모든 분들을 환영하며 축복합니다.</p>
-                            
+
                             <p>물댄동산교회는 대한예수교 장로회(통합)에 소속된 교회로 영락, 새문안, 연동, 남대문, 무학교회 등과 형제교회로 올해 63주년(2024년)의 역사를 가지고 있으며 지역의 동네 교회로 자리 잡고 있는 교회입니다.</p>
-                            
+
                             <p>물댄동산교회는 순수한 사랑을 앞세우는 예수 그리스도의 몸 된 교회로 성도들 모두가 함께 행복한 교회를 만들어 가고 있습니다. 또한, 하나님께서 기뻐하시는 교회 되기 위해 말씀과 찬양과 기도가 어우러진 살아있는 예배를 드리고 있습니다.</p>
-                            
+
                             <p>예배의 감동을 꿈꾸며 좋은 교회를 소망하는 모든 이들에게 작은 쉼을 주기를 바라며 주님의 이름으로 여러분을 사랑하며 축복합니다.</p>
-                            
+
                             <p>감사합니다.</p>
-                            
+
                             <p class="text-end mt-4">
-                                <strong>물댄동산교회 담임목사 정종한 목사</strong>
+                                <strong id="greetingSignature">물댄동산교회 담임목사 정종한 목사</strong>
                             </p>
                         </div>
                     </div>
@@ -319,5 +319,26 @@
     <script src="../script.js"></script>
     <script src="../footer-loader.js"></script>
     <script src="../header-loader.js"></script>
+    <script>
+    (async function() {
+        try {
+            const res = await fetch('/api/contents/greeting');
+            if (!res.ok) return;
+            const { data } = await res.json();
+            if (!data) return;
+            if (data.pastorName) document.getElementById('pastorName').textContent = data.pastorName;
+            if (data.pastorTitle) document.getElementById('pastorTitle').textContent = data.pastorTitle;
+            if (data.paragraphs && data.paragraphs.length) {
+                const el = document.getElementById('greetingText');
+                el.innerHTML = data.paragraphs.map(p => '<p>' + p + '</p>').join('')
+                    + '<p class="text-end mt-4"><strong id="greetingSignature">' + (data.signature || '') + '</strong></p>';
+            }
+            if (data.signature) {
+                const sig = document.getElementById('greetingSignature');
+                if (sig) sig.textContent = data.signature;
+            }
+        } catch(e) {}
+    })();
+    </script>
 </body>
 </html>

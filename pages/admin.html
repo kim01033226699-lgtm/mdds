@@ -178,6 +178,31 @@
             </div>
         </div>
 
+        <!-- 인사말 관리 -->
+        <div class="config-card">
+            <h3><i class="fas fa-comment-dots" style="color:#8b5cf6;"></i> 인사말 관리</h3>
+            <div class="mb-3">
+                <label class="form-label">목사 이름</label>
+                <input type="text" id="greetPastorName" class="form-control" placeholder="정종한">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">직분</label>
+                <input type="text" id="greetPastorTitle" class="form-control" placeholder="담임목사">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">인사말 본문 <span style="font-weight:400;color:#aaa;">(문단 구분은 빈 줄로)</span></label>
+                <textarea id="greetParagraphs" class="form-control" rows="10" placeholder="첫 번째 문단&#10;&#10;두 번째 문단&#10;&#10;세 번째 문단"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">서명</label>
+                <input type="text" id="greetSignature" class="form-control" placeholder="물댄동산교회 담임목사 정종한 목사">
+            </div>
+            <button class="btn-save" onclick="saveGreeting()" style="margin-bottom:8px;">
+                <i class="fas fa-save"></i> 인사말 저장
+            </button>
+            <a class="preview-link" href="greeting.html" target="_blank"><i class="fas fa-external-link-alt"></i> 인사말 페이지 미리보기</a>
+        </div>
+
         <!-- 저장 버튼 -->
         <button class="btn-save" onclick="saveConfig()">
             <i class="fas fa-save"></i> 설정 저장
@@ -199,6 +224,7 @@ function doLogin() {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('adminScreen').style.display = 'block';
         loadConfig();
+        loadGreeting();
     } else {
         document.getElementById('loginError').style.display = 'block';
     }
@@ -252,6 +278,45 @@ document.addEventListener('input', function(e) {
         updatePreviewLinks();
     }
 });
+
+// === 인사말 관리 ===
+async function loadGreeting() {
+    try {
+        const res = await fetch('/api/contents/greeting');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data) return;
+        document.getElementById('greetPastorName').value = data.pastorName || '';
+        document.getElementById('greetPastorTitle').value = data.pastorTitle || '';
+        document.getElementById('greetParagraphs').value = (data.paragraphs || []).join('\n\n');
+        document.getElementById('greetSignature').value = data.signature || '';
+    } catch(e) { console.log('인사말 로드 실패 (로컬 환경에서는 정상)'); }
+}
+
+async function saveGreeting() {
+    const data = {
+        pastorName: document.getElementById('greetPastorName').value.trim(),
+        pastorTitle: document.getElementById('greetPastorTitle').value.trim(),
+        paragraphs: document.getElementById('greetParagraphs').value.trim().split(/\n\s*\n/).filter(p => p.trim()),
+        signature: document.getElementById('greetSignature').value.trim(),
+    };
+    try {
+        const res = await fetch('/api/contents/greeting', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data }),
+        });
+        if (res.ok) {
+            const toast = document.getElementById('toast');
+            toast.textContent = '✅ 인사말이 저장되었습니다';
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        } else {
+            const err = await res.json();
+            alert(err.error || '저장에 실패했습니다.');
+        }
+    } catch(e) { alert('오류가 발생했습니다: ' + e.message); }
+}
 
 function saveConfig() {
     const config = {
