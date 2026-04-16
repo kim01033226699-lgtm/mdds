@@ -10,25 +10,68 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f5f7fa; color: #333; }
 
-        .admin-header {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 100%);
-            color: #fff; padding: 24px 0;
-        }
-        .admin-header h1 { font-size: 22px; font-weight: 700; }
-        .admin-header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
-
-        .login-container {
-            max-width: 400px; margin: 80px auto; padding: 0 20px;
-        }
+        /* 로그인 */
+        .login-container { max-width: 400px; margin: 80px auto; padding: 0 20px; }
         .login-box {
             background: #fff; border-radius: 16px; padding: 40px 32px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;
         }
         .login-box h2 { font-size: 20px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
         .login-box p { font-size: 13px; color: #999; margin-bottom: 24px; }
+        .btn-login {
+            background: #1e3a5f; color: #fff; border: none; border-radius: 10px;
+            padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer;
+            width: 100%; transition: background 0.2s;
+        }
+        .btn-login:hover { background: #2d5a8e; }
 
-        .admin-container { max-width: 800px; margin: 0 auto; padding: 24px 20px 60px; }
+        /* 관리자 레이아웃 */
+        .admin-layout { display: flex; min-height: 100vh; }
 
+        /* 사이드바 */
+        .admin-sidebar {
+            width: 240px; background: #1e3a5f; color: #fff; flex-shrink: 0;
+            display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; z-index: 100;
+        }
+        .sidebar-header {
+            padding: 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar-header h1 { font-size: 16px; font-weight: 700; }
+        .sidebar-header p { font-size: 11px; opacity: 0.6; margin-top: 4px; }
+        .sidebar-nav { flex: 1; padding: 12px 0; overflow-y: auto; }
+        .sidebar-nav a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 20px; color: rgba(255,255,255,0.7); text-decoration: none;
+            font-size: 13px; font-weight: 500; transition: all 0.2s; border-left: 3px solid transparent;
+        }
+        .sidebar-nav a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+        .sidebar-nav a.active {
+            background: rgba(255,255,255,0.12); color: #fff;
+            border-left-color: #d4af37; font-weight: 700;
+        }
+        .sidebar-nav a i { width: 18px; text-align: center; font-size: 14px; }
+        .sidebar-footer {
+            padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; gap: 12px;
+        }
+        .sidebar-footer a {
+            color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .sidebar-footer a:hover { color: #fff; }
+
+        /* 메인 콘텐츠 */
+        .admin-main { flex: 1; margin-left: 240px; padding: 32px; }
+        .admin-main-header {
+            margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .admin-main-header h2 { font-size: 22px; font-weight: 700; color: #1e3a5f; }
+
+        /* 섹션 */
+        .admin-section { display: none; }
+        .admin-section.active { display: block; }
+
+        /* 카드 */
         .config-card {
             background: #fff; border-radius: 16px; padding: 28px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px;
@@ -56,12 +99,11 @@
         }
         .btn-save:hover { background: #2d5a8e; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30,58,95,0.3); }
 
-        .btn-login {
-            background: #1e3a5f; color: #fff; border: none; border-radius: 10px;
-            padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer;
-            width: 100%; transition: background 0.2s;
+        .preview-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 12px; color: #2563eb; text-decoration: none; margin-top: 8px;
         }
-        .btn-login:hover { background: #2d5a8e; }
+        .preview-link:hover { text-decoration: underline; }
 
         .toast-msg {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -70,19 +112,18 @@
             box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none;
         }
 
-        .preview-link {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 12px; color: #2563eb; text-decoration: none; margin-top: 8px;
+        /* 모바일 사이드바 */
+        .mobile-toggle {
+            display: none; position: fixed; top: 12px; left: 12px; z-index: 200;
+            background: #1e3a5f; color: #fff; border: none; border-radius: 8px;
+            width: 40px; height: 40px; font-size: 18px; cursor: pointer;
         }
-        .preview-link:hover { text-decoration: underline; }
-
-        .back-link {
-            color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
-            display: inline-flex; align-items: center; gap: 6px;
+        @media (max-width: 768px) {
+            .admin-sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+            .admin-sidebar.open { transform: translateX(0); }
+            .admin-main { margin-left: 0; padding: 20px; padding-top: 60px; }
+            .mobile-toggle { display: flex; align-items: center; justify-content: center; }
         }
-        .back-link:hover { color: #fff; }
-
-        .last-saved { font-size: 12px; color: #aaa; text-align: center; margin-top: 16px; }
     </style>
 </head>
 <body>
@@ -104,265 +145,326 @@
 
 <!-- 관리자 화면 -->
 <div id="adminScreen" style="display:none;">
-    <div class="admin-header">
-        <div class="admin-container" style="padding-top:0;padding-bottom:0;">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div>
-                    <h1><i class="fas fa-cog"></i> 관리자 설정</h1>
-                    <p>홈페이지 설정값을 관리합니다</p>
-                </div>
-                <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> 홈으로</a>
-            </div>
-        </div>
-    </div>
+    <button class="mobile-toggle" onclick="document.querySelector('.admin-sidebar').classList.toggle('open')">
+        <i class="fas fa-bars"></i>
+    </button>
 
-    <div class="admin-container">
-        <!-- 설교 설정 -->
-        <div class="config-card">
-            <h3><i class="fab fa-youtube" style="color:#e53e3e;"></i> 설교 YouTube 설정</h3>
-            <div class="mb-3">
-                <label class="form-label">메인 설교 재생목록 ID</label>
-                <input type="text" id="sermonPlaylistId" class="form-control" placeholder="PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H">
-                <div class="form-text">YouTube 재생목록 URL에서 list= 뒤의 값 (메인 페이지 최신 설교에 사용)</div>
-                <a class="preview-link" href="#" id="sermonPreview" target="_blank"><i class="fas fa-external-link-alt"></i> 재생목록 확인</a>
+    <!-- 사이드바 -->
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-cog"></i> 관리자</h1>
+                <p>물댄동산교회 홈페이지 관리</p>
             </div>
-            <div class="mb-3">
-                <label class="form-label">설교 재생목록 라벨</label>
-                <input type="text" id="sermonLabel" class="form-control" placeholder="물댄동산교회 설교 재생목록">
+            <nav class="sidebar-nav">
+                <a href="#" data-section="youtube" class="active"><i class="fab fa-youtube"></i> YouTube 설정</a>
+                <a href="#" data-section="churchInfo"><i class="fas fa-church"></i> 교회 기본정보</a>
+                <a href="#" data-section="greeting"><i class="fas fa-comment-dots"></i> 인사말</a>
+                <a href="#" data-section="worship"><i class="fas fa-cross"></i> 예배안내</a>
+                <a href="#" data-section="serving"><i class="fas fa-users"></i> 섬기는사람들</a>
+                <a href="#" data-section="history"><i class="fas fa-clock-rotate-left"></i> 교회연혁</a>
+                <a href="#" data-section="directions"><i class="fas fa-map-location-dot"></i> 오시는길</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../index.html"><i class="fas fa-home"></i> 홈</a>
+                <a href="#" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> 로그아웃</a>
             </div>
-        </div>
+        </aside>
 
-        <!-- 샤론찬양대 설정 -->
-        <div class="config-card">
-            <h3><i class="fas fa-music" style="color:#9333ea;"></i> 샤론찬양대 YouTube 설정</h3>
-            <div class="mb-3">
-                <label class="form-label">샤론찬양대 재생목록 ID</label>
-                <input type="text" id="sharonPlaylistId" class="form-control" placeholder="PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y">
-                <div class="form-text">샤론찬양대 페이지에서 사용되는 재생목록</div>
-                <a class="preview-link" href="#" id="sharonPreview" target="_blank"><i class="fas fa-external-link-alt"></i> 재생목록 확인</a>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">샤론찬양대 라벨</label>
-                <input type="text" id="sharonLabel" class="form-control" placeholder="샤론찬양대 재생목록">
-            </div>
-        </div>
+        <!-- 메인 콘텐츠 -->
+        <main class="admin-main">
 
-        <!-- YouTube 채널 설정 -->
-        <div class="config-card">
-            <h3><i class="fas fa-link" style="color:#2563eb;"></i> YouTube 채널 설정</h3>
-            <div class="mb-3">
-                <label class="form-label">YouTube 채널 URL</label>
-                <input type="text" id="channelUrl" class="form-control" placeholder="https://www.youtube.com/@mdds">
-                <div class="form-text">푸터 및 링크에 사용되는 채널 주소</div>
-            </div>
-        </div>
-
-        <!-- 교회 기본 정보 -->
-        <div class="config-card">
-            <h3><i class="fas fa-church" style="color:#16a34a;"></i> 교회 기본 정보</h3>
-            <div class="mb-3">
-                <label class="form-label">교회명</label>
-                <input type="text" id="churchName" class="form-control" placeholder="물댄동산교회">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">담임목사</label>
-                <input type="text" id="churchPastor" class="form-control" placeholder="정종한 목사">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">전화번호</label>
-                <input type="text" id="churchPhone" class="form-control" placeholder="031-553-0191">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">주소</label>
-                <input type="text" id="churchAddress" class="form-control" placeholder="경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층">
-            </div>
-        </div>
-
-        <!-- 인사말 관리 -->
-        <div class="config-card">
-            <h3><i class="fas fa-comment-dots" style="color:#8b5cf6;"></i> 인사말 관리</h3>
-            <div class="mb-3">
-                <label class="form-label">목사 이름</label>
-                <input type="text" id="greetPastorName" class="form-control" placeholder="정종한">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">직분</label>
-                <input type="text" id="greetPastorTitle" class="form-control" placeholder="담임목사">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">인사말 본문 <span style="font-weight:400;color:#aaa;">(문단 구분은 빈 줄로)</span></label>
-                <textarea id="greetParagraphs" class="form-control" rows="10" placeholder="첫 번째 문단&#10;&#10;두 번째 문단&#10;&#10;세 번째 문단"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">서명</label>
-                <input type="text" id="greetSignature" class="form-control" placeholder="물댄동산교회 담임목사 정종한 목사">
-            </div>
-            <button class="btn-save" onclick="saveGreeting()" style="margin-bottom:8px;">
-                <i class="fas fa-save"></i> 인사말 저장
-            </button>
-            <a class="preview-link" href="greeting.html" target="_blank"><i class="fas fa-external-link-alt"></i> 인사말 페이지 미리보기</a>
-        </div>
-
-        <!-- 예배안내 관리 -->
-        <div class="config-card">
-            <h3><i class="fas fa-cross" style="color:#dc3545;"></i> 예배안내 관리</h3>
-            <div id="worshipEditor">
-                <div class="mb-3" id="worshipService0">
-                    <label class="form-label">예배 1</label>
-                    <div class="row g-2 mb-1">
-                        <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명 (예: 주일예배)"></div>
-                        <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
-                        <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+            <!-- YouTube 설정 -->
+            <div class="admin-section active" id="sec-youtube">
+                <div class="admin-main-header"><h2>YouTube 설정</h2></div>
+                <div class="config-card">
+                    <h3><i class="fab fa-youtube" style="color:#e53e3e;"></i> 설교 YouTube 설정</h3>
+                    <div class="mb-3">
+                        <label class="form-label">메인 설교 재생목록 ID</label>
+                        <input type="text" id="sermonPlaylistId" class="form-control" placeholder="PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H">
+                        <div class="form-text">YouTube 재생목록 URL에서 list= 뒤의 값</div>
+                        <a class="preview-link" href="#" id="sermonPreview" target="_blank"><i class="fas fa-external-link-alt"></i> 재생목록 확인</a>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">설교 재생목록 라벨</label>
+                        <input type="text" id="sermonLabel" class="form-control" placeholder="물댄동산교회 설교 재생목록">
                     </div>
                 </div>
-                <div class="mb-3" id="worshipService1">
-                    <label class="form-label">예배 2</label>
-                    <div class="row g-2 mb-1">
-                        <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명"></div>
-                        <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
-                        <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-music" style="color:#9333ea;"></i> 샤론찬양대 YouTube 설정</h3>
+                    <div class="mb-3">
+                        <label class="form-label">샤론찬양대 재생목록 ID</label>
+                        <input type="text" id="sharonPlaylistId" class="form-control" placeholder="PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y">
+                        <a class="preview-link" href="#" id="sharonPreview" target="_blank"><i class="fas fa-external-link-alt"></i> 재생목록 확인</a>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">샤론찬양대 라벨</label>
+                        <input type="text" id="sharonLabel" class="form-control" placeholder="샤론찬양대 재생목록">
                     </div>
                 </div>
-                <div class="mb-3" id="worshipService2">
-                    <label class="form-label">예배 3</label>
-                    <div class="row g-2 mb-1">
-                        <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명"></div>
-                        <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
-                        <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-link" style="color:#2563eb;"></i> YouTube 채널 설정</h3>
+                    <div class="mb-3">
+                        <label class="form-label">YouTube 채널 URL</label>
+                        <input type="text" id="channelUrl" class="form-control" placeholder="https://www.youtube.com/@mdds">
                     </div>
                 </div>
+                <button class="btn-save" onclick="saveConfig()"><i class="fas fa-save"></i> 설정 저장</button>
+                <div class="last-saved" id="lastSaved"></div>
             </div>
-            <button class="btn-save" onclick="saveWorship()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 예배안내 저장</button>
-            <a class="preview-link" href="worship-guide.html" target="_blank"><i class="fas fa-external-link-alt"></i> 예배안내 페이지 미리보기</a>
-        </div>
 
-        <!-- 섬기는사람들 관리 -->
-        <div class="config-card">
-            <h3><i class="fas fa-users" style="color:#16a34a;"></i> 섬기는사람들 관리</h3>
-            <div class="form-text mb-3">각 카테고리별 한 줄에 한 명씩 입력. 형식: <strong>이름 | 직분</strong> (예: 정종한 | 담임목사)</div>
-            <div class="mb-3">
-                <label class="form-label">담임목사</label>
-                <textarea id="servingPastor" class="form-control" rows="2" placeholder="정종한 | 담임목사"></textarea>
+            <!-- 교회 기본정보 -->
+            <div class="admin-section" id="sec-churchInfo">
+                <div class="admin-main-header"><h2>교회 기본정보</h2></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-church" style="color:#16a34a;"></i> 교회 기본 정보</h3>
+                    <div class="mb-3">
+                        <label class="form-label">교회명</label>
+                        <input type="text" id="churchName" class="form-control" placeholder="물댄동산교회">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">담임목사</label>
+                        <input type="text" id="churchPastor" class="form-control" placeholder="정종한 목사">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">전화번호</label>
+                        <input type="text" id="churchPhone" class="form-control" placeholder="031-553-0191">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">주소</label>
+                        <input type="text" id="churchAddress" class="form-control" placeholder="경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층">
+                    </div>
+                </div>
+                <button class="btn-save" onclick="saveConfig()"><i class="fas fa-save"></i> 설정 저장</button>
             </div>
-            <div class="mb-3">
-                <label class="form-label">교역자</label>
-                <textarea id="servingStaff" class="form-control" rows="5" placeholder="송봉길 | 부목사&#10;김호년 | 부목사"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">시무장로</label>
-                <textarea id="servingElders" class="form-control" rows="4" placeholder="강영철 | 시무장로&#10;김형곤 | 시무장로"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">원로장로</label>
-                <textarea id="servingSeniorElders" class="form-control" rows="2" placeholder="김유철 | 원로장로"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">교회 전화번호</label>
-                <input type="text" id="servingPhone" class="form-control" placeholder="031-553-0191">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">교회 이메일</label>
-                <input type="text" id="servingEmail" class="form-control" placeholder="info@mdds.or.kr">
-            </div>
-            <button class="btn-save" onclick="saveServing()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 섬기는사람들 저장</button>
-            <a class="preview-link" href="serving.html" target="_blank"><i class="fas fa-external-link-alt"></i> 섬기는사람들 페이지 미리보기</a>
-        </div>
 
-        <!-- 교회연혁 관리 -->
-        <div class="config-card">
-            <h3><i class="fas fa-clock-rotate-left" style="color:#f59e0b;"></i> 교회연혁 관리</h3>
-            <div class="row g-2 mb-3">
-                <div class="col-3"><label class="form-label">설립년도</label><input type="text" id="histStat0" class="form-control" placeholder="1961"></div>
-                <div class="col-3"><label class="form-label">등록교인</label><input type="text" id="histStat1" class="form-control" placeholder="500"></div>
-                <div class="col-3"><label class="form-label">섬기는 분들</label><input type="text" id="histStat2" class="form-control" placeholder="15"></div>
-                <div class="col-3"><label class="form-label">선교지</label><input type="text" id="histStat3" class="form-control" placeholder="10"></div>
+            <!-- 인사말 -->
+            <div class="admin-section" id="sec-greeting">
+                <div class="admin-main-header"><h2>인사말 관리</h2></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-comment-dots" style="color:#8b5cf6;"></i> 인사말</h3>
+                    <div class="mb-3">
+                        <label class="form-label">목사 이름</label>
+                        <input type="text" id="greetPastorName" class="form-control" placeholder="정종한">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">직분</label>
+                        <input type="text" id="greetPastorTitle" class="form-control" placeholder="담임목사">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">인사말 본문 <span style="font-weight:400;color:#aaa;">(문단 구분은 빈 줄로)</span></label>
+                        <textarea id="greetParagraphs" class="form-control" rows="10" placeholder="첫 번째 문단&#10;&#10;두 번째 문단"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">서명</label>
+                        <input type="text" id="greetSignature" class="form-control" placeholder="물댄동산교회 담임목사 정종한 목사">
+                    </div>
+                </div>
+                <button class="btn-save" onclick="saveGreeting()"><i class="fas fa-save"></i> 인사말 저장</button>
+                <a class="preview-link" href="greeting.html" target="_blank"><i class="fas fa-external-link-alt"></i> 인사말 페이지 미리보기</a>
             </div>
-            <div class="mb-3">
-                <label class="form-label">연혁 목록</label>
-                <div class="form-text mb-2">한 줄에 하나씩. 형식: <strong>연월 | 제목 | 세부내용1; 세부내용2</strong></div>
-                <textarea id="histTimeline" class="form-control" rows="12" placeholder="2023년 9월 | 정종한 목사 담임 목사로 부임 | 17일 - 정종한 목사 담임 목사로 부임&#10;2023년 5월 | 박혜진 청소년부 교육 목사 부임 | 7일 - 박혜진 청소년부 교육 목사 부임"></textarea>
-            </div>
-            <button class="btn-save" onclick="saveHistory()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 교회연혁 저장</button>
-            <a class="preview-link" href="history.html" target="_blank"><i class="fas fa-external-link-alt"></i> 교회연혁 페이지 미리보기</a>
-        </div>
 
-        <!-- 오시는길 관리 -->
-        <div class="config-card">
-            <h3><i class="fas fa-map-location-dot" style="color:#2563eb;"></i> 오시는길 관리</h3>
-            <div class="mb-3">
-                <label class="form-label">교회 주소</label>
-                <input type="text" id="dirAddress" class="form-control" placeholder="(12097) 경기도 남양주시 덕송2로 63">
-            </div>
-            <div class="row g-2 mb-3">
-                <div class="col-6">
-                    <label class="form-label">전화번호</label>
-                    <input type="text" id="dirPhone" class="form-control" placeholder="031-553-0191">
+            <!-- 예배안내 -->
+            <div class="admin-section" id="sec-worship">
+                <div class="admin-main-header"><h2>예배안내 관리</h2></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-cross" style="color:#dc3545;"></i> 예배시간</h3>
+                    <div id="worshipEditor">
+                        <div class="mb-3" id="worshipService0">
+                            <label class="form-label">예배 1</label>
+                            <div class="row g-2 mb-1">
+                                <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명 (예: 주일예배)"></div>
+                                <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
+                                <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3" id="worshipService1">
+                            <label class="form-label">예배 2</label>
+                            <div class="row g-2 mb-1">
+                                <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명"></div>
+                                <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
+                                <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3" id="worshipService2">
+                            <label class="form-label">예배 3</label>
+                            <div class="row g-2 mb-1">
+                                <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명"></div>
+                                <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
+                                <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <label class="form-label">전화 운영시간</label>
-                    <input type="text" id="dirPhoneHours" class="form-control" placeholder="평일 9시-18시, 주말 8시-17시">
-                </div>
+                <button class="btn-save" onclick="saveWorship()"><i class="fas fa-save"></i> 예배안내 저장</button>
+                <a class="preview-link" href="worship-guide.html" target="_blank"><i class="fas fa-external-link-alt"></i> 예배안내 페이지 미리보기</a>
             </div>
-            <div class="mb-3">
-                <label class="form-label">이메일 (줄바꿈으로 여러 개)</label>
-                <textarea id="dirEmailAdmin" class="form-control" rows="2" placeholder="info@mdds.or.kr&#10;pastor@mdds.or.kr"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">방문시간</label>
-                <textarea id="dirVisitHoursAdmin" class="form-control" rows="3" placeholder="평일: 오전 9시 - 오후 10시&#10;주말: 오전 8시 - 오후 9시&#10;(기도실은 24시간 이용 가능)"></textarea>
-            </div>
-            <div class="row g-2 mb-3">
-                <div class="col-6">
-                    <label class="form-label">주차 가능 대수</label>
-                    <input type="text" id="dirParkingSpaces" class="form-control" placeholder="총 50대 (지하 1층)">
-                </div>
-                <div class="col-6">
-                    <label class="form-label">주차 요금</label>
-                    <input type="text" id="dirParkingFee" class="form-control" placeholder="무료 (예배 참석자)">
-                </div>
-            </div>
-            <button class="btn-save" onclick="saveDirections()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 오시는길 저장</button>
-            <a class="preview-link" href="directions.html" target="_blank"><i class="fas fa-external-link-alt"></i> 오시는길 페이지 미리보기</a>
-        </div>
 
-        <!-- 저장 버튼 -->
-        <button class="btn-save" onclick="saveConfig()">
-            <i class="fas fa-save"></i> 설정 저장
-        </button>
-        <div class="last-saved" id="lastSaved"></div>
+            <!-- 섬기는사람들 -->
+            <div class="admin-section" id="sec-serving">
+                <div class="admin-main-header"><h2>섬기는사람들 관리</h2></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-users" style="color:#16a34a;"></i> 섬기는사람들</h3>
+                    <div class="form-text mb-3">각 카테고리별 한 줄에 한 명씩. 형식: <strong>이름 | 직분</strong></div>
+                    <div class="mb-3">
+                        <label class="form-label">담임목사</label>
+                        <textarea id="servingPastor" class="form-control" rows="2" placeholder="정종한 | 담임목사"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">교역자</label>
+                        <textarea id="servingStaff" class="form-control" rows="5" placeholder="송봉길 | 부목사&#10;김호년 | 부목사"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">시무장로</label>
+                        <textarea id="servingElders" class="form-control" rows="4" placeholder="강영철 | 시무장로"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">원로장로</label>
+                        <textarea id="servingSeniorElders" class="form-control" rows="2" placeholder="김유철 | 원로장로"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">교회 전화번호</label>
+                        <input type="text" id="servingPhone" class="form-control" placeholder="031-553-0191">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">교회 이메일</label>
+                        <input type="text" id="servingEmail" class="form-control" placeholder="info@mdds.or.kr">
+                    </div>
+                </div>
+                <button class="btn-save" onclick="saveServing()"><i class="fas fa-save"></i> 섬기는사람들 저장</button>
+                <a class="preview-link" href="serving.html" target="_blank"><i class="fas fa-external-link-alt"></i> 섬기는사람들 페이지 미리보기</a>
+            </div>
+
+            <!-- 교회연혁 -->
+            <div class="admin-section" id="sec-history">
+                <div class="admin-main-header"><h2>교회연혁 관리</h2></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-clock-rotate-left" style="color:#f59e0b;"></i> 교회연혁</h3>
+                    <div class="row g-2 mb-3">
+                        <div class="col-3"><label class="form-label">설립년도</label><input type="text" id="histStat0" class="form-control" placeholder="1961"></div>
+                        <div class="col-3"><label class="form-label">등록교인</label><input type="text" id="histStat1" class="form-control" placeholder="500"></div>
+                        <div class="col-3"><label class="form-label">섬기는 분들</label><input type="text" id="histStat2" class="form-control" placeholder="15"></div>
+                        <div class="col-3"><label class="form-label">선교지</label><input type="text" id="histStat3" class="form-control" placeholder="10"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">연혁 목록</label>
+                        <div class="form-text mb-2">한 줄에 하나씩. 형식: <strong>연월 | 제목 | 세부내용1; 세부내용2</strong></div>
+                        <textarea id="histTimeline" class="form-control" rows="12" placeholder="2023년 9월 | 정종한 목사 담임 목사로 부임 | 17일 - 정종한 목사 담임 목사로 부임"></textarea>
+                    </div>
+                </div>
+                <button class="btn-save" onclick="saveHistory()"><i class="fas fa-save"></i> 교회연혁 저장</button>
+                <a class="preview-link" href="history.html" target="_blank"><i class="fas fa-external-link-alt"></i> 교회연혁 페이지 미리보기</a>
+            </div>
+
+            <!-- 오시는길 -->
+            <div class="admin-section" id="sec-directions">
+                <div class="admin-main-header"><h2>오시는길 관리</h2></div>
+                <div class="config-card">
+                    <h3><i class="fas fa-map-location-dot" style="color:#2563eb;"></i> 오시는길</h3>
+                    <div class="mb-3">
+                        <label class="form-label">교회 주소</label>
+                        <input type="text" id="dirAddress" class="form-control" placeholder="(12097) 경기도 남양주시 덕송2로 63">
+                    </div>
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <label class="form-label">전화번호</label>
+                            <input type="text" id="dirPhone" class="form-control" placeholder="031-553-0191">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">전화 운영시간</label>
+                            <input type="text" id="dirPhoneHours" class="form-control" placeholder="평일 9시-18시, 주말 8시-17시">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">이메일 (줄바꿈으로 여러 개)</label>
+                        <textarea id="dirEmailAdmin" class="form-control" rows="2" placeholder="info@mdds.or.kr&#10;pastor@mdds.or.kr"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">방문시간</label>
+                        <textarea id="dirVisitHoursAdmin" class="form-control" rows="3" placeholder="평일: 오전 9시 - 오후 10시&#10;주말: 오전 8시 - 오후 9시"></textarea>
+                    </div>
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <label class="form-label">주차 가능 대수</label>
+                            <input type="text" id="dirParkingSpaces" class="form-control" placeholder="총 50대 (지하 1층)">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">주차 요금</label>
+                            <input type="text" id="dirParkingFee" class="form-control" placeholder="무료 (예배 참석자)">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-save" onclick="saveDirections()"><i class="fas fa-save"></i> 오시는길 저장</button>
+                <a class="preview-link" href="directions.html" target="_blank"><i class="fas fa-external-link-alt"></i> 오시는길 페이지 미리보기</a>
+            </div>
+
+        </main>
     </div>
 </div>
 
 <!-- 토스트 메시지 -->
-<div class="toast-msg" id="toast">✅ 설정이 저장되었습니다</div>
+<div class="toast-msg" id="toast"></div>
 
 <script>
 const ADMIN_PASSWORD = 'mdds2025!';
 const CONFIG_KEY = 'mdds_admin_config';
+const SESSION_KEY = 'mdds_admin_session';
 
+// === 사이드바 네비게이션 ===
+document.querySelectorAll('.sidebar-nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const section = this.dataset.section;
+        document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('sec-' + section).classList.add('active');
+        // 모바일: 메뉴 클릭 후 사이드바 닫기
+        document.querySelector('.admin-sidebar').classList.remove('open');
+    });
+});
+
+// === 로그인/로그아웃 ===
 function doLogin() {
     const pw = document.getElementById('adminPassword').value;
     if (pw === ADMIN_PASSWORD) {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('adminScreen').style.display = 'block';
-        loadConfig();
-        loadGreeting();
-        loadWorship();
-        loadServing();
-        loadHistory();
-        loadDirections();
+        sessionStorage.setItem(SESSION_KEY, pw);
+        showAdmin();
     } else {
         document.getElementById('loginError').style.display = 'block';
     }
 }
 
+function doLogout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('adminScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'block';
+    document.getElementById('adminPassword').value = '';
+}
+
+function showAdmin() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    // adminPassword 값을 세션에서 복원 (API 호출에 필요)
+    const pw = sessionStorage.getItem(SESSION_KEY);
+    if (pw) document.getElementById('adminPassword').value = pw;
+    loadConfig(); loadGreeting(); loadWorship(); loadServing(); loadHistory(); loadDirections();
+}
+
+// 페이지 로드 시 세션 확인
+(function() {
+    const saved = sessionStorage.getItem(SESSION_KEY);
+    if (saved === ADMIN_PASSWORD) {
+        showAdmin();
+    }
+})();
+
+// === localStorage 설정 ===
 function loadConfig() {
-    // localStorage에서 로드, 없으면 기본값
     let config;
     const saved = localStorage.getItem(CONFIG_KEY);
-    if (saved) {
-        config = JSON.parse(saved);
-    } else {
+    if (saved) { config = JSON.parse(saved); }
+    else {
         config = {
             sermon: { playlistId: 'PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H', label: '물댄동산교회 설교 재생목록' },
             sharon: { playlistId: 'PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y', label: '샤론찬양대 재생목록' },
@@ -370,8 +472,6 @@ function loadConfig() {
             church: { name: '물댄동산교회', pastor: '정종한 목사', phone: '031-553-0191', address: '경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층' },
         };
     }
-
-    // 필드에 값 세팅
     document.getElementById('sermonPlaylistId').value = config.sermon?.playlistId || '';
     document.getElementById('sermonLabel').value = config.sermon?.label || '';
     document.getElementById('sharonPlaylistId').value = config.sharon?.playlistId || '';
@@ -381,11 +481,7 @@ function loadConfig() {
     document.getElementById('churchPastor').value = config.church?.pastor || '';
     document.getElementById('churchPhone').value = config.church?.phone || '';
     document.getElementById('churchAddress').value = config.church?.address || '';
-
-    // 미리보기 링크
     updatePreviewLinks();
-
-    // 마지막 저장 시간
     if (config.updatedAt) {
         document.getElementById('lastSaved').textContent = '마지막 저장: ' + new Date(config.updatedAt).toLocaleString('ko-KR');
     }
@@ -394,18 +490,28 @@ function loadConfig() {
 function updatePreviewLinks() {
     const sermonId = document.getElementById('sermonPlaylistId').value;
     const sharonId = document.getElementById('sharonPlaylistId').value;
-    document.getElementById('sermonPreview').href = sermonId ? `https://www.youtube.com/playlist?list=${sermonId}` : '#';
-    document.getElementById('sharonPreview').href = sharonId ? `https://www.youtube.com/playlist?list=${sharonId}` : '#';
+    document.getElementById('sermonPreview').href = sermonId ? 'https://www.youtube.com/playlist?list=' + sermonId : '#';
+    document.getElementById('sharonPreview').href = sharonId ? 'https://www.youtube.com/playlist?list=' + sharonId : '#';
 }
 
-// 입력 변경 시 미리보기 링크 업데이트
 document.addEventListener('input', function(e) {
-    if (e.target.id === 'sermonPlaylistId' || e.target.id === 'sharonPlaylistId') {
-        updatePreviewLinks();
-    }
+    if (e.target.id === 'sermonPlaylistId' || e.target.id === 'sharonPlaylistId') updatePreviewLinks();
 });
 
-// === 인사말 관리 ===
+function saveConfig() {
+    const config = {
+        sermon: { playlistId: document.getElementById('sermonPlaylistId').value.trim(), label: document.getElementById('sermonLabel').value.trim() },
+        sharon: { playlistId: document.getElementById('sharonPlaylistId').value.trim(), label: document.getElementById('sharonLabel').value.trim() },
+        youtube: { channelUrl: document.getElementById('channelUrl').value.trim() },
+        church: { name: document.getElementById('churchName').value.trim(), pastor: document.getElementById('churchPastor').value.trim(), phone: document.getElementById('churchPhone').value.trim(), address: document.getElementById('churchAddress').value.trim() },
+        updatedAt: new Date().toISOString(),
+    };
+    localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+    showToast('설정이 저장되었습니다');
+    document.getElementById('lastSaved').textContent = '마지막 저장: ' + new Date().toLocaleString('ko-KR');
+}
+
+// === 인사말 ===
 async function loadGreeting() {
     try {
         const res = await fetch('/api/contents/greeting');
@@ -416,7 +522,7 @@ async function loadGreeting() {
         document.getElementById('greetPastorTitle').value = data.pastorTitle || '';
         document.getElementById('greetParagraphs').value = (data.paragraphs || []).join('\n\n');
         document.getElementById('greetSignature').value = data.signature || '';
-    } catch(e) { console.log('인사말 로드 실패 (로컬 환경에서는 정상)'); }
+    } catch(e) {}
 }
 
 async function saveGreeting() {
@@ -428,20 +534,15 @@ async function saveGreeting() {
     };
     try {
         const res = await fetch('/api/contents/greeting', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data }),
         });
-        if (res.ok) {
-            showToast('인사말이 저장되었습니다');
-        } else {
-            const err = await res.json();
-            alert(err.error || '저장에 실패했습니다.');
-        }
-    } catch(e) { alert('오류가 발생했습니다: ' + e.message); }
+        if (res.ok) showToast('인사말이 저장되었습니다');
+        else { const err = await res.json(); alert(err.error || '저장 실패'); }
+    } catch(e) { alert('오류: ' + e.message); }
 }
 
-// === 예배안내 관리 ===
+// === 예배안내 ===
 async function loadWorship() {
     try {
         const res = await fetch('/api/contents/worship');
@@ -455,7 +556,7 @@ async function loadWorship() {
             block.querySelector('.worship-time').value = s.time || '';
             block.querySelector('.worship-desc').value = s.description || '';
         });
-    } catch(e) { console.log('예배안내 로드 실패'); }
+    } catch(e) {}
 }
 
 async function saveWorship() {
@@ -470,22 +571,21 @@ async function saveWorship() {
     }
     try {
         const res = await fetch('/api/contents/worship', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data: { services } }),
         });
-        if (res.ok) { showToast('예배안내가 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+        if (res.ok) showToast('예배안내가 저장되었습니다');
+        else { const err = await res.json(); alert(err.error || '저장 실패'); }
     } catch(e) { alert('오류: ' + e.message); }
 }
 
-// === 섬기는사람들 관리 ===
+// === 섬기는사람들 ===
 function parseMembers(text) {
     return text.trim().split('\n').filter(l => l.trim()).map(line => {
         const parts = line.split('|').map(s => s.trim());
         return { name: parts[0] || '', position: parts[1] || '', description: parts[2] || '' };
     });
 }
-
 function membersToText(members) {
     return (members || []).map(m => m.name + ' | ' + m.position + (m.description ? ' | ' + m.description : '')).join('\n');
 }
@@ -497,15 +597,12 @@ async function loadServing() {
         const { data } = await res.json();
         if (!data) return;
         const catMap = { '담임목사': 'servingPastor', '교역자': 'servingStaff', '시무장로': 'servingElders', '원로장로': 'servingSeniorElders' };
-        (data.categories || []).forEach(cat => {
-            const id = catMap[cat.title];
-            if (id) document.getElementById(id).value = membersToText(cat.members);
-        });
+        (data.categories || []).forEach(cat => { const id = catMap[cat.title]; if (id) document.getElementById(id).value = membersToText(cat.members); });
         if (data.contact) {
             document.getElementById('servingPhone').value = data.contact.phone || '';
             document.getElementById('servingEmail').value = data.contact.email || '';
         }
-    } catch(e) { console.log('섬기는사람들 로드 실패'); }
+    } catch(e) {}
 }
 
 async function saveServing() {
@@ -515,67 +612,49 @@ async function saveServing() {
         { title: '시무장로', members: parseMembers(document.getElementById('servingElders').value) },
         { title: '원로장로', members: parseMembers(document.getElementById('servingSeniorElders').value) },
     ].filter(c => c.members.length > 0);
-    const contact = {
-        phone: document.getElementById('servingPhone').value.trim(),
-        hours: '평일 오전 9시 - 오후 6시',
-        email: document.getElementById('servingEmail').value.trim(),
-        address: document.getElementById('churchAddress').value.trim(),
-    };
+    const contact = { phone: document.getElementById('servingPhone').value.trim(), hours: '평일 오전 9시 - 오후 6시', email: document.getElementById('servingEmail').value.trim(), address: document.getElementById('churchAddress').value.trim() };
     try {
         const res = await fetch('/api/contents/serving', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data: { categories, contact } }),
         });
-        if (res.ok) { showToast('섬기는사람들이 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+        if (res.ok) showToast('섬기는사람들이 저장되었습니다');
+        else { const err = await res.json(); alert(err.error || '저장 실패'); }
     } catch(e) { alert('오류: ' + e.message); }
 }
 
-// === 교회연혁 관리 ===
+// === 교회연혁 ===
 async function loadHistory() {
     try {
         const res = await fetch('/api/contents/history');
         if (!res.ok) return;
         const { data } = await res.json();
         if (!data) return;
-        const labels = ['설립년도', '등록교인', '섬기는 분들', '선교지'];
-        (data.stats || []).forEach((s, i) => {
-            const el = document.getElementById('histStat' + i);
-            if (el) el.value = s.number || '';
-        });
+        (data.stats || []).forEach((s, i) => { const el = document.getElementById('histStat' + i); if (el) el.value = s.number || ''; });
         if (data.timeline) {
-            document.getElementById('histTimeline').value = data.timeline.map(t =>
-                t.year + ' | ' + t.title + ' | ' + t.events.join('; ')
-            ).join('\n');
+            document.getElementById('histTimeline').value = data.timeline.map(t => t.year + ' | ' + t.title + ' | ' + t.events.join('; ')).join('\n');
         }
-    } catch(e) { console.log('교회연혁 로드 실패'); }
+    } catch(e) {}
 }
 
 async function saveHistory() {
     const labels = ['설립년도', '등록교인', '섬기는 분들', '선교지'];
-    const stats = labels.map((label, i) => ({
-        number: (document.getElementById('histStat' + i).value || '').trim(),
-        label: label,
-    }));
+    const stats = labels.map((label, i) => ({ number: (document.getElementById('histStat' + i).value || '').trim(), label }));
     const timeline = document.getElementById('histTimeline').value.trim().split('\n').filter(l => l.trim()).map(line => {
         const parts = line.split('|').map(s => s.trim());
-        return {
-            year: parts[0] || '',
-            title: parts[1] || '',
-            events: (parts[2] || '').split(';').map(s => s.trim()).filter(s => s),
-        };
+        return { year: parts[0] || '', title: parts[1] || '', events: (parts[2] || '').split(';').map(s => s.trim()).filter(s => s) };
     });
     try {
         const res = await fetch('/api/contents/history', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data: { stats, timeline } }),
         });
-        if (res.ok) { showToast('교회연혁이 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+        if (res.ok) showToast('교회연혁이 저장되었습니다');
+        else { const err = await res.json(); alert(err.error || '저장 실패'); }
     } catch(e) { alert('오류: ' + e.message); }
 }
 
-// === 오시는길 관리 ===
+// === 오시는길 ===
 async function loadDirections() {
     try {
         const res = await fetch('/api/contents/directions');
@@ -589,7 +668,7 @@ async function loadDirections() {
         document.getElementById('dirVisitHoursAdmin').value = data.visitHours || '';
         document.getElementById('dirParkingSpaces').value = data.parkingSpaces || '';
         document.getElementById('dirParkingFee').value = data.parkingFee || '';
-    } catch(e) { console.log('오시는길 로드 실패'); }
+    } catch(e) {}
 }
 
 async function saveDirections() {
@@ -604,53 +683,20 @@ async function saveDirections() {
     };
     try {
         const res = await fetch('/api/contents/directions', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data }),
         });
-        if (res.ok) { showToast('오시는길이 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+        if (res.ok) showToast('오시는길이 저장되었습니다');
+        else { const err = await res.json(); alert(err.error || '저장 실패'); }
     } catch(e) { alert('오류: ' + e.message); }
 }
 
-// 토스트 헬퍼
+// === 토스트 ===
 function showToast(msg) {
     const toast = document.getElementById('toast');
     toast.textContent = '\u2705 ' + msg;
     toast.style.display = 'block';
     setTimeout(() => { toast.style.display = 'none'; }, 2500);
-}
-
-function saveConfig() {
-    const config = {
-        sermon: {
-            playlistId: document.getElementById('sermonPlaylistId').value.trim(),
-            label: document.getElementById('sermonLabel').value.trim(),
-        },
-        sharon: {
-            playlistId: document.getElementById('sharonPlaylistId').value.trim(),
-            label: document.getElementById('sharonLabel').value.trim(),
-        },
-        youtube: {
-            channelUrl: document.getElementById('channelUrl').value.trim(),
-        },
-        church: {
-            name: document.getElementById('churchName').value.trim(),
-            pastor: document.getElementById('churchPastor').value.trim(),
-            phone: document.getElementById('churchPhone').value.trim(),
-            address: document.getElementById('churchAddress').value.trim(),
-        },
-        updatedAt: new Date().toISOString(),
-    };
-
-    localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
-
-    // 토스트 표시
-    const toast = document.getElementById('toast');
-    toast.style.display = 'block';
-    setTimeout(() => { toast.style.display = 'none'; }, 2500);
-
-    // 마지막 저장 시간 업데이트
-    document.getElementById('lastSaved').textContent = '마지막 저장: ' + new Date().toLocaleString('ko-KR');
 }
 </script>
 </body>
