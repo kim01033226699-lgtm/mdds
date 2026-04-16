@@ -1,7 +1,7 @@
 // GET: 콘텐츠 조회 (공개)
 export async function onRequestGet(context) {
   const { params, env } = context;
-  const key = params.key;
+  const key = Array.isArray(params.key) ? params.key.join('/') : params.key;
 
   try {
     const row = await env.DB.prepare("SELECT value, updated_at FROM contents WHERE key = ?").bind(key).first();
@@ -25,7 +25,7 @@ export async function onRequestGet(context) {
 // PUT: 콘텐츠 수정 (관리자)
 export async function onRequestPut(context) {
   const { params, env, request } = context;
-  const key = params.key;
+  const key = Array.isArray(params.key) ? params.key.join('/') : params.key;
   const ADMIN_PASSWORD = 'mdds2025!';
 
   try {
