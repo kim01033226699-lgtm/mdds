@@ -211,7 +211,7 @@
     <section class="worship-schedule">
         <div class="container">
             <h2 class="text-center mb-5">예배시간</h2>
-            <div class="row">
+            <div class="row" id="worshipServices">
                 <div class="col-lg-4 col-md-6">
                     <div class="schedule-card">
                         <div class="schedule-icon">
@@ -373,5 +373,28 @@
     <script src="../script.js"></script>
     <script src="../footer-loader.js"></script>
     <script src="../header-loader.js"></script>
+<script>
+(async function() {
+    try {
+        const res = await fetch('/api/contents/worship');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data || !data.services) return;
+        const icons = ['fa-sun','fa-pray','fa-hands'];
+        const container = document.getElementById('worshipServices');
+        if (!container) return;
+        container.innerHTML = data.services.map((s,i) => `
+            <div class="col-lg-4 col-md-6">
+                <div class="schedule-card">
+                    <div class="schedule-icon"><i class="fas ${icons[i] || 'fa-church'}"></i></div>
+                    <div class="schedule-title">${s.title}</div>
+                    <div class="schedule-time">${s.time}</div>
+                    <div class="schedule-description">${s.description}</div>
+                </div>
+            </div>
+        `).join('');
+    } catch(e) {}
+})();
+</script>
 </body>
 </html>

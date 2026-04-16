@@ -215,7 +215,7 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div class="contact-title">전화</div>
-                        <div class="contact-content">
+                        <div class="contact-content" id="dirPhone">
                             031-553-0191<br>
                             평일: 오전 9시 - 오후 6시<br>
                             주말: 오전 8시 - 오후 5시
@@ -228,7 +228,7 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-title">이메일</div>
-                        <div class="contact-content">
+                        <div class="contact-content" id="dirEmail">
                             info@mdds.or.kr<br>
                             pastor@mdds.or.kr<br>
                             24시간 접수 가능
@@ -241,7 +241,7 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="contact-title">방문시간</div>
-                        <div class="contact-content">
+                        <div class="contact-content" id="dirVisitHours">
                             평일: 오전 9시 - 오후 10시<br>
                             주말: 오전 8시 - 오후 9시<br>
                             (기도실은 24시간 이용 가능)
@@ -319,5 +319,22 @@
         });
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+<script>
+(async function() {
+    try {
+        const res = await fetch('/api/contents/directions');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data) return;
+        var el;
+        el = document.getElementById('dirPhone');
+        if (el && data.phone) el.innerHTML = data.phone + '<br>' + (data.phoneHours || '').replace(/\n/g,'<br>');
+        el = document.getElementById('dirEmail');
+        if (el && data.email) el.innerHTML = (data.email || '').replace(/\n/g,'<br>');
+        el = document.getElementById('dirVisitHours');
+        if (el && data.visitHours) el.innerHTML = (data.visitHours || '').replace(/\n/g,'<br>');
+    } catch(e) {}
+})();
+</script>
 </body>
 </html>

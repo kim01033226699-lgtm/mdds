@@ -311,7 +311,7 @@
     </section>
 
     <!-- Team Section -->
-    <section class="team-section">
+    <section class="team-section" id="teamSection">
         <div class="container">
             <!-- Senior Pastor -->
             <div class="team-category">
@@ -489,7 +489,7 @@
     <section class="contact-section">
         <div class="container">
             <h2 class="text-center mb-5">연락처</h2>
-            <div class="row">
+            <div class="row" id="contactSection">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="contact-card">
                         <div class="contact-icon">
@@ -531,5 +531,48 @@
     <script src="../script.js"></script>
     <script src="../footer-loader.js"></script>
     <script src="../header-loader.js"></script>
+<script>
+(async function() {
+    try {
+        const res = await fetch('/api/contents/serving');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data) return;
+        if (data.categories) {
+            const el = document.getElementById('teamSection');
+            if (el) {
+                el.innerHTML = '<div class="container">' + data.categories.map(cat => `
+                    <div class="team-category">
+                        <h2 class="category-title">${cat.title}</h2>
+                        <div class="row justify-content-center">
+                            ${cat.members.map(m => `
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="team-member">
+                                        <div class="member-photo"><i class="fas fa-user"></i></div>
+                                        <div class="member-name">${m.name}</div>
+                                        <div class="member-position">${m.position}</div>
+                                        ${m.description ? '<div class="member-description">' + m.description + '</div>' : ''}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('') + '</div>';
+            }
+        }
+        if (data.contact) {
+            const c = data.contact;
+            const el = document.getElementById('contactSection');
+            if (el) {
+                el.innerHTML = `
+                    <div class="col-lg-4 col-md-6 mb-4"><div class="contact-card"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-title">전화</div><div class="contact-info">${c.phone}<br>${c.hours}</div></div></div>
+                    <div class="col-lg-4 col-md-6 mb-4"><div class="contact-card"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-title">이메일</div><div class="contact-info">${c.email}</div></div></div>
+                    <div class="col-lg-4 col-md-6 mb-4"><div class="contact-card"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-title">주소</div><div class="contact-info">${c.address}</div></div></div>
+                `;
+            }
+        }
+    } catch(e) {}
+})();
+</script>
 </body>
 </html>

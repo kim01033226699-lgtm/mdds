@@ -203,6 +203,128 @@
             <a class="preview-link" href="greeting.html" target="_blank"><i class="fas fa-external-link-alt"></i> 인사말 페이지 미리보기</a>
         </div>
 
+        <!-- 예배안내 관리 -->
+        <div class="config-card">
+            <h3><i class="fas fa-cross" style="color:#dc3545;"></i> 예배안내 관리</h3>
+            <div id="worshipEditor">
+                <div class="mb-3" id="worshipService0">
+                    <label class="form-label">예배 1</label>
+                    <div class="row g-2 mb-1">
+                        <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명 (예: 주일예배)"></div>
+                        <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
+                        <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                    </div>
+                </div>
+                <div class="mb-3" id="worshipService1">
+                    <label class="form-label">예배 2</label>
+                    <div class="row g-2 mb-1">
+                        <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명"></div>
+                        <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
+                        <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                    </div>
+                </div>
+                <div class="mb-3" id="worshipService2">
+                    <label class="form-label">예배 3</label>
+                    <div class="row g-2 mb-1">
+                        <div class="col-4"><input type="text" class="form-control worship-title" placeholder="예배명"></div>
+                        <div class="col-3"><input type="text" class="form-control worship-time" placeholder="시간"></div>
+                        <div class="col-5"><input type="text" class="form-control worship-desc" placeholder="설명"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-save" onclick="saveWorship()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 예배안내 저장</button>
+            <a class="preview-link" href="worship-guide.html" target="_blank"><i class="fas fa-external-link-alt"></i> 예배안내 페이지 미리보기</a>
+        </div>
+
+        <!-- 섬기는사람들 관리 -->
+        <div class="config-card">
+            <h3><i class="fas fa-users" style="color:#16a34a;"></i> 섬기는사람들 관리</h3>
+            <div class="form-text mb-3">각 카테고리별 한 줄에 한 명씩 입력. 형식: <strong>이름 | 직분</strong> (예: 정종한 | 담임목사)</div>
+            <div class="mb-3">
+                <label class="form-label">담임목사</label>
+                <textarea id="servingPastor" class="form-control" rows="2" placeholder="정종한 | 담임목사"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">교역자</label>
+                <textarea id="servingStaff" class="form-control" rows="5" placeholder="송봉길 | 부목사&#10;김호년 | 부목사"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">시무장로</label>
+                <textarea id="servingElders" class="form-control" rows="4" placeholder="강영철 | 시무장로&#10;김형곤 | 시무장로"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">원로장로</label>
+                <textarea id="servingSeniorElders" class="form-control" rows="2" placeholder="김유철 | 원로장로"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">교회 전화번호</label>
+                <input type="text" id="servingPhone" class="form-control" placeholder="031-553-0191">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">교회 이메일</label>
+                <input type="text" id="servingEmail" class="form-control" placeholder="info@mdds.or.kr">
+            </div>
+            <button class="btn-save" onclick="saveServing()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 섬기는사람들 저장</button>
+            <a class="preview-link" href="serving.html" target="_blank"><i class="fas fa-external-link-alt"></i> 섬기는사람들 페이지 미리보기</a>
+        </div>
+
+        <!-- 교회연혁 관리 -->
+        <div class="config-card">
+            <h3><i class="fas fa-clock-rotate-left" style="color:#f59e0b;"></i> 교회연혁 관리</h3>
+            <div class="row g-2 mb-3">
+                <div class="col-3"><label class="form-label">설립년도</label><input type="text" id="histStat0" class="form-control" placeholder="1961"></div>
+                <div class="col-3"><label class="form-label">등록교인</label><input type="text" id="histStat1" class="form-control" placeholder="500"></div>
+                <div class="col-3"><label class="form-label">섬기는 분들</label><input type="text" id="histStat2" class="form-control" placeholder="15"></div>
+                <div class="col-3"><label class="form-label">선교지</label><input type="text" id="histStat3" class="form-control" placeholder="10"></div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">연혁 목록</label>
+                <div class="form-text mb-2">한 줄에 하나씩. 형식: <strong>연월 | 제목 | 세부내용1; 세부내용2</strong></div>
+                <textarea id="histTimeline" class="form-control" rows="12" placeholder="2023년 9월 | 정종한 목사 담임 목사로 부임 | 17일 - 정종한 목사 담임 목사로 부임&#10;2023년 5월 | 박혜진 청소년부 교육 목사 부임 | 7일 - 박혜진 청소년부 교육 목사 부임"></textarea>
+            </div>
+            <button class="btn-save" onclick="saveHistory()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 교회연혁 저장</button>
+            <a class="preview-link" href="history.html" target="_blank"><i class="fas fa-external-link-alt"></i> 교회연혁 페이지 미리보기</a>
+        </div>
+
+        <!-- 오시는길 관리 -->
+        <div class="config-card">
+            <h3><i class="fas fa-map-location-dot" style="color:#2563eb;"></i> 오시는길 관리</h3>
+            <div class="mb-3">
+                <label class="form-label">교회 주소</label>
+                <input type="text" id="dirAddress" class="form-control" placeholder="(12097) 경기도 남양주시 덕송2로 63">
+            </div>
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <label class="form-label">전화번호</label>
+                    <input type="text" id="dirPhone" class="form-control" placeholder="031-553-0191">
+                </div>
+                <div class="col-6">
+                    <label class="form-label">전화 운영시간</label>
+                    <input type="text" id="dirPhoneHours" class="form-control" placeholder="평일 9시-18시, 주말 8시-17시">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">이메일 (줄바꿈으로 여러 개)</label>
+                <textarea id="dirEmailAdmin" class="form-control" rows="2" placeholder="info@mdds.or.kr&#10;pastor@mdds.or.kr"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">방문시간</label>
+                <textarea id="dirVisitHoursAdmin" class="form-control" rows="3" placeholder="평일: 오전 9시 - 오후 10시&#10;주말: 오전 8시 - 오후 9시&#10;(기도실은 24시간 이용 가능)"></textarea>
+            </div>
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <label class="form-label">주차 가능 대수</label>
+                    <input type="text" id="dirParkingSpaces" class="form-control" placeholder="총 50대 (지하 1층)">
+                </div>
+                <div class="col-6">
+                    <label class="form-label">주차 요금</label>
+                    <input type="text" id="dirParkingFee" class="form-control" placeholder="무료 (예배 참석자)">
+                </div>
+            </div>
+            <button class="btn-save" onclick="saveDirections()" style="margin-bottom:8px;"><i class="fas fa-save"></i> 오시는길 저장</button>
+            <a class="preview-link" href="directions.html" target="_blank"><i class="fas fa-external-link-alt"></i> 오시는길 페이지 미리보기</a>
+        </div>
+
         <!-- 저장 버튼 -->
         <button class="btn-save" onclick="saveConfig()">
             <i class="fas fa-save"></i> 설정 저장
@@ -225,6 +347,10 @@ function doLogin() {
         document.getElementById('adminScreen').style.display = 'block';
         loadConfig();
         loadGreeting();
+        loadWorship();
+        loadServing();
+        loadHistory();
+        loadDirections();
     } else {
         document.getElementById('loginError').style.display = 'block';
     }
@@ -307,15 +433,191 @@ async function saveGreeting() {
             body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data }),
         });
         if (res.ok) {
-            const toast = document.getElementById('toast');
-            toast.textContent = '✅ 인사말이 저장되었습니다';
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+            showToast('인사말이 저장되었습니다');
         } else {
             const err = await res.json();
             alert(err.error || '저장에 실패했습니다.');
         }
     } catch(e) { alert('오류가 발생했습니다: ' + e.message); }
+}
+
+// === 예배안내 관리 ===
+async function loadWorship() {
+    try {
+        const res = await fetch('/api/contents/worship');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data || !data.services) return;
+        data.services.forEach((s, i) => {
+            const block = document.getElementById('worshipService' + i);
+            if (!block) return;
+            block.querySelector('.worship-title').value = s.title || '';
+            block.querySelector('.worship-time').value = s.time || '';
+            block.querySelector('.worship-desc').value = s.description || '';
+        });
+    } catch(e) { console.log('예배안내 로드 실패'); }
+}
+
+async function saveWorship() {
+    const services = [];
+    for (let i = 0; i < 3; i++) {
+        const block = document.getElementById('worshipService' + i);
+        if (!block) continue;
+        const title = block.querySelector('.worship-title').value.trim();
+        const time = block.querySelector('.worship-time').value.trim();
+        const description = block.querySelector('.worship-desc').value.trim();
+        if (title) services.push({ title, time, description });
+    }
+    try {
+        const res = await fetch('/api/contents/worship', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data: { services } }),
+        });
+        if (res.ok) { showToast('예배안내가 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+    } catch(e) { alert('오류: ' + e.message); }
+}
+
+// === 섬기는사람들 관리 ===
+function parseMembers(text) {
+    return text.trim().split('\n').filter(l => l.trim()).map(line => {
+        const parts = line.split('|').map(s => s.trim());
+        return { name: parts[0] || '', position: parts[1] || '', description: parts[2] || '' };
+    });
+}
+
+function membersToText(members) {
+    return (members || []).map(m => m.name + ' | ' + m.position + (m.description ? ' | ' + m.description : '')).join('\n');
+}
+
+async function loadServing() {
+    try {
+        const res = await fetch('/api/contents/serving');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data) return;
+        const catMap = { '담임목사': 'servingPastor', '교역자': 'servingStaff', '시무장로': 'servingElders', '원로장로': 'servingSeniorElders' };
+        (data.categories || []).forEach(cat => {
+            const id = catMap[cat.title];
+            if (id) document.getElementById(id).value = membersToText(cat.members);
+        });
+        if (data.contact) {
+            document.getElementById('servingPhone').value = data.contact.phone || '';
+            document.getElementById('servingEmail').value = data.contact.email || '';
+        }
+    } catch(e) { console.log('섬기는사람들 로드 실패'); }
+}
+
+async function saveServing() {
+    const categories = [
+        { title: '담임목사', members: parseMembers(document.getElementById('servingPastor').value) },
+        { title: '교역자', members: parseMembers(document.getElementById('servingStaff').value) },
+        { title: '시무장로', members: parseMembers(document.getElementById('servingElders').value) },
+        { title: '원로장로', members: parseMembers(document.getElementById('servingSeniorElders').value) },
+    ].filter(c => c.members.length > 0);
+    const contact = {
+        phone: document.getElementById('servingPhone').value.trim(),
+        hours: '평일 오전 9시 - 오후 6시',
+        email: document.getElementById('servingEmail').value.trim(),
+        address: document.getElementById('churchAddress').value.trim(),
+    };
+    try {
+        const res = await fetch('/api/contents/serving', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data: { categories, contact } }),
+        });
+        if (res.ok) { showToast('섬기는사람들이 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+    } catch(e) { alert('오류: ' + e.message); }
+}
+
+// === 교회연혁 관리 ===
+async function loadHistory() {
+    try {
+        const res = await fetch('/api/contents/history');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data) return;
+        const labels = ['설립년도', '등록교인', '섬기는 분들', '선교지'];
+        (data.stats || []).forEach((s, i) => {
+            const el = document.getElementById('histStat' + i);
+            if (el) el.value = s.number || '';
+        });
+        if (data.timeline) {
+            document.getElementById('histTimeline').value = data.timeline.map(t =>
+                t.year + ' | ' + t.title + ' | ' + t.events.join('; ')
+            ).join('\n');
+        }
+    } catch(e) { console.log('교회연혁 로드 실패'); }
+}
+
+async function saveHistory() {
+    const labels = ['설립년도', '등록교인', '섬기는 분들', '선교지'];
+    const stats = labels.map((label, i) => ({
+        number: (document.getElementById('histStat' + i).value || '').trim(),
+        label: label,
+    }));
+    const timeline = document.getElementById('histTimeline').value.trim().split('\n').filter(l => l.trim()).map(line => {
+        const parts = line.split('|').map(s => s.trim());
+        return {
+            year: parts[0] || '',
+            title: parts[1] || '',
+            events: (parts[2] || '').split(';').map(s => s.trim()).filter(s => s),
+        };
+    });
+    try {
+        const res = await fetch('/api/contents/history', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data: { stats, timeline } }),
+        });
+        if (res.ok) { showToast('교회연혁이 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+    } catch(e) { alert('오류: ' + e.message); }
+}
+
+// === 오시는길 관리 ===
+async function loadDirections() {
+    try {
+        const res = await fetch('/api/contents/directions');
+        if (!res.ok) return;
+        const { data } = await res.json();
+        if (!data) return;
+        document.getElementById('dirAddress').value = data.address || '';
+        document.getElementById('dirPhone').value = data.phone || '';
+        document.getElementById('dirPhoneHours').value = data.phoneHours || '';
+        document.getElementById('dirEmailAdmin').value = data.email || '';
+        document.getElementById('dirVisitHoursAdmin').value = data.visitHours || '';
+        document.getElementById('dirParkingSpaces').value = data.parkingSpaces || '';
+        document.getElementById('dirParkingFee').value = data.parkingFee || '';
+    } catch(e) { console.log('오시는길 로드 실패'); }
+}
+
+async function saveDirections() {
+    const data = {
+        address: document.getElementById('dirAddress').value.trim(),
+        phone: document.getElementById('dirPhone').value.trim(),
+        phoneHours: document.getElementById('dirPhoneHours').value.trim(),
+        email: document.getElementById('dirEmailAdmin').value.trim(),
+        visitHours: document.getElementById('dirVisitHoursAdmin').value.trim(),
+        parkingSpaces: document.getElementById('dirParkingSpaces').value.trim(),
+        parkingFee: document.getElementById('dirParkingFee').value.trim(),
+    };
+    try {
+        const res = await fetch('/api/contents/directions', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ adminPassword: document.getElementById('adminPassword').value, data }),
+        });
+        if (res.ok) { showToast('오시는길이 저장되었습니다'); } else { const err = await res.json(); alert(err.error || '저장 실패'); }
+    } catch(e) { alert('오류: ' + e.message); }
+}
+
+// 토스트 헬퍼
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = '\u2705 ' + msg;
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2500);
 }
 
 function saveConfig() {
