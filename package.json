@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:cf": "npx @cloudflare/next-on-pages",
     "start": "next start",
+    "preview:cf": "npx wrangler pages dev .vercel/output/static",
+    "deploy:cf": "npx wrangler pages deploy .vercel/output/static --project-name=mdds",
     "lint": "eslint"
   },
   "dependencies": {
@@ -14,6 +17,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

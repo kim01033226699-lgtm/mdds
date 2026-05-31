@@ -1,0 +1,9 @@
+name = "mdds"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "out"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mddsch-db"
+database_id = "b87646d0-d2ca-4121-bb40-295550e363b4"

@@ -1,65 +1,266 @@
-import Image from "next/image";
+import Image from 'next/image';
+import Link from 'next/link';
+import KakaoMap from '@/components/KakaoMap';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="bg-[#f8f9ff] text-[#0b1c30] font-['Inter']">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-8 space-y-5">
+        {/* Hero */}
+        <section className="relative h-[500px] overflow-hidden rounded-xl border border-[#c2c6d4]">
+          <Image
+            src="/hero-01.jpg"
+            alt="물댄동산교회 전경"
+            fill
+            priority
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c30]/85 via-[#0b1c30]/25 to-transparent flex flex-col justify-end p-8 md:p-10">
+            <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] leading-[1.1] font-bold text-[#f8f9ff] mb-2 tracking-tight">
+              새 일을 이루는 교회
+            </h1>
+            <p className="text-base md:text-lg leading-relaxed text-[#d3e4fe] max-w-2xl">
+              &ldquo;너희 안에서 착한 일을 시작하신 이가 그리스도 예수의 날까지 이루실 줄을 우리는 확신하노라&rdquo;
+            </p>
+            <span className="font-['JetBrains_Mono'] text-xs text-[#a8c8ff] mt-2">— 빌립보서 1:6</span>
+          </div>
+        </section>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-4 md:grid-cols-12 gap-3 md:gap-5">
+          {/* 담임목사 인사말 (8 col) */}
+          <div className="col-span-4 md:col-span-8 bg-white border border-[#c2c6d4] p-6 md:p-8 rounded-xl flex flex-col md:flex-row gap-6">
+            <div className="shrink-0">
+              <Image
+                src="/pastor01.png"
+                alt="정종한 담임목사"
+                width={192}
+                height={192}
+                className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-[#e5eeff]"
+              />
+            </div>
+            <div>
+              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
+                담임목사 인사말
+              </span>
+              <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-4 tracking-tight">
+                물댄동산교회에 오신 것을 환영합니다
+              </h2>
+              <p className="text-sm leading-relaxed text-[#424752] mb-4">
+                &ldquo;물댄동산교회는 단순한 건물이 아니라, 모두가 한 자리에 함께하는 가족입니다.
+                우리의 비전은 하나님을 마음을 다해 사랑하고, 이웃을 내 몸과 같이 사랑하는 것입니다.
+                답을 찾고 있든, 공동체를 찾고 있든, 섬길 자리를 찾고 있든, 은혜의 능력을 함께 경험하시기를 초대합니다.&rdquo;
+              </p>
+              <span className="font-['JetBrains_Mono'] text-[10px] tracking-wider text-[#424752] italic">
+                — 담임목사, 정종한
+              </span>
+            </div>
+          </div>
+
+          {/* 예배안내 (4 col) */}
+          <div className="col-span-4 md:col-span-4 bg-white border border-[#c2c6d4] p-6 md:p-8 rounded-xl">
+            <div className="flex items-center gap-2 mb-4 text-[#00488d]">
+              <span className="material-symbols-outlined">schedule</span>
+              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">예배안내</span>
+            </div>
+            <div className="space-y-4">
+              <div className="flex justify-between items-end border-b border-[#c2c6d4] pb-2">
+                <span className="text-base font-semibold">주일예배</span>
+                <span className="font-['JetBrains_Mono'] text-xs text-[#00488d]">오전 9시 &amp; 11시</span>
+              </div>
+              <div className="flex justify-between items-end border-b border-[#c2c6d4] pb-2">
+                <span className="text-base font-semibold">수요예배</span>
+                <span className="font-['JetBrains_Mono'] text-xs text-[#00488d]">오후 7시 30분</span>
+              </div>
+              <div className="flex justify-between items-end">
+                <span className="text-base font-semibold">금요기도회</span>
+                <span className="font-['JetBrains_Mono'] text-xs text-[#00488d]">오후 8시</span>
+              </div>
+            </div>
+            <Link
+              href="/worship-guide"
+              className="block text-center w-full mt-8 py-2 border-2 border-[#00488d] text-[#00488d] font-semibold rounded text-sm hover:bg-[#00488d] hover:text-white transition-colors"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              예배안내 자세히
+            </Link>
+          </div>
+
+          {/* 비전 카드 (4 col, primary blue) */}
+          <div className="col-span-4 md:col-span-4 bg-[#00488d] text-white p-6 md:p-8 rounded-xl">
+            <span className="material-symbols-outlined text-4xl mb-4">diversity_3</span>
+            <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold mb-2">공동체 안에서 자라는 교회</h3>
+            <p className="text-xs leading-relaxed opacity-90">
+              우리는 줄이 아닌 둘러앉은 자리에서 성장한다고 믿습니다.
+              소그룹과 지역 섬김을 통해 깊고 지속적인 관계를 세워갑니다.
+            </p>
+          </div>
+
+          {/* 오시는길 + 지도 (8 col) */}
+          <div className="col-span-4 md:col-span-8 bg-white border border-[#c2c6d4] rounded-xl overflow-hidden flex flex-col md:flex-row">
+            <div className="p-6 md:p-8 md:w-1/2">
+              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
+                오시는 길
+              </span>
+              <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold mb-4 tracking-tight">교회로 오시는 길</h2>
+              <p className="text-sm text-[#424752] mb-6 leading-relaxed">
+                별가람역 인근에 위치한 물댄동산교회는 쉼과 영적 회복의 공간입니다.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <span className="material-symbols-outlined text-[#00488d] mt-1">location_on</span>
+                  <div>
+                    <p className="text-sm font-semibold">경기도 남양주시 덕송2로 63</p>
+                    <p className="text-xs text-[#424752]">(별내동) 프라자빌딩 3, 4층 · 우 12097</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="material-symbols-outlined text-[#00488d] mt-1">call</span>
+                  <p className="text-sm text-[#424752]">031-553-0191 · FAX 031-572-9901</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="material-symbols-outlined text-[#00488d] mt-1">directions_car</span>
+                  <p className="text-xs text-[#424752]">교회 인근에 방문자 주차 공간이 마련되어 있습니다.</p>
+                </div>
+              </div>
+            </div>
+            <div className="md:w-1/2 min-h-[360px] bg-[#dce9ff] flex items-center justify-center p-4 overflow-hidden">
+              <KakaoMap />
+            </div>
+          </div>
+
+          {/* 교회소식 (12 col) */}
+          <div className="col-span-4 md:col-span-12 bg-white border border-[#c2c6d4] p-6 md:p-8 rounded-xl">
+            <div className="flex justify-between items-end mb-6">
+              <div>
+                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
+                  Updates
+                </span>
+                <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold tracking-tight">교회소식</h2>
+              </div>
+              <Link href="/church-news-events" className="font-['JetBrains_Mono'] text-xs text-[#00488d] font-semibold hover:underline">
+                더보기 →
+              </Link>
+            </div>
+            <ul>
+              {[
+                { tag: '공지', title: '주일예배 안내', date: '2026.04.16' },
+                { tag: '행사', title: '부활절 감사예배', date: '2026.04.13' },
+                { tag: '공지', title: '수요기도회 안내', date: '2026.04.09' },
+                { tag: '소식', title: '교회학교 봄소풍', date: '2026.04.06' },
+              ].map((item, i) => (
+                <li
+                  key={i}
+                  className="flex justify-between items-center py-3 border-b border-[#c2c6d4] last:border-b-0"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="font-['JetBrains_Mono'] text-[10px] tracking-wider px-2 py-0.5 bg-[#e5eeff] text-[#00488d] font-semibold rounded uppercase">
+                      {item.tag}
+                    </span>
+                    <span className="text-sm text-[#0b1c30]">{item.title}</span>
+                  </div>
+                  <span className="font-['JetBrains_Mono'] text-[10px] text-[#424752]">{item.date}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 교회소개 4 카드 (12 col with internal grid) */}
+          <div className="col-span-4 md:col-span-12">
+            <div className="flex items-end justify-between mb-5">
+              <div>
+                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
+                  About
+                </span>
+                <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold tracking-tight">물댄동산 교회는</h2>
+              </div>
+              <p className="hidden md:block text-sm text-[#424752]">하나님의 사랑 안에서 함께하는 교회입니다</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+              {[
+                { icon: 'church', title: '우리의 예배', desc: '예배는 우리의 삶의 목적입니다.', href: '/worship-guide' },
+                { icon: 'music_note', title: '말씀과 찬양', desc: '말씀과 찬양으로 함께 예배합니다.', href: '/sunday-sermon' },
+                { icon: 'menu_book', title: '양육과 훈련', desc: '함께 성장하는 공동체입니다.', href: '/discipleship' },
+                { icon: 'child_care', title: '다음세대', desc: '다음 세대를 양육합니다.', href: '/kindergarten' },
+              ].map((card) => (
+                <Link
+                  key={card.title}
+                  href={card.href}
+                  className="block bg-white border border-[#c2c6d4] rounded-xl p-6 hover:border-[#00488d] hover:shadow-[0_4px_12px_rgba(0,72,141,0.08)] transition"
+                >
+                  <span className="material-symbols-outlined text-3xl text-[#00488d] mb-4 block">{card.icon}</span>
+                  <h3 className="font-['Hanken_Grotesk'] text-base font-semibold text-[#0b1c30] mb-2">{card.title}</h3>
+                  <p className="text-xs text-[#424752] leading-relaxed">{card.desc}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* 새가족 안내 (12 col, dark accent) */}
+          <div className="col-span-4 md:col-span-12 bg-[#0b1c30] text-white p-8 md:p-10 rounded-xl">
+            <div className="text-center mb-8">
+              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#a8c8ff] uppercase mb-2 block">
+                Welcome
+              </span>
+              <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-semibold mb-2 tracking-tight">처음 오셨나요?</h2>
+              <p className="text-sm text-[#c2c6d4]">물댄동산교회는 여러분을 환영합니다</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {[
+                { num: '1', title: '등록카드 작성', desc: '안내데스크에서 등록' },
+                { num: '2', title: '예배 참석', desc: '주일예배에 함께' },
+                { num: '3', title: '담임목사 면담', desc: '예배 후 만남의 시간' },
+                { num: '4', title: '새가족 교육', desc: '4주 새가족반 교육' },
+                { num: '5', title: '새가족 심방', desc: '가정 방문 및 교제' },
+              ].map((step) => (
+                <div key={step.num} className="text-center">
+                  <div className="w-14 h-14 rounded-full bg-[#00488d] flex items-center justify-center mx-auto mb-3 font-['Hanken_Grotesk'] text-xl font-bold">
+                    {step.num}
+                  </div>
+                  <h5 className="text-sm font-semibold mb-1">{step.title}</h5>
+                  <p className="text-xs text-[#a8c8ff]">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <Link
+                href="/discipleship#new-family"
+                className="inline-block px-8 py-3 bg-white text-[#00488d] rounded text-sm font-semibold hover:bg-[#d6e3ff] transition"
+              >
+                새가족 안내 보기
+              </Link>
+            </div>
+          </div>
+
+          {/* 바로가기 (12 col with internal grid) */}
+          <div className="col-span-4 md:col-span-12">
+            <div className="flex items-end justify-between mb-5">
+              <div>
+                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
+                  Quick Links
+                </span>
+                <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold tracking-tight">바로가기</h2>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+              {[
+                { icon: 'play_circle', label: '주일설교', href: '/sunday-sermon' },
+                { icon: 'description', label: '주보보기', href: '/bulletin' },
+                { icon: 'campaign', label: '교회소식', href: '/church-news-events' },
+                { icon: 'place', label: '오시는길', href: '/directions' },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="bg-white border border-[#c2c6d4] rounded-xl p-6 text-center hover:border-[#00488d] hover:shadow-[0_4px_12px_rgba(0,72,141,0.08)] transition flex flex-col items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-3xl text-[#00488d]">{item.icon}</span>
+                  <span className="text-sm font-semibold text-[#0b1c30]">{item.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
