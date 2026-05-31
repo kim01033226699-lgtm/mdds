@@ -1,6 +1,6 @@
 'use client';
 
-import PageHeader from '@/components/PageHeader';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 type Member = { name: string; position: string; desc?: string };
@@ -36,62 +36,215 @@ const DEFAULT: Category[] = [
   },
 ];
 
+const HERO_PATTERN_STYLE = {
+  backgroundColor: '#001b3d',
+  backgroundImage:
+    'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)',
+  backgroundSize: '24px 24px',
+};
+
 export default function ServingPage() {
   const [categories, setCategories] = useState<Category[]>(DEFAULT);
 
   useEffect(() => {
-    fetch('/api/contents/serving').then(r => r.ok ? r.json() : null).then(d => {
-      if (d?.data?.categories?.length) setCategories(d.data.categories);
-    }).catch(() => {});
+    fetch('/api/contents/serving')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.data?.categories?.length) setCategories(d.data.categories);
+      })
+      .catch(() => {});
   }, []);
 
-  return (
-    <>
-      <PageHeader title="섬기는 사람들" subtitle="물댄동산교회를 섬기는 분들을 소개합니다" />
+  const seniorPastor = categories.find((c) => c.title === '담임목사')?.members?.[0];
+  const pastoralStaff = categories.find((c) => c.title === '교역자')?.members ?? [];
+  const activeElders = categories.find((c) => c.title === '시무장로')?.members ?? [];
+  const retiredElders = categories.find((c) => c.title === '원로장로')?.members ?? [];
 
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-screen-xl mx-auto px-4 space-y-16">
-          {categories.map((cat) => (
-            <div key={cat.title}>
-              <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">{cat.title}</h2>
-              <div className="w-12 h-0.5 bg-black mx-auto mb-10" />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {cat.members.map((m) => (
+  return (
+    <div className="bg-[#f8f9ff] text-[#0b1c30] font-['Inter']">
+      {/* Hero */}
+      <section
+        className="py-20 md:py-32 flex flex-col items-center justify-center text-center px-4"
+        style={HERO_PATTERN_STYLE}
+      >
+        <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] leading-[1.1] font-bold text-white mb-4 tracking-tight">
+          섬기는 사람들
+        </h1>
+        <p className="text-base md:text-lg text-[#cadcff] max-w-2xl">
+          물댄동산교회를 섬기는 분들을 소개합니다.
+        </p>
+      </section>
+
+      <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-12 md:py-16">
+        {/* 담임목사 */}
+        {seniorPastor && (
+          <section className="mb-20 md:mb-28">
+            <div className="flex flex-col items-center">
+              <div className="text-center mb-8 md:mb-10">
+                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase block">
+                  Senior Pastor
+                </span>
+                <h2 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] font-bold mt-2 tracking-tight">
+                  담임목사
+                </h2>
+              </div>
+              <div className="w-full max-w-4xl bg-white border border-[#c2c6d4] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex flex-col md:flex-row items-center p-6 md:p-8 gap-6 md:gap-8">
+                  <div className="w-44 h-44 md:w-56 md:h-56 shrink-0 bg-[#cadcff] rounded-full overflow-hidden flex items-center justify-center border-4 border-[#dce9ff]">
+                    <span
+                      className="material-symbols-outlined text-[#00488d] text-7xl md:text-8xl"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      person
+                    </span>
+                  </div>
+                  <div className="text-center md:text-left flex-grow">
+                    <h3 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold text-[#0b1c30] mb-1">
+                      {seniorPastor.name} {seniorPastor.position}
+                    </h3>
+                    {seniorPastor.desc && seniorPastor.desc !== '약력' && (
+                      <p className="text-sm text-[#424752] mb-5 leading-relaxed">
+                        {seniorPastor.desc}
+                      </p>
+                    )}
+                    <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-4">
+                      <span className="bg-[#dce9ff] text-[#00488d] px-3 py-1 rounded-full font-['JetBrains_Mono'] text-xs font-medium tracking-wider">
+                        VISIONARY
+                      </span>
+                      <span className="bg-[#dce9ff] text-[#00488d] px-3 py-1 rounded-full font-['JetBrains_Mono'] text-xs font-medium tracking-wider">
+                        SERVANT LEADERSHIP
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 교역자 */}
+        {pastoralStaff.length > 0 && (
+          <section className="mb-20 md:mb-28">
+            <div className="mb-8 md:mb-10 border-l-4 border-[#00488d] pl-4">
+              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase block">
+                Pastoral Staff
+              </span>
+              <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold tracking-tight">
+                교역자
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+              {pastoralStaff.map((m) => (
+                <div
+                  key={m.name}
+                  className="bg-white border border-[#c2c6d4] p-6 rounded-xl flex flex-col items-center text-center group hover:border-[#00488d] transition-colors"
+                >
+                  <div className="w-24 h-24 bg-[#dce9ff] rounded-full mb-4 flex items-center justify-center group-hover:bg-[#cadcff] transition-colors">
+                    <span className="material-symbols-outlined text-[#424752] text-4xl group-hover:text-[#00488d] transition-colors">
+                      person
+                    </span>
+                  </div>
+                  <h4 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#0b1c30] mb-1">
+                    {m.name}
+                  </h4>
+                  <p className="text-xs text-[#00488d] font-bold">{m.position}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Bento: 시무장로 (2/3) + 원로장로 (1/3) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* 시무장로 */}
+          {activeElders.length > 0 && (
+            <section className="lg:col-span-2">
+              <div className="mb-8 md:mb-10 border-l-4 border-[#006a61] pl-4">
+                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#006a61] uppercase block">
+                  Active Elders
+                </span>
+                <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold tracking-tight">
+                  시무장로
+                </h2>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-5">
+                {activeElders.map((m) => (
                   <div
                     key={m.name}
-                    className="bg-white rounded-xl border border-gray-200 p-6 text-center hover:shadow-lg hover:-translate-y-1 transition"
+                    className="bg-[#e5eeff] border border-[#c2c6d4] p-5 rounded-xl flex items-center gap-4"
                   >
-                    <div className="w-20 h-20 rounded-full bg-gray-900 text-white flex items-center justify-center mx-auto mb-4 text-2xl">
-                      ◉
+                    <div className="w-16 h-16 bg-white rounded-full shrink-0 flex items-center justify-center border border-[#c2c6d4]">
+                      <span className="material-symbols-outlined text-[#006a61] text-2xl">
+                        verified_user
+                      </span>
                     </div>
-                    <div className="text-base font-bold text-gray-900 mb-1">{m.name}</div>
-                    <div className="text-xs text-gray-600 font-semibold">{m.position}</div>
-                    {m.desc && <div className="text-xs text-gray-500 mt-2">{m.desc}</div>}
+                    <div>
+                      <h4 className="font-['Hanken_Grotesk'] text-lg font-semibold">{m.name}</h4>
+                      <p className="font-['JetBrains_Mono'] text-[10px] tracking-wider text-[#424752]">
+                        ELDER
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            </section>
+          )}
 
-      <section className="py-16 bg-white">
-        <div className="max-w-screen-xl mx-auto px-4 grid md:grid-cols-3 gap-6">
-          {[
-            { icon: '☎', title: '전화', info: '031-553-0191\n평일 오전 9시 - 오후 6시' },
-            { icon: '✉', title: '이메일', info: 'info@mdds.or.kr' },
-            { icon: '◈', title: '주소', info: '경기도 남양주시 덕송2로 63 (별내동) 프라자빌딩 3,4층' },
-          ].map((c) => (
-            <div key={c.title} className="bg-white border border-gray-200 rounded-xl p-8 text-center">
-              <div className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center mx-auto mb-4 text-xl">
-                {c.icon}
+          {/* 원로장로 */}
+          {retiredElders.length > 0 && (
+            <section>
+              <div className="mb-8 md:mb-10 border-l-4 border-[#727783] pl-4">
+                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#727783] uppercase block">
+                  Retired Elders
+                </span>
+                <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold tracking-tight">
+                  원로장로
+                </h2>
               </div>
-              <div className="text-base font-bold text-gray-900 mb-3">{c.title}</div>
-              <div className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{c.info}</div>
-            </div>
-          ))}
+              <div className="flex flex-col gap-5">
+                {retiredElders.map((m) => (
+                  <div
+                    key={m.name}
+                    className="bg-[#eff4ff] border border-[#c2c6d4] p-5 rounded-xl flex items-center gap-4 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all"
+                  >
+                    <div className="w-16 h-16 bg-white rounded-full shrink-0 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-[#727783] text-2xl">
+                        history_edu
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-['Hanken_Grotesk'] text-lg font-semibold">{m.name}</h4>
+                      <p className="font-['JetBrains_Mono'] text-[10px] tracking-wider text-[#424752]">
+                        HONORARY
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
-      </section>
-    </>
+
+        {/* Visual Break */}
+        <div className="mt-20 md:mt-28 rounded-xl overflow-hidden relative h-[300px] md:h-[400px]">
+          <Image
+            src="/hero-01.jpg"
+            alt="물댄동산교회 공동체"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6 md:p-10">
+            <div className="text-white">
+              <p className="font-['Hanken_Grotesk'] text-2xl md:text-[32px] font-bold mb-2 tracking-tight">
+                하나님의 사랑으로 세워진 공동체
+              </p>
+              <p className="text-sm md:text-base opacity-90">
+                함께 예배하며 성장하는 물댄동산교회가 되겠습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
