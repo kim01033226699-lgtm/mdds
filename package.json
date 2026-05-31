@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:cf": "npx @cloudflare/next-on-pages",
+    "build": "next build && node -e \"require('fs').cpSync('functions','out/functions',{recursive:true})\"",
     "start": "next start",
-    "preview:cf": "npx wrangler pages dev .vercel/output/static",
-    "deploy:cf": "npx wrangler pages deploy .vercel/output/static --project-name=mdds",
+    "preview:cf": "npx wrangler pages dev out",
+    "deploy:cf": "npm run build && npx wrangler pages deploy out --project-name=mdds --branch=main",
     "lint": "eslint"
   },
   "dependencies": {
@@ -17,7 +16,6 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.16",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
