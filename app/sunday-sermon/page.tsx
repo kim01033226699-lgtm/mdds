@@ -19,9 +19,6 @@ export default function SundaySermonPage() {
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c30]/85 via-[#0b1c30]/35 to-[#0b1c30]/10 flex flex-col justify-end p-8 md:p-10">
-            <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#a8c8ff] uppercase mb-2 block">
-              Sunday Sermon
-            </span>
             <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] leading-[1.1] font-bold text-[#f8f9ff] mb-2 tracking-tight">
               주일설교
             </h1>
@@ -48,9 +45,6 @@ export default function SundaySermonPage() {
             <div className="p-6 md:p-8 border-t border-[#c2c6d4]">
               <div className="flex items-center gap-2 mb-3 text-[#00488d]">
                 <span className="material-symbols-outlined">play_circle</span>
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">
-                  Now Playing
-                </span>
               </div>
               <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-2 tracking-tight">
                 주일예배 설교 재생목록
@@ -66,7 +60,6 @@ export default function SundaySermonPage() {
           <div className="col-span-4 md:col-span-4 bg-white border border-[#c2c6d4] p-6 md:p-8 rounded-xl flex flex-col">
             <div className="flex items-center gap-2 mb-4 text-[#00488d]">
               <span className="material-symbols-outlined">person</span>
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">Pastor</span>
             </div>
             <div className="flex flex-col items-center text-center mb-6">
               <Image

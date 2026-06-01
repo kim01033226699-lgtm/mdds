@@ -53,9 +53,6 @@ export default function DiscipleshipPage() {
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c30]/85 via-[#0b1c30]/35 to-[#0b1c30]/10 flex flex-col justify-end p-8 md:p-10">
-            <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#a8c8ff] uppercase mb-2 block">
-              Discipleship &amp; Training
-            </span>
             <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] leading-[1.1] font-bold text-[#f8f9ff] mb-3 tracking-tight">
               양육과 훈련
             </h1>
@@ -70,7 +67,7 @@ export default function DiscipleshipPage() {
         {/* 빠른 이동 */}
         <nav className="bg-white border border-[#c2c6d4] rounded-xl p-4 md:p-5 flex flex-wrap items-center gap-2 md:gap-3">
           <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase pr-2">
-            Programs
+            프로그램
           </span>
           {[
             { id: 'new-family', label: '새가족반' },
@@ -102,9 +99,6 @@ export default function DiscipleshipPage() {
               <div className="md:col-span-1">
                 <div className="flex items-center gap-2 mb-4 text-[#00488d]">
                   <span className="material-symbols-outlined">volunteer_activism</span>
-                  <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">
-                    Welcome
-                  </span>
                 </div>
                 <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-2 tracking-tight">
                   새가족반
@@ -139,7 +133,7 @@ export default function DiscipleshipPage() {
             {/* 수료 후 안내 */}
             <div className="border-t border-[#c2c6d4] mt-6 pt-5">
               <span className="font-['JetBrains_Mono'] text-[10px] font-medium tracking-wider text-[#00488d] uppercase block mb-3">
-                After Completion · 수료 후 안내
+                수료 후 안내
               </span>
               <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
                 {AFTER_CARE.map((line, i) => (
@@ -161,9 +155,6 @@ export default function DiscipleshipPage() {
           >
             <div className="flex items-center gap-2 mb-4 text-[#00488d]">
               <span className="material-symbols-outlined">menu_book</span>
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">
-                Bible Academy
-              </span>
             </div>
             <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-1 tracking-tight">
               성경아카데미
@@ -177,7 +168,7 @@ export default function DiscipleshipPage() {
 
             <div className="border-t border-[#c2c6d4] pt-5">
               <span className="font-['JetBrains_Mono'] text-[10px] font-medium tracking-wider text-[#00488d] uppercase block mb-3">
-                Courses · 개설 강좌
+                개설 강좌
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 {BIBLE_COURSES.map((c) => (
@@ -213,9 +204,6 @@ export default function DiscipleshipPage() {
           >
             <div className="flex items-center gap-2 mb-4 text-white">
               <span className="material-symbols-outlined">self_improvement</span>
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">
-                Prayer
-              </span>
             </div>
             <h2 className="font-['Hanken_Grotesk'] text-xl font-semibold mb-3 tracking-tight">
               수요중보기도
@@ -247,9 +235,6 @@ export default function DiscipleshipPage() {
           >
             <div className="flex items-center gap-2 mb-4 text-[#00488d]">
               <span className="material-symbols-outlined">campaign</span>
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">
-                Evangelism
-              </span>
             </div>
             <h2 className="font-['Hanken_Grotesk'] text-xl font-semibold text-[#0b1c30] mb-1 tracking-tight">
               화요전도팀
@@ -283,9 +268,6 @@ export default function DiscipleshipPage() {
           >
             <div className="flex items-center gap-2 mb-4 text-[#00488d]">
               <span className="material-symbols-outlined">family_restroom</span>
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">
-                Young Couples
-              </span>
             </div>
             <h2 className="font-['Hanken_Grotesk'] text-xl font-semibold text-[#0b1c30] mb-3 tracking-tight">
               젊은부부모임
@@ -317,9 +299,6 @@ export default function DiscipleshipPage() {
           >
             <div className="flex items-center gap-2 mb-4 text-[#00488d]">
               <span className="material-symbols-outlined">favorite_border</span>
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider uppercase">
-                Newlyweds
-              </span>
             </div>
             <h2 className="font-['Hanken_Grotesk'] text-xl font-semibold text-[#0b1c30] mb-3 tracking-tight">
               신혼부부모임
@@ -338,9 +317,6 @@ export default function DiscipleshipPage() {
           <section className="col-span-4 md:col-span-12 bg-[#0b1c30] text-white rounded-xl p-8 md:p-10">
             <div className="md:flex md:items-center md:justify-between gap-8">
               <div className="mb-6 md:mb-0">
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#a8c8ff] uppercase mb-2 block">
-                  Join Us
-                </span>
                 <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-semibold mb-2 tracking-tight">
                   함께 양육과 훈련에 동참하세요
                 </h2>

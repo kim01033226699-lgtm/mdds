@@ -2,6 +2,32 @@ import Image from 'next/image';
 import Link from 'next/link';
 import KakaoMap from '@/components/KakaoMap';
 
+const SERMON_PLAYLIST_ID = 'PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H';
+
+const LATEST_SERMONS = [
+  {
+    id: '32XoOSfxhpg',
+    title: '말씀의 사람, 소명의 사람',
+    verse: '히브리서 1:1-3 · 온 세대 통합예배',
+    pastor: '신기원 목사',
+    date: '2026.05.31',
+  },
+  {
+    id: 'uct4XofUC44',
+    title: '내 영을 만민에게 (욜 2:28-32)',
+    verse: '요엘 2:28-32',
+    pastor: '정종한 목사',
+    date: '2026.05.24',
+  },
+  {
+    id: 'qaDk6yLjjYQ',
+    title: '참된 스승은 (딤후 2:1-2)',
+    verse: '디모데후서 2:1-2',
+    pastor: '정종한 목사',
+    date: '2026.05.17',
+  },
+];
+
 export default function Home() {
   return (
     <div className="bg-[#f8f9ff] text-[#0b1c30] font-['Inter']">
@@ -28,33 +54,87 @@ export default function Home() {
 
         {/* Bento Grid */}
         <div className="grid grid-cols-4 md:grid-cols-12 gap-3 md:gap-5">
-          {/* 담임목사 인사말 (8 col) */}
+          {/* 최신 설교 영상 (8 col) */}
           <div className="col-span-4 md:col-span-8 bg-white border border-[#c2c6d4] p-6 md:p-8 rounded-xl flex flex-col md:flex-row gap-6">
-            <div className="shrink-0">
-              <Image
-                src="/pastor01.png"
-                alt="정종한 담임목사"
-                width={192}
-                height={192}
-                className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-[#e5eeff]"
-              />
-            </div>
-            <div>
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
-                담임목사 인사말
-              </span>
-              <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-4 tracking-tight">
-                물댄동산교회에 오신 것을 환영합니다
-              </h2>
-              <p className="text-sm leading-relaxed text-[#424752] mb-4">
-                &ldquo;물댄동산교회는 단순한 건물이 아니라, 모두가 한 자리에 함께하는 가족입니다.
-                우리의 비전은 하나님을 마음을 다해 사랑하고, 이웃을 내 몸과 같이 사랑하는 것입니다.
-                답을 찾고 있든, 공동체를 찾고 있든, 섬길 자리를 찾고 있든, 은혜의 능력을 함께 경험하시기를 초대합니다.&rdquo;
-              </p>
-              <span className="font-['JetBrains_Mono'] text-[10px] tracking-wider text-[#424752] italic">
-                — 담임목사, 정종한
-              </span>
-            </div>
+            {(() => {
+              const featured = LATEST_SERMONS[0];
+              return (
+                <>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${featured.id}&list=${SERMON_PLAYLIST_ID}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="md:w-1/2 shrink-0 relative group block rounded-lg overflow-hidden"
+                  >
+                    <div className="relative w-full aspect-video bg-[#0b1c30]">
+                      <Image
+                        src={`https://i.ytimg.com/vi/${featured.id}/hqdefault.jpg`}
+                        alt={featured.title}
+                        fill
+                        sizes="(min-width: 768px) 480px, 100vw"
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition flex items-center justify-center">
+                        <span
+                          className="material-symbols-outlined text-white text-6xl md:text-7xl drop-shadow-lg"
+                          style={{ fontVariationSettings: "'FILL' 1" }}
+                        >
+                          play_circle
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+
+                  <div className="flex flex-col flex-1 min-w-0">
+                    <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
+                      최신 설교 영상
+                    </span>
+                    <h2 className="font-['Hanken_Grotesk'] text-xl md:text-2xl font-semibold text-[#0b1c30] mb-3 tracking-tight">
+                      {featured.title}
+                    </h2>
+                    <p className="text-sm text-[#424752] mb-2">
+                      <span className="font-['JetBrains_Mono'] text-xs text-[#00488d] tabular-nums mr-2">
+                        {featured.date}
+                      </span>
+                      {featured.pastor}
+                    </p>
+                    <p className="text-xs text-[#424752] leading-relaxed mb-5">{featured.verse}</p>
+
+                    <div className="border-t border-[#c2c6d4] pt-3 mb-3">
+                      <span className="font-['JetBrains_Mono'] text-[10px] font-medium tracking-wider text-[#00488d] uppercase block mb-2">
+                        지난 설교
+                      </span>
+                      <ul className="space-y-2">
+                        {LATEST_SERMONS.slice(1).map((s) => (
+                          <li key={s.id}>
+                            <a
+                              href={`https://www.youtube.com/watch?v=${s.id}&list=${SERMON_PLAYLIST_ID}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-baseline gap-2 text-xs text-[#0b1c30] hover:text-[#00488d] transition-colors group"
+                            >
+                              <span className="font-['JetBrains_Mono'] text-[10px] text-[#424752] tabular-nums shrink-0">
+                                {s.date}
+                              </span>
+                              <span className="flex-1 truncate group-hover:underline">{s.title}</span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <Link
+                      href="/sunday-sermon"
+                      className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-[#00488d] hover:underline"
+                    >
+                      전체 설교 보기
+                      <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                    </Link>
+                  </div>
+                </>
+              );
+            })()}
           </div>
 
           {/* 예배안내 (4 col) */}
@@ -132,9 +212,6 @@ export default function Home() {
           <div className="col-span-4 md:col-span-12 bg-white border border-[#c2c6d4] p-6 md:p-8 rounded-xl">
             <div className="flex justify-between items-end mb-6">
               <div>
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
-                  Updates
-                </span>
                 <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold tracking-tight">교회소식</h2>
               </div>
               <Link href="/church-news-events" className="font-['JetBrains_Mono'] text-xs text-[#00488d] font-semibold hover:underline">
@@ -168,9 +245,6 @@ export default function Home() {
           <div className="col-span-4 md:col-span-12">
             <div className="flex items-end justify-between mb-5">
               <div>
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
-                  About
-                </span>
                 <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold tracking-tight">물댄동산 교회는</h2>
               </div>
               <p className="hidden md:block text-sm text-[#424752]">하나님의 사랑 안에서 함께하는 교회입니다</p>
@@ -198,9 +272,6 @@ export default function Home() {
           {/* 새가족 안내 (12 col, dark accent) */}
           <div className="col-span-4 md:col-span-12 bg-[#0b1c30] text-white p-8 md:p-10 rounded-xl">
             <div className="text-center mb-8">
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#a8c8ff] uppercase mb-2 block">
-                Welcome
-              </span>
               <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-semibold mb-2 tracking-tight">처음 오셨나요?</h2>
               <p className="text-sm text-[#c2c6d4]">물댄동산교회는 여러분을 환영합니다</p>
             </div>
@@ -235,9 +306,6 @@ export default function Home() {
           <div className="col-span-4 md:col-span-12">
             <div className="flex items-end justify-between mb-5">
               <div>
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-1 block">
-                  Quick Links
-                </span>
                 <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold tracking-tight">바로가기</h2>
               </div>
             </div>

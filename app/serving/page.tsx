@@ -7,15 +7,26 @@ type Member = { name: string; position: string; desc?: string };
 type Category = { title: string; members: Member[] };
 
 const DEFAULT: Category[] = [
-  { title: '담임목사', members: [{ name: '정종한', position: '담임목사', desc: '약력' }] },
+  { title: '담임목사', members: [{ name: '정종한', position: '담임목사' }] },
   {
-    title: '교역자',
+    title: '부목사',
     members: [
       { name: '송봉길', position: '부목사' },
       { name: '김호년', position: '부목사' },
-      { name: '박혜진', position: '교육목사' },
-      { name: '김은숙', position: '전도사' },
+    ],
+  },
+  {
+    title: '전도사',
+    members: [
+      { name: '김은순', position: '전도사' },
       { name: '김숙정', position: '전도사' },
+    ],
+  },
+  {
+    title: '교육전도사',
+    members: [
+      { name: '박철수', position: '교육전도사' },
+      { name: '진두만', position: '교육전도사' },
     ],
   },
   {
@@ -43,6 +54,8 @@ const HERO_PATTERN_STYLE = {
   backgroundSize: '24px 24px',
 };
 
+const STAFF_GROUPS = ['부목사', '전도사', '교육전도사'];
+
 export default function ServingPage() {
   const [categories, setCategories] = useState<Category[]>(DEFAULT);
 
@@ -56,7 +69,10 @@ export default function ServingPage() {
   }, []);
 
   const seniorPastor = categories.find((c) => c.title === '담임목사')?.members?.[0];
-  const pastoralStaff = categories.find((c) => c.title === '교역자')?.members ?? [];
+  const staffByGroup = STAFF_GROUPS.map((g) => ({
+    title: g,
+    members: categories.find((c) => c.title === g)?.members ?? [],
+  })).filter((g) => g.members.length > 0);
   const activeElders = categories.find((c) => c.title === '시무장로')?.members ?? [];
   const retiredElders = categories.find((c) => c.title === '원로장로')?.members ?? [];
 
@@ -81,10 +97,7 @@ export default function ServingPage() {
           <section className="mb-20 md:mb-28">
             <div className="flex flex-col items-center">
               <div className="text-center mb-8 md:mb-10">
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase block">
-                  Senior Pastor
-                </span>
-                <h2 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] font-bold mt-2 tracking-tight">
+                <h2 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] font-bold tracking-tight">
                   담임목사
                 </h2>
               </div>
@@ -107,14 +120,6 @@ export default function ServingPage() {
                         {seniorPastor.desc}
                       </p>
                     )}
-                    <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-4">
-                      <span className="bg-[#dce9ff] text-[#00488d] px-3 py-1 rounded-full font-['JetBrains_Mono'] text-xs font-medium tracking-wider">
-                        VISIONARY
-                      </span>
-                      <span className="bg-[#dce9ff] text-[#00488d] px-3 py-1 rounded-full font-['JetBrains_Mono'] text-xs font-medium tracking-wider">
-                        SERVANT LEADERSHIP
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -122,32 +127,45 @@ export default function ServingPage() {
           </section>
         )}
 
-        {/* 교역자 */}
-        {pastoralStaff.length > 0 && (
+        {/* 교역자 (부목사 + 전도사 + 교육전도사) */}
+        {staffByGroup.length > 0 && (
           <section className="mb-20 md:mb-28">
             <div className="mb-8 md:mb-10 border-l-4 border-[#00488d] pl-4">
-              <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase block">
-                Pastoral Staff
-              </span>
               <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold tracking-tight">
                 교역자
               </h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-              {pastoralStaff.map((m) => (
-                <div
-                  key={m.name}
-                  className="bg-white border border-[#c2c6d4] p-6 rounded-xl flex flex-col items-center text-center group hover:border-[#00488d] transition-colors"
-                >
-                  <div className="w-24 h-24 bg-[#dce9ff] rounded-full mb-4 flex items-center justify-center group-hover:bg-[#cadcff] transition-colors">
-                    <span className="material-symbols-outlined text-[#424752] text-4xl group-hover:text-[#00488d] transition-colors">
-                      person
+
+            <div className="space-y-10">
+              {staffByGroup.map((g) => (
+                <div key={g.title}>
+                  <div className="flex items-center gap-3 mb-5">
+                    <h3 className="font-['Hanken_Grotesk'] text-lg md:text-xl font-semibold text-[#0b1c30]">
+                      {g.title}
+                    </h3>
+                    <span className="font-['JetBrains_Mono'] text-[10px] tracking-wider text-[#424752]">
+                      {g.members.length}명
                     </span>
+                    <span className="flex-1 h-px bg-[#c2c6d4]" />
                   </div>
-                  <h4 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#0b1c30] mb-1">
-                    {m.name}
-                  </h4>
-                  <p className="text-xs text-[#00488d] font-bold">{m.position}</p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                    {g.members.map((m) => (
+                      <div
+                        key={`${g.title}-${m.name}`}
+                        className="bg-white border border-[#c2c6d4] p-6 rounded-xl flex flex-col items-center text-center group hover:border-[#00488d] hover:shadow-[0_4px_12px_rgba(0,72,141,0.06)] transition-all"
+                      >
+                        <div className="w-24 h-24 bg-[#dce9ff] rounded-full mb-4 flex items-center justify-center group-hover:bg-[#cadcff] transition-colors">
+                          <span className="material-symbols-outlined text-[#424752] text-4xl group-hover:text-[#00488d] transition-colors">
+                            person
+                          </span>
+                        </div>
+                        <h4 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#0b1c30] mb-1">
+                          {m.name}
+                        </h4>
+                        <p className="text-xs text-[#00488d] font-bold">{m.position}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -160,9 +178,6 @@ export default function ServingPage() {
           {activeElders.length > 0 && (
             <section className="lg:col-span-2">
               <div className="mb-8 md:mb-10 border-l-4 border-[#006a61] pl-4">
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#006a61] uppercase block">
-                  Active Elders
-                </span>
                 <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold tracking-tight">
                   시무장로
                 </h2>
@@ -180,9 +195,7 @@ export default function ServingPage() {
                     </div>
                     <div>
                       <h4 className="font-['Hanken_Grotesk'] text-lg font-semibold">{m.name}</h4>
-                      <p className="font-['JetBrains_Mono'] text-[10px] tracking-wider text-[#424752]">
-                        ELDER
-                      </p>
+                      <p className="text-xs text-[#424752]">시무장로</p>
                     </div>
                   </div>
                 ))}
@@ -194,9 +207,6 @@ export default function ServingPage() {
           {retiredElders.length > 0 && (
             <section>
               <div className="mb-8 md:mb-10 border-l-4 border-[#727783] pl-4">
-                <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#727783] uppercase block">
-                  Retired Elders
-                </span>
                 <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold tracking-tight">
                   원로장로
                 </h2>
@@ -214,9 +224,7 @@ export default function ServingPage() {
                     </div>
                     <div>
                       <h4 className="font-['Hanken_Grotesk'] text-lg font-semibold">{m.name}</h4>
-                      <p className="font-['JetBrains_Mono'] text-[10px] tracking-wider text-[#424752]">
-                        HONORARY
-                      </p>
+                      <p className="text-xs text-[#424752]">원로장로</p>
                     </div>
                   </div>
                 ))}

@@ -96,9 +96,6 @@ export default function GreetingPage() {
 
           {/* Welcome text */}
           <div className="flex-1 space-y-6 text-[#0b1c30]">
-            <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase block">
-              Welcome Message
-            </span>
             <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-bold text-[#00488d] leading-snug tracking-tight">
               {data.paragraphs[0]}
             </h2>
@@ -123,9 +120,6 @@ export default function GreetingPage() {
       <section className="bg-[#eff4ff] py-16 md:py-20">
         <div className="max-w-[1600px] mx-auto px-4 md:px-8">
           <div className="text-center mb-10 md:mb-12">
-            <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase mb-2 block">
-              Vision Pillars
-            </span>
             <h2 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] font-bold text-[#0b1c30] tracking-tight">
               우리 교회의 비전
             </h2>
