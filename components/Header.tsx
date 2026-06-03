@@ -43,9 +43,11 @@ const menus = [
   {
     label: '성도의 교제',
     items: [
-      { label: '교회소식 & 이달의 행사', href: '/church-news-events' },
+      { label: '교회소식', href: '/church-news-events' },
       { label: '주보보기', href: '/bulletin' },
-      { label: '교회행사앨범 & 새가족소개', href: '/event-album-family' },
+      { label: '이달의 행사', href: '/monthly-events' },
+      { label: '교회행사앨범', href: '/event-album-family' },
+      { label: '새가족소개', href: '/new-family-intro' },
       { label: '문의게시판', href: '/board' },
     ],
   },
@@ -72,7 +74,7 @@ export default function Header() {
 
   return (
     <header className="bg-white border-b border-[#c2c6d4] sticky top-0 z-50 font-['Inter']">
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-16 flex justify-between items-center gap-4">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 h-16 flex justify-between items-center gap-4">
         <Link
           href="/"
           className="font-['Hanken_Grotesk'] text-lg font-bold text-[#00488d] tracking-tight whitespace-nowrap shrink-0"

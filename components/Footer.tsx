@@ -9,7 +9,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0b1c30] text-white font-['Inter']">
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-10 md:py-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-10 md:py-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
         {/* 브랜드 */}
         <div className="flex flex-col gap-3">
           <div className="font-['Hanken_Grotesk'] text-lg font-bold text-[#f8f9ff]">
@@ -19,7 +19,7 @@ export default function Footer() {
             하나님의 사랑 안에서 함께하는 물댄동산교회입니다. 모두를 환영합니다.
           </p>
           <ul className="mt-3 space-y-1 text-xs text-[#d3e4fe]">
-            <li>경기도 남양주시 덕송2로 63</li>
+            <li>경기도 남양주시 덕송2로 63(별내동)</li>
             <li>TEL 031-553-0191</li>
             <li>info@mdds.or.kr</li>
           </ul>

@@ -102,10 +102,10 @@ export default function BoardPage() {
 
   return (
     <>
-      <PageHeader title="문의게시판" subtitle="궁금하신 내용을 문의해주세요" />
+      <PageHeader pill="성도의 교제" title="문의게시판" subtitle="궁금하신 내용을 문의해주세요" />
 
       <section className="py-16 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           {/* 상세 보기 */}
           {detail && (
             <div className="bg-white border border-gray-200 rounded-xl p-8 mb-6">

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import PageHeader from '@/components/PageHeader';
 
 type Member = { name: string; position: string; desc?: string };
 type Category = { title: string; members: Member[] };
@@ -47,13 +48,6 @@ const DEFAULT: Category[] = [
   },
 ];
 
-const HERO_PATTERN_STYLE = {
-  backgroundColor: '#001b3d',
-  backgroundImage:
-    'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)',
-  backgroundSize: '24px 24px',
-};
-
 const STAFF_GROUPS = ['부목사', '전도사', '교육전도사'];
 
 export default function ServingPage() {
@@ -78,20 +72,13 @@ export default function ServingPage() {
 
   return (
     <div className="bg-[#f8f9ff] text-[#0b1c30] font-['Inter']">
-      {/* Hero */}
-      <section
-        className="py-20 md:py-32 flex flex-col items-center justify-center text-center px-4"
-        style={HERO_PATTERN_STYLE}
-      >
-        <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] leading-[1.1] font-bold text-white mb-4 tracking-tight">
-          섬기는 사람들
-        </h1>
-        <p className="text-base md:text-lg text-[#cadcff] max-w-2xl">
-          물댄동산교회를 섬기는 분들을 소개합니다.
-        </p>
-      </section>
+      <PageHeader
+        pill="교회소개"
+        title="섬기는 사람들"
+        subtitle="물댄동산교회를 섬기는 분들을 소개합니다."
+      />
 
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-12 md:py-16">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-12 md:py-16">
         {/* 담임목사 */}
         {seniorPastor && (
           <section className="mb-20 md:mb-28">

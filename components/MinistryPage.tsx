@@ -12,10 +12,10 @@ interface MinistryPageProps {
 export default function MinistryPage({ title, subtitle, description, schedule, contact, features }: MinistryPageProps) {
   return (
     <>
-      <PageHeader title={title} subtitle={subtitle} />
+      <PageHeader pill="다음세대" title={title} subtitle={subtitle} />
 
       <section className="py-16 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <div className="bg-white border border-gray-200 rounded-xl p-10 mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4">소개</h2>
             <p className="text-sm text-gray-700 leading-loose whitespace-pre-line">{description}</p>
@@ -46,7 +46,7 @@ export default function MinistryPage({ title, subtitle, description, schedule, c
 
       {features && features.length > 0 && (
         <section className="py-16 bg-white">
-          <div className="max-w-screen-xl mx-auto px-4">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-6">
             <div className="grid md:grid-cols-3 gap-6">
               {features.map((f) => (
                 <div key={f.title} className="bg-gray-50 border border-gray-200 rounded-xl p-6">

@@ -1,10 +1,27 @@
-export default function PageHeader({ title, subtitle }: { title: string; subtitle?: string }) {
+export default function PageHeader({
+  title,
+  subtitle,
+  pill,
+}: {
+  title: string;
+  subtitle?: string;
+  pill?: string;
+}) {
   return (
-    <section className="bg-black text-white py-16 text-center">
-      <div className="max-w-screen-xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">{title}</h1>
-        {subtitle && <p className="text-sm md:text-base text-gray-400">{subtitle}</p>}
-        <div className="w-12 h-0.5 bg-white mx-auto mt-6" />
+    <section className="bg-[#f3f4f5] pt-16 md:pt-20 pb-12 md:pb-16 font-['Manrope']">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 text-left">
+        {pill && (
+          <span className="inline-block px-4 py-1 bg-[#006b5d] text-white rounded-full text-sm font-semibold mb-4">
+            {pill}
+          </span>
+        )}
+        <h1 className="text-4xl md:text-[48px] leading-[1.15] font-extrabold text-[#191c1d] tracking-tight">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-base md:text-lg text-[#434655] mt-4 max-w-2xl">{subtitle}</p>
+        )}
+        <div className="w-16 h-1 bg-[#0045bc] mt-6 rounded-full" />
       </div>
     </section>
   );

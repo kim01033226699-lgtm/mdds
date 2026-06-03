@@ -4,7 +4,7 @@ import PageHeader from '@/components/PageHeader';
 import { useEffect, useState } from 'react';
 
 const DEFAULT = {
-  address: '(12097) 경기도 남양주시 덕송2로 63\n(별내동) 프라자빌딩 3,4층',
+  address: '(12097) 경기도 남양주시 덕송2로 63(별내동)',
   phone: '031-553-0191',
   phoneHours: '평일 9시-18시\n주말 8시-17시',
   email: 'info@mdds.or.kr\npastor@mdds.or.kr',
@@ -24,10 +24,10 @@ export default function DirectionsPage() {
 
   return (
     <>
-      <PageHeader title="찾아오시는 길" subtitle="물댄동산교회로 오시는 방법을 안내합니다" />
+      <PageHeader pill="교회소개" title="찾아오시는 길" subtitle="물댄동산교회로 오시는 방법을 안내합니다" />
 
       <section className="py-16 bg-gray-50">
-        <div className="max-w-screen-xl mx-auto px-4 grid md:grid-cols-2 gap-6 mb-10">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 grid md:grid-cols-2 gap-6 mb-10">
           <div className="bg-white border border-gray-200 rounded-xl p-8">
             <div className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center mb-4 text-xl">◈</div>
             <div className="text-lg font-bold text-gray-900 mb-3">주소</div>
@@ -50,7 +50,7 @@ export default function DirectionsPage() {
           </div>
         </div>
 
-        <div className="max-w-screen-xl mx-auto px-4">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <div className="aspect-[16/9] bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
               지도 영역 (Google Maps 또는 Daum Maps 연동 예정)
@@ -60,7 +60,7 @@ export default function DirectionsPage() {
       </section>
 
       <section className="py-16 bg-white">
-        <div className="max-w-screen-xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6 grid md:grid-cols-3 gap-6">
           {[
             { icon: '☎', title: '전화', info: `${data.phone}\n${data.phoneHours}` },
             { icon: '✉', title: '이메일', info: data.email },

@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import PageHeader from '@/components/PageHeader';
 
 export const metadata = { title: '양육/훈련 - 물댄동산교회' };
 
@@ -42,28 +42,12 @@ const BIBLE_COURSES = [
 export default function DiscipleshipPage() {
   return (
     <div className="bg-[#f8f9ff] text-[#0b1c30] font-['Inter']">
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-8 space-y-5">
-        {/* Hero */}
-        <section className="relative h-[400px] overflow-hidden rounded-xl border border-[#c2c6d4]">
-          <Image
-            src="/hero-01.jpg"
-            alt="양육과 훈련"
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c30]/85 via-[#0b1c30]/35 to-[#0b1c30]/10 flex flex-col justify-end p-8 md:p-10">
-            <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] leading-[1.1] font-bold text-[#f8f9ff] mb-3 tracking-tight">
-              양육과 훈련
-            </h1>
-            <p className="text-sm md:text-base leading-relaxed text-[#d3e4fe] max-w-3xl">
-              &ldquo;그러므로 너희가 그리스도 예수를 주로 받았으니 그 안에서 행하되 그 안에 뿌리를 박으며
-              세움을 받아 교훈을 받은 대로 믿음에 굳게 서서 감사함을 넘치게 하라&rdquo;
-            </p>
-            <span className="font-['JetBrains_Mono'] text-xs text-[#a8c8ff] mt-2">— 골로새서 2:6-7</span>
-          </div>
-        </section>
-
+      <PageHeader
+        pill="양육/훈련"
+        title="양육과 훈련"
+        subtitle="말씀과 기도, 교제 안에서 함께 성장하는 신앙 공동체입니다. (골로새서 2:6-7)"
+      />
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-8 space-y-5">
         {/* 빠른 이동 */}
         <nav className="bg-white border border-[#c2c6d4] rounded-xl p-4 md:p-5 flex flex-wrap items-center gap-2 md:gap-3">
           <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase pr-2">

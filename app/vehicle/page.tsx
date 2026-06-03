@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import PageHeader from '@/components/PageHeader';
 
 export const metadata = { title: '차량 운행안내 - 물댄동산교회' };
 
@@ -75,37 +75,15 @@ const NOTES = [
 export default function VehiclePage() {
   return (
     <div className="bg-[#f8f9ff] text-[#0b1c30] font-['Inter']">
-      {/* Hero */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/hero-01.jpg"
-            alt="차량 운행 안내"
-            fill
-            priority
-            className="object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(rgba(11, 28, 48, 0.6), rgba(11, 28, 48, 0.8))',
-            }}
-          />
-        </div>
-        <div className="relative z-10 text-center px-4">
-          <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[56px] leading-[1.05] font-bold text-[#f8f9ff] mb-4 tracking-tight">
-            차량 운행 안내
-          </h1>
-          <p className="text-base md:text-lg text-[#d6e3ff] max-w-2xl mx-auto">
-            주일예배에 편안하게 오실 수 있도록 차량을 운행합니다.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        pill="교회소개"
+        title="차량 운행 안내"
+        subtitle="주일예배에 편안하게 오실 수 있도록 차량을 운행합니다."
+      />
 
-      <main className="max-w-[1600px] mx-auto">
+      <main className="max-w-[1200px] mx-auto">
         {/* 운행 차량 */}
-        <section className="py-12 md:py-16 px-4 md:px-8">
+        <section className="py-12 md:py-16 px-5 md:px-6">
           <div className="mb-10">
             <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-semibold text-[#0b1c30] mb-2 flex items-center gap-2 tracking-tight">
               <span className="material-symbols-outlined text-[#00488d]">commute</span>
@@ -145,7 +123,7 @@ export default function VehiclePage() {
         </section>
 
         {/* 1호차 운행시간표 */}
-        <section className="py-12 md:py-16 px-4 md:px-8 bg-[#eff4ff]">
+        <section className="py-12 md:py-16 px-5 md:px-6 bg-[#eff4ff]">
           <div className="mb-10">
             <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-semibold text-[#0b1c30] mb-2 flex items-center gap-2 tracking-tight">
               <span className="material-symbols-outlined text-[#00488d]">schedule</span>
@@ -211,7 +189,7 @@ export default function VehiclePage() {
         </section>
 
         {/* 추가 안내 - Bento */}
-        <section className="py-12 md:py-16 px-4 md:px-8">
+        <section className="py-12 md:py-16 px-5 md:px-6">
           <div className="mb-10">
             <h2 className="font-['Hanken_Grotesk'] text-2xl md:text-3xl font-semibold text-[#0b1c30] mb-2 flex items-center gap-2 tracking-tight">
               <span className="material-symbols-outlined text-[#00488d]">info</span>
@@ -255,7 +233,7 @@ export default function VehiclePage() {
         </section>
 
         {/* 차량 문의 - dark card */}
-        <section className="py-12 md:py-16 px-4 md:px-8">
+        <section className="py-12 md:py-16 px-5 md:px-6">
           <div className="bg-[#0b1c30] rounded-xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between text-[#f8f9ff] gap-8 overflow-hidden relative">
             <div className="absolute right-0 top-0 opacity-10 translate-x-1/4 -translate-y-1/4 pointer-events-none">
               <span className="material-symbols-outlined" style={{ fontSize: '300px' }}>
@@ -305,7 +283,7 @@ export default function VehiclePage() {
                   </div>
                   <div>
                     <p className="text-xs text-[#d3e4fe]">교회 위치</p>
-                    <p className="text-sm">경기도 남양주시 덕송2로 63</p>
+                    <p className="text-sm">경기도 남양주시 덕송2로 63(별내동)</p>
                   </div>
                 </div>
               </div>

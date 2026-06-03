@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import MainWrapper from "@/components/MainWrapper";
 
 export const metadata: Metadata = {
-  title: "물댄동산교회 - 새 일을 이루는 교회",
-  description: "하나님의 사랑 안에서 함께하는 물댄동산교회",
+  title: "물댄동산교회 - 복음으로 다시 세워지는 교회",
+  description: "복음으로 다시 세워지는 교회, 물댄동산교회입니다.",
 };
 
 export default function RootLayout({

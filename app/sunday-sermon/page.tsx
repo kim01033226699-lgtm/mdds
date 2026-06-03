@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import PageHeader from '@/components/PageHeader';
 
 export const metadata = { title: '주일설교 - 물댄동산교회' };
 
@@ -8,26 +9,12 @@ const PLAYLIST_ID = 'PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H';
 export default function SundaySermonPage() {
   return (
     <div className="bg-[#f8f9ff] text-[#0b1c30] font-['Inter']">
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-8 space-y-5">
-        {/* Hero */}
-        <section className="relative h-[320px] overflow-hidden rounded-xl border border-[#c2c6d4]">
-          <Image
-            src="/hero-01.jpg"
-            alt="주일설교"
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1c30]/85 via-[#0b1c30]/35 to-[#0b1c30]/10 flex flex-col justify-end p-8 md:p-10">
-            <h1 className="font-['Hanken_Grotesk'] text-3xl md:text-[40px] leading-[1.1] font-bold text-[#f8f9ff] mb-2 tracking-tight">
-              주일설교
-            </h1>
-            <p className="text-base md:text-lg leading-relaxed text-[#d3e4fe] max-w-2xl">
-              담임목사의 주일예배 말씀을 영상으로 만나보세요.
-            </p>
-          </div>
-        </section>
-
+      <PageHeader
+        pill="말씀과 찬양"
+        title="주일설교"
+        subtitle="담임목사의 주일예배 말씀을 영상으로 만나보세요."
+      />
+      <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-8 space-y-5">
         {/* Bento Grid */}
         <div className="grid grid-cols-4 md:grid-cols-12 gap-3 md:gap-5">
           {/* 영상 플레이어 (8 col) */}
