@@ -26,6 +26,12 @@ const AFTER_CARE = [
 
 const BIBLE_COURSES = [
   {
+    title: '성장하는 그리스도인',
+    desc: '평신도 지도자를 양성하여 하나님 나라를 확장하고 그리스도의 몸된 교회를 섬기는 것을 목표로 주제별 성경공부가 이루어집니다.',
+    when: '매주 토요일 오전 10:00',
+    where: '청년부실 (지하 1층)',
+  },
+  {
     title: '역사와 지리로 보는 모세오경',
     desc: '모세오경에 나타난 역사적 사건과 지리적 배경을 바탕으로 성경을 입체적으로 볼 수 있는 성경공부 모임입니다.',
     when: '매주 토요일 오전 10:00',
@@ -140,14 +146,12 @@ export default function DiscipleshipPage() {
             <div className="flex items-center gap-2 mb-4 text-[#00488d]">
               <span className="material-symbols-outlined">menu_book</span>
             </div>
-            <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-1 tracking-tight">
+            <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-4 tracking-tight">
               성경아카데미
             </h2>
-            <p className="text-sm font-semibold text-[#00488d] mb-4">성장하는 그리스도인</p>
             <p className="text-sm text-[#424752] leading-relaxed mb-6">
               하나님의 뜻에 합당한 존재이유를 깨닫고, 자녀에게 신앙을 물려주기 위해 기독교의 핵심진리를
-              배웁니다. 평신도 지도자를 양성하여 하나님 나라를 확장하고 그리스도의 몸된 교회를 섬기는 것을
-              목표로 주제별 성경공부가 이루어집니다.
+              배우는 성경공부 모임입니다.
             </p>
 
             <div className="border-t border-[#c2c6d4] pt-5">
@@ -161,20 +165,26 @@ export default function DiscipleshipPage() {
                       {c.title}
                     </h3>
                     <p className="text-xs text-[#424752] leading-relaxed mb-4">{c.desc}</p>
-                    <div className="space-y-1.5 border-t border-[#c2c6d4] pt-3">
-                      <div className="flex items-start gap-2 text-xs">
-                        <span className="material-symbols-outlined text-sm text-[#00488d] shrink-0">
-                          schedule
-                        </span>
-                        <span className="text-[#0b1c30]">{c.when}</span>
+                    {(c.when || c.where) && (
+                      <div className="space-y-1.5 border-t border-[#c2c6d4] pt-3">
+                        {c.when && (
+                          <div className="flex items-start gap-2 text-xs">
+                            <span className="material-symbols-outlined text-sm text-[#00488d] shrink-0">
+                              schedule
+                            </span>
+                            <span className="text-[#0b1c30]">{c.when}</span>
+                          </div>
+                        )}
+                        {c.where && (
+                          <div className="flex items-start gap-2 text-xs">
+                            <span className="material-symbols-outlined text-sm text-[#00488d] shrink-0">
+                              location_on
+                            </span>
+                            <span className="text-[#0b1c30]">{c.where}</span>
+                          </div>
+                        )}
                       </div>
-                      <div className="flex items-start gap-2 text-xs">
-                        <span className="material-symbols-outlined text-sm text-[#00488d] shrink-0">
-                          location_on
-                        </span>
-                        <span className="text-[#0b1c30]">{c.where}</span>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 ))}
               </div>

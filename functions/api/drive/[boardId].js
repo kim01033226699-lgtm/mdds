@@ -11,6 +11,7 @@
  *    DRIVE_FOLDER_EVENTS      - 이달의 행사 폴더 ID
  *    DRIVE_FOLDER_ALBUM       - 교회행사앨범 폴더 ID
  *    DRIVE_FOLDER_NEWFAMILY   - 새가족소개 폴더 ID
+ *    DRIVE_FOLDER_MISSIONARY  - 해외선교 소식지 폴더 ID
  */
 
 export async function onRequestGet(context) {
@@ -23,6 +24,7 @@ export async function onRequestGet(context) {
     events: env.DRIVE_FOLDER_EVENTS,
     album: env.DRIVE_FOLDER_ALBUM,
     newfamily: env.DRIVE_FOLDER_NEWFAMILY,
+    missionary: env.DRIVE_FOLDER_MISSIONARY,
   };
 
   const folderId = folderMap[boardId];

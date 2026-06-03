@@ -20,11 +20,13 @@ type DriveResponse = {
 };
 
 type Props = {
-  /** API endpoint board id: news | bulletin | events | album | newfamily */
-  boardId: 'news' | 'bulletin' | 'events' | 'album' | 'newfamily';
+  /** API endpoint board id */
+  boardId: 'news' | 'bulletin' | 'events' | 'album' | 'newfamily' | 'missionary';
   /** 그리드(이미지 중심) 또는 리스트(첨부파일 혼합) */
   mode: 'gallery' | 'list';
   emptyMessage?: string;
+  /** 파일명에 포함된 문자열로 필터링 (예: 선교사 이름) */
+  filter?: string;
 };
 
 const isImage = (mime: string) => mime.startsWith('image/');
@@ -51,7 +53,7 @@ function iconForMime(mime: string) {
   return 'insert_drive_file';
 }
 
-export default function DriveBoard({ boardId, mode, emptyMessage }: Props) {
+export default function DriveBoard({ boardId, mode, emptyMessage, filter }: Props) {
   const [data, setData] = useState<DriveResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -98,7 +100,11 @@ export default function DriveBoard({ boardId, mode, emptyMessage }: Props) {
     );
   }
 
-  if (data.files.length === 0) {
+  const visibleFiles = filter
+    ? data.files.filter((f) => f.name.includes(filter))
+    : data.files;
+
+  if (visibleFiles.length === 0) {
     return (
       <div className="bg-white border border-[#e1e3e4] rounded-2xl p-10 text-center">
         <span className="material-symbols-outlined text-[#737686] text-4xl mb-2 block">inbox</span>
@@ -110,7 +116,7 @@ export default function DriveBoard({ boardId, mode, emptyMessage }: Props) {
   if (mode === 'gallery') {
     return (
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
-        {data.files.map((f) => {
+        {visibleFiles.map((f) => {
           const img = isImage(f.mimeType);
           return (
             <a
@@ -153,14 +159,14 @@ export default function DriveBoard({ boardId, mode, emptyMessage }: Props) {
   // list mode
   return (
     <div className="bg-white border border-[#e1e3e4] rounded-2xl overflow-hidden">
-      {data.files.map((f, i) => (
+      {visibleFiles.map((f, i) => (
         <a
           key={f.id}
           href={f.webViewLink}
           target="_blank"
           rel="noopener noreferrer"
           className={`flex items-center gap-4 px-5 md:px-6 py-4 hover:bg-[#f3f4f5] transition-colors ${
-            i !== data.files.length - 1 ? 'border-b border-[#e1e3e4]' : ''
+            i !== visibleFiles.length - 1 ? 'border-b border-[#e1e3e4]' : ''
           }`}
         >
           <div className="w-12 h-12 shrink-0 rounded-lg bg-[#dbe1ff] flex items-center justify-center overflow-hidden">

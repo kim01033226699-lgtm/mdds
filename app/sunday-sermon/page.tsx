@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 
@@ -17,8 +16,8 @@ export default function SundaySermonPage() {
       <div className="max-w-[1200px] mx-auto px-5 md:px-6 py-8 space-y-5">
         {/* Bento Grid */}
         <div className="grid grid-cols-4 md:grid-cols-12 gap-3 md:gap-5">
-          {/* 영상 플레이어 (8 col) */}
-          <div className="col-span-4 md:col-span-8 bg-white border border-[#c2c6d4] rounded-xl overflow-hidden">
+          {/* 영상 플레이어 (12 col, 전체 폭) */}
+          <div className="col-span-4 md:col-span-12 bg-white border border-[#c2c6d4] rounded-xl overflow-hidden">
             <div className="aspect-video bg-[#0b1c30]">
               <iframe
                 width="100%"
@@ -29,52 +28,17 @@ export default function SundaySermonPage() {
                 allowFullScreen
               />
             </div>
-            <div className="p-6 md:p-8 border-t border-[#c2c6d4]">
-              <div className="flex items-center gap-2 mb-3 text-[#00488d]">
-                <span className="material-symbols-outlined">play_circle</span>
-              </div>
-              <h2 className="font-['Hanken_Grotesk'] text-2xl font-semibold text-[#0b1c30] mb-2 tracking-tight">
-                주일예배 설교 재생목록
-              </h2>
-              <p className="text-sm text-[#424752] leading-relaxed">
-                매주 주일에 선포된 담임목사님의 말씀이 순서대로 재생됩니다.
-                플레이어 우측 상단의 목록 아이콘으로 회차를 선택할 수 있습니다.
-              </p>
-            </div>
           </div>
 
-          {/* 담임목사 카드 (4 col) */}
-          <div className="col-span-4 md:col-span-4 bg-white border border-[#c2c6d4] p-6 md:p-8 rounded-xl flex flex-col">
-            <div className="flex items-center gap-2 mb-4 text-[#00488d]">
-              <span className="material-symbols-outlined">person</span>
-            </div>
-            <div className="flex flex-col items-center text-center mb-6">
-              <Image
-                src="/pastor01.png"
-                alt="정종한 담임목사"
-                width={120}
-                height={120}
-                className="w-28 h-28 rounded-full object-cover border-4 border-[#e5eeff] mb-4"
-              />
-              <h3 className="font-['Hanken_Grotesk'] text-lg font-semibold text-[#0b1c30]">정종한 담임목사</h3>
-              <p className="text-xs text-[#424752] mt-1">물댄동산교회</p>
-            </div>
-            <div className="space-y-3 border-t border-[#c2c6d4] pt-4 mb-6">
-              <div className="flex justify-between items-end border-b border-[#c2c6d4] pb-2">
-                <span className="text-sm font-semibold">주일 1부</span>
-                <span className="font-['JetBrains_Mono'] text-xs text-[#00488d]">오전 9시</span>
-              </div>
-              <div className="flex justify-between items-end">
-                <span className="text-sm font-semibold">주일 2부</span>
-                <span className="font-['JetBrains_Mono'] text-xs text-[#00488d]">오전 11시</span>
-              </div>
-            </div>
+          {/* YouTube 채널 이동 버튼 — 영상 바로 아래 */}
+          <div className="col-span-4 md:col-span-12 flex justify-center">
             <Link
               href={`https://www.youtube.com/playlist?list=${PLAYLIST_ID}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center w-full mt-auto py-2 border-2 border-[#00488d] text-[#00488d] font-semibold rounded text-sm hover:bg-[#00488d] hover:text-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#00488d] text-[#00488d] font-semibold rounded-full text-sm hover:bg-[#00488d] hover:text-white transition-colors"
             >
+              <span className="material-symbols-outlined text-base">open_in_new</span>
               YouTube 채널 이동
             </Link>
           </div>

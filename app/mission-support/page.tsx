@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 
 export const metadata = { title: '선교후원 및 기관 - 물댄동산교회' };
@@ -148,22 +149,32 @@ export default function MissionSupportPage() {
                 </h3>
               </div>
               <ul className="space-y-3">
-                {OVERSEAS.map((m) => (
-                  <li
-                    key={m.country}
-                    className="flex items-baseline gap-3 pb-3 border-b border-white/40 last:border-b-0"
-                  >
-                    <span className="inline-flex items-center gap-2 shrink-0">
-                      <span className="w-2 h-2 rounded-full bg-[#e53935]" />
-                      <span className="font-['Manrope'] text-sm font-bold text-[#003da9] uppercase tracking-wide w-24">
-                        {m.country}
+                {OVERSEAS.map((m) => {
+                  const missionaryName = m.name.replace(/\s*선교사$/, '');
+                  return (
+                    <li
+                      key={m.country}
+                      className="flex flex-wrap items-center gap-3 pb-3 border-b border-white/40 last:border-b-0"
+                    >
+                      <span className="inline-flex items-center gap-2 shrink-0">
+                        <span className="w-2 h-2 rounded-full bg-[#e53935]" />
+                        <span className="font-['Manrope'] text-sm font-bold text-[#003da9] uppercase tracking-wide w-20 md:w-24">
+                          {m.country}
+                        </span>
                       </span>
-                    </span>
-                    <span className="text-sm md:text-base text-[#191c1d] font-semibold">
-                      {m.name}
-                    </span>
-                  </li>
-                ))}
+                      <span className="flex-1 text-sm md:text-base text-[#191c1d] font-semibold">
+                        {m.name}
+                      </span>
+                      <Link
+                        href={`/missionary-news?m=${encodeURIComponent(missionaryName)}`}
+                        className="inline-flex items-center gap-1 bg-white text-[#0045bc] text-xs font-bold px-3 py-1.5 rounded-full hover:bg-[#0045bc] hover:text-white transition-colors shrink-0"
+                      >
+                        <span className="material-symbols-outlined text-sm">mail</span>
+                        소식지보기
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

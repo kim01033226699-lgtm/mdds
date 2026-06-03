@@ -1,36 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import ScrollToTop from '@/components/ScrollToTop';
-
-const SERMON_PLAYLIST_ID = 'PLuyd60PWgGd2rEYGrUkFLffSaQZDjOd1H';
-
-const LATEST_SERMONS = [
-  {
-    id: '32XoOSfxhpg',
-    title: '말씀의 사람, 소명의 사람',
-    verse: '히브리서 1:1-3',
-    pastor: '신기원 목사',
-    series: '온 세대 통합예배',
-    date: '2026.05.31',
-    desc: '우리는 말씀의 통로가 되어 하나님의 소명을 따라가는 사람들입니다. 오늘 선포되는 말씀을 통해 당신의 삶을 향한 하나님의 새로운 계획을 발견하시길 바랍니다.',
-  },
-  {
-    id: 'uct4XofUC44',
-    title: '내 영을 만민에게',
-    verse: '욜 2:28-32',
-    pastor: '정종한 목사',
-    series: '주일 2부예배',
-    date: '2026.05.24',
-  },
-  {
-    id: 'qaDk6yLjjYQ',
-    title: '참된 스승은',
-    verse: '딤후 2:1-2',
-    pastor: '정종한 목사',
-    series: '주일 2부예배',
-    date: '2026.05.17',
-  },
-];
+import LatestSermonCards from '@/components/LatestSermonCards';
+import FeaturedSermon from '@/components/FeaturedSermon';
 
 const NEWS = [
   { tag: '공지', tone: 'primary', title: '주일예배 안내', date: '2026.04.16' },
@@ -64,12 +36,44 @@ const NEW_FAMILY_STEPS = [
 ];
 
 export default function Home() {
-  const featured = LATEST_SERMONS[0];
-
   return (
     <div className="bg-[#f8f9fa] text-[#191c1d] font-['Manrope']">
-      {/* Hero */}
-      <section className="relative overflow-hidden min-h-[600px] flex items-center">
+      {/* Mobile-only top: 제목 + 말씀 + 바로가기 버튼 (md 이상에선 숨김) */}
+      <section className="md:hidden bg-white pt-6 pb-6 px-5 border-b border-[#e1e3e4]">
+        <div className="text-center mb-6">
+          <h1 className="font-['Manrope'] text-2xl font-extrabold text-[#0045bc] leading-[1.25] mb-3 tracking-tight">
+            복음으로 다시
+            <br />
+            세워지는 교회
+          </h1>
+          <p className="text-xs text-[#434655] italic leading-relaxed px-2">
+            &ldquo;그러므로 너희가 그리스도 예수를 주로 받았으니 그 안에서 행하되 그 안에 뿌리를
+            박으며 세움을 받아 교훈을 받은 대로 믿음에 굳게 서서 감사함을 넘치게 하라&rdquo;
+          </p>
+          <p className="font-['Manrope'] text-[11px] font-bold text-[#0045bc]/80 mt-2 tracking-wider">
+            — 골로새서 2:6-7
+          </p>
+        </div>
+        <div className="grid grid-cols-4 gap-2">
+          {[
+            { href: '/sunday-sermon', label: '이번주설교' },
+            { href: '/discipleship#new-family', label: '새신자' },
+            { href: '/bulletin', label: '주보보기' },
+            { href: '/church-news-events', label: '공지사항' },
+          ].map((b) => (
+            <Link
+              key={b.href}
+              href={b.href}
+              className="bg-[#eff4ff] border border-[#dbe1ff] text-[#0045bc] text-xs font-bold rounded-full py-2.5 px-1 text-center active:scale-[0.98] active:bg-[#dbe1ff] transition-all whitespace-nowrap"
+            >
+              {b.label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Hero (데스크탑 전용, md 이상에서만 표시) */}
+      <section className="hidden md:flex relative overflow-hidden min-h-[600px] items-center">
         <div className="absolute inset-0 z-0">
           <Image src="/hero-01.jpg" alt="물댄동산교회" fill priority className="object-cover" />
           <div
@@ -80,7 +84,7 @@ export default function Home() {
             }}
           />
         </div>
-        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-6 w-full py-20 md:py-24">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-6 w-full py-10 md:py-24">
           <div className="max-w-2xl space-y-6">
             <div className="inline-flex items-center bg-white/60 backdrop-blur-sm px-4 py-1.5 rounded-full border border-[#0045bc]/15">
               <span className="text-[#0045bc] text-[13px] font-semibold tracking-[0.08em]">
@@ -121,19 +125,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 이번 주 말씀 — YouTube에서 최근 설교 4개 자동 fetch (본문 성경구절만 표시) */}
+      <LatestSermonCards />
+
       {/* Quick Links Bento */}
-      <section className="py-20 md:py-24 max-w-[1200px] mx-auto px-5 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* 우리의 예배 (col-span-2, mint) */}
+      <section className="py-10 md:py-24 max-w-[1200px] mx-auto px-5 md:px-6">
+        <div className="grid grid-cols-2 gap-3 md:gap-6">
+          {/* 우리의 예배 (mint) */}
           <Link
             href="/worship-guide"
-            className="md:col-span-2 group relative overflow-hidden bg-[#E0F5F0] p-8 rounded-3xl transition-all duration-300 hover:-translate-y-1"
+            className="group relative overflow-hidden bg-[#E0F5F0] p-5 md:p-8 rounded-2xl md:rounded-3xl transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="relative z-10 flex flex-col h-full justify-between gap-12">
-              <div className="space-y-4">
+            <div className="relative z-10 flex flex-col h-full justify-between gap-10">
+              <div className="space-y-3">
                 <span className="material-symbols-outlined text-4xl text-[#006b5d]">church</span>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#191c1d]">우리의 예배</h3>
-                <p className="text-[#434655] text-base leading-relaxed">
+                <h3 className="text-base md:text-2xl font-bold text-[#191c1d]">우리의 예배</h3>
+                <p className="text-[#434655] text-sm leading-relaxed">
                   예배는 우리의 삶의 목적입니다. 영과 진리로 드리는 거룩한 산 제사로 나아갑니다.
                 </p>
               </div>
@@ -146,16 +153,16 @@ export default function Home() {
           {/* 말씀과 찬양 (primary) */}
           <Link
             href="/sunday-sermon"
-            className="bg-[#0045bc] p-8 rounded-3xl text-white transition-all duration-300 hover:-translate-y-1 group"
+            className="bg-[#0045bc] p-5 md:p-8 rounded-2xl md:rounded-3xl text-white transition-all duration-300 hover:-translate-y-1 group"
           >
-            <div className="flex flex-col h-full justify-between">
-              <span className="material-symbols-outlined text-4xl text-[#61fadf]">music_note</span>
-              <div className="mt-6">
-                <h3 className="text-xl font-bold">말씀과 찬양</h3>
-                <p className="text-white/80 text-sm mt-2">감동이 있는 예배</p>
+            <div className="flex flex-col h-full justify-between gap-10">
+              <div className="space-y-3">
+                <span className="material-symbols-outlined text-4xl text-[#61fadf]">music_note</span>
+                <h3 className="text-base md:text-2xl font-bold">말씀과 찬양</h3>
+                <p className="text-white/80 text-sm leading-relaxed">감동이 있는 예배</p>
               </div>
-              <span className="mt-8 material-symbols-outlined self-end group-hover:translate-x-2 transition-transform">
-                arrow_forward
+              <span className="text-[#61fadf] text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-4 transition-all">
+                설교 보기 <span className="material-symbols-outlined">arrow_forward</span>
               </span>
             </div>
           </Link>
@@ -163,209 +170,54 @@ export default function Home() {
           {/* 양육과 훈련 (cream) */}
           <Link
             href="/discipleship"
-            className="bg-[#FFF9E1] p-8 rounded-3xl transition-all duration-300 hover:-translate-y-1 group"
+            className="bg-[#FFF9E1] p-5 md:p-8 rounded-2xl md:rounded-3xl transition-all duration-300 hover:-translate-y-1 group"
           >
-            <div className="flex flex-col h-full justify-between text-[#191c1d]">
-              <span className="material-symbols-outlined text-4xl text-[#8f2f00]">menu_book</span>
-              <div className="mt-6">
-                <h3 className="text-xl font-bold">양육과 훈련</h3>
-                <p className="text-[#434655] text-sm mt-2">그리스도의 제자로</p>
+            <div className="flex flex-col h-full justify-between gap-10 text-[#191c1d]">
+              <div className="space-y-3">
+                <span className="material-symbols-outlined text-4xl text-[#8f2f00]">menu_book</span>
+                <h3 className="text-base md:text-2xl font-bold">양육과 훈련</h3>
+                <p className="text-[#434655] text-sm leading-relaxed">그리스도의 제자로</p>
               </div>
-              <span className="mt-8 material-symbols-outlined self-end text-[#8f2f00] group-hover:translate-x-2 transition-transform">
-                arrow_forward
+              <span className="text-[#8f2f00] text-sm font-semibold inline-flex items-center gap-2 group-hover:gap-4 transition-all">
+                양육 안내 <span className="material-symbols-outlined">arrow_forward</span>
               </span>
+            </div>
+          </Link>
+
+          {/* 예배안내 (pink) — 시간표 */}
+          <Link
+            href="/worship-guide"
+            className="bg-[#ffdad6] p-5 md:p-8 rounded-2xl md:rounded-3xl transition-all duration-300 hover:-translate-y-1 group"
+          >
+            <div className="flex flex-col h-full justify-between gap-6 text-[#191c1d]">
+              <div className="space-y-3">
+                <span className="material-symbols-outlined text-4xl text-[#ba1a1a]">schedule</span>
+                <h3 className="text-base md:text-2xl font-bold">예배안내</h3>
+              </div>
+              <ul className="space-y-2 text-xs md:text-sm">
+                <li className="flex flex-col md:flex-row md:justify-between md:items-center pb-2 border-b border-white/50">
+                  <span className="text-[#93000a]">주일예배</span>
+                  <span className="font-bold text-[#191c1d]">오전 9시 &amp; 11시</span>
+                </li>
+                <li className="flex flex-col md:flex-row md:justify-between md:items-center pb-2 border-b border-white/50">
+                  <span className="text-[#93000a]">수요예배</span>
+                  <span className="font-bold text-[#191c1d]">오후 7시 30분</span>
+                </li>
+                <li className="flex flex-col md:flex-row md:justify-between md:items-center">
+                  <span className="text-[#93000a]">금요기도회</span>
+                  <span className="font-bold text-[#191c1d]">오후 8시</span>
+                </li>
+              </ul>
             </div>
           </Link>
         </div>
       </section>
 
-      {/* Latest Sermon */}
-      <section id="sermon" className="py-20 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-            <div className="space-y-2">
-              <span className="text-[#0045bc] text-sm font-semibold uppercase tracking-widest">
-                주일 메시지
-              </span>
-              <h2 className="text-3xl md:text-[32px] font-bold leading-tight">최신 설교 영상</h2>
-            </div>
-            <Link
-              href="/sunday-sermon"
-              className="text-[#434655] hover:text-[#0045bc] flex items-center gap-2 transition-colors font-medium"
-            >
-              전체 설교 보기 <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Main Featured */}
-            <div className="lg:col-span-8 group">
-              <a
-                href={`https://www.youtube.com/watch?v=${featured.id}&list=${SERMON_PLAYLIST_ID}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative block aspect-video rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
-              >
-                <Image
-                  src={`https://i.ytimg.com/vi/${featured.id}/hqdefault.jpg`}
-                  alt={featured.title}
-                  fill
-                  sizes="(min-width: 1024px) 800px, 100vw"
-                  className="object-cover"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center text-[#0045bc] shadow-xl">
-                    <span
-                      className="material-symbols-outlined text-4xl"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      play_arrow
-                    </span>
-                  </div>
-                </div>
-                <div className="absolute top-6 right-6 bg-[#0045bc] text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider">
-                  NEW
-                </div>
-              </a>
-              <div className="mt-8 space-y-4">
-                <div className="flex flex-wrap items-center gap-3 text-[#434655] text-sm">
-                  <span className="bg-[#edeeef] px-3 py-1 rounded-md font-medium">{featured.date}</span>
-                  <span>{featured.verse}</span>
-                  <span className="w-1 h-1 bg-[#737686] rounded-full" />
-                  <span>{featured.series}</span>
-                  <span className="w-1 h-1 bg-[#737686] rounded-full" />
-                  <span>{featured.pastor}</span>
-                </div>
-                <h3 className="text-2xl md:text-[28px] font-bold text-[#0045bc] leading-tight">
-                  {featured.title}
-                </h3>
-                {featured.desc && (
-                  <p className="text-base text-[#434655] max-w-2xl leading-relaxed">
-                    {featured.desc}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Sidebar */}
-            <div className="lg:col-span-4 space-y-6">
-              <h4 className="text-lg font-bold border-b border-[#c3c6d7] pb-4">지난 설교</h4>
-              <div className="space-y-2">
-                {LATEST_SERMONS.slice(1).map((s, i) => (
-                  <a
-                    key={s.id}
-                    href={`https://www.youtube.com/watch?v=${s.id}&list=${SERMON_PLAYLIST_ID}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex gap-4 p-4 rounded-2xl hover:bg-[#f3f4f5] transition-colors group ${
-                      i > 0 ? 'border-t border-[#e1e3e4]' : ''
-                    }`}
-                  >
-                    <div className="w-24 h-16 bg-[#edeeef] rounded-lg overflow-hidden flex-shrink-0 relative">
-                      <Image
-                        src={`https://i.ytimg.com/vi/${s.id}/mqdefault.jpg`}
-                        alt={s.title}
-                        fill
-                        sizes="96px"
-                        className="object-cover opacity-70 group-hover:opacity-100 transition-opacity"
-                        unoptimized
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[#0045bc] text-xs font-semibold mb-1">{s.date}</p>
-                      <p className="text-sm font-semibold text-[#191c1d] truncate">
-                        {s.title} ({s.verse})
-                      </p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-
-              <div className="bg-[#e1e3e4]/70 p-7 rounded-3xl mt-8">
-                <h5 className="text-lg font-bold text-[#0045bc] mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined">schedule</span>
-                  예배안내
-                </h5>
-                <ul className="space-y-3 text-sm text-[#434655]">
-                  <li className="flex justify-between">
-                    <span>주일예배</span>
-                    <span className="font-bold text-[#191c1d]">오전 9시 &amp; 11시</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>수요예배</span>
-                    <span className="font-bold text-[#191c1d]">오후 7시 30분</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>금요기도회</span>
-                    <span className="font-bold text-[#191c1d]">오후 8시</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* New Family */}
-      <section className="py-20 md:py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="bg-white rounded-[40px] shadow-[0_40px_80px_rgba(0,0,0,0.04)] overflow-hidden border border-[#e1e3e4]">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="p-10 md:p-16 space-y-8">
-                <div className="space-y-3">
-                  <h2 className="text-3xl md:text-[32px] font-bold text-[#0045bc] leading-tight">
-                    처음 오셨나요?
-                  </h2>
-                  <p className="text-[#434655] text-base md:text-lg">
-                    물댄동산교회는 하나님의 사랑 안에서 여러분을 환영합니다. 함께 성장하는 기쁨을 누려보세요.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  {NEW_FAMILY_STEPS.map((s) => (
-                    <div key={s.num} className="flex items-start gap-5">
-                      <div className="w-10 h-10 rounded-full bg-[#dbe1ff] text-[#0045bc] flex items-center justify-center font-bold shrink-0">
-                        {s.num}
-                      </div>
-                      <div>
-                        <h5 className="text-lg font-bold text-[#191c1d] mb-1">{s.title}</h5>
-                        <p className="text-[#434655] text-sm md:text-base">{s.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <Link
-                  href="/discipleship#new-family"
-                  className="inline-flex items-center gap-3 text-[#0045bc] text-lg font-bold hover:underline decoration-2 underline-offset-8"
-                >
-                  새가족 안내 자세히 보기
-                  <span className="material-symbols-outlined">arrow_right_alt</span>
-                </Link>
-              </div>
-
-              <div className="bg-[#E0F5F0] relative hidden lg:block overflow-hidden min-h-[400px]">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-4 max-w-xs px-6">
-                    <span className="material-symbols-outlined text-[120px] text-[#0045bc]/25">
-                      diversity_1
-                    </span>
-                    <p className="text-[#0045bc]/70 text-lg italic leading-relaxed">
-                      &ldquo;우리는 사랑 안에서 하나되는 공동체입니다&rdquo;
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/40 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute -top-10 -left-10 w-48 h-48 bg-[#0045bc]/5 rounded-full blur-2xl pointer-events-none" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 이번주 설교 영상 (인플레이스 재생, 지난 설교 4개 표시) */}
+      <FeaturedSermon />
 
       {/* Church News + Location */}
-      <section className="py-20 md:py-24 bg-[#f8f9fa]">
+      <section className="py-10 md:py-24 bg-[#f8f9fa]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* News */}
@@ -439,7 +291,7 @@ export default function Home() {
                   <div className="pt-4 border-t border-[#e1e3e4] flex gap-4">
                     <span className="material-symbols-outlined text-[#006b5d]">directions_car</span>
                     <p className="text-[#434655] text-sm">
-                      교회 인근에 방문자 주차 공간이 마련되어 있습니다.
+                      교회 내 주차장 및 주일예배시 덕송초등학교 주차장 이용이 가능합니다.
                     </p>
                   </div>
                   <Link
@@ -450,6 +302,63 @@ export default function Home() {
                     <span className="material-symbols-outlined text-base">arrow_right_alt</span>
                   </Link>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* New Family */}
+      <section className="py-10 md:py-24 bg-white">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+          <div className="bg-white rounded-[40px] shadow-[0_40px_80px_rgba(0,0,0,0.04)] overflow-hidden border border-[#e1e3e4]">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-10 md:p-16 space-y-8">
+                <div className="space-y-3">
+                  <h2 className="text-3xl md:text-[32px] font-bold text-[#0045bc] leading-tight">
+                    처음 오셨나요?
+                  </h2>
+                  <p className="text-[#434655] text-base md:text-lg">
+                    물댄동산교회는 하나님의 사랑 안에서 여러분을 환영합니다. 함께 성장하는 기쁨을 누려보세요.
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {NEW_FAMILY_STEPS.map((s) => (
+                    <div key={s.num} className="flex items-start gap-5">
+                      <div className="w-10 h-10 rounded-full bg-[#dbe1ff] text-[#0045bc] flex items-center justify-center font-bold shrink-0">
+                        {s.num}
+                      </div>
+                      <div>
+                        <h5 className="text-lg font-bold text-[#191c1d] mb-1">{s.title}</h5>
+                        <p className="text-[#434655] text-sm md:text-base">{s.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <Link
+                  href="/discipleship#new-family"
+                  className="inline-flex items-center gap-3 text-[#0045bc] text-lg font-bold hover:underline decoration-2 underline-offset-8"
+                >
+                  새가족 안내 자세히 보기
+                  <span className="material-symbols-outlined">arrow_right_alt</span>
+                </Link>
+              </div>
+
+              <div className="bg-[#E0F5F0] relative hidden lg:block overflow-hidden min-h-[400px]">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center space-y-4 max-w-xs px-6">
+                    <span className="material-symbols-outlined text-[120px] text-[#0045bc]/25">
+                      diversity_1
+                    </span>
+                    <p className="text-[#0045bc]/70 text-lg italic leading-relaxed">
+                      &ldquo;우리는 사랑 안에서 하나되는 공동체입니다&rdquo;
+                    </p>
+                  </div>
+                </div>
+                <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/40 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -top-10 -left-10 w-48 h-48 bg-[#0045bc]/5 rounded-full blur-2xl pointer-events-none" />
               </div>
             </div>
           </div>
