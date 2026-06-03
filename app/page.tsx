@@ -17,24 +17,6 @@ const TAG_TONES: Record<string, string> = {
   tertiary: 'bg-[#8f2f00]/10 text-[#8f2f00]',
 };
 
-const NEW_FAMILY_STEPS = [
-  {
-    num: '1',
-    title: '등록카드 작성',
-    desc: '안내데스크에서 등록카드를 작성해주시면 정성껏 안내해 드립니다.',
-  },
-  {
-    num: '2',
-    title: '예배 참석 & 담임목사 면담',
-    desc: '은혜로운 예배 후 목사님과 따뜻한 만남의 시간을 갖습니다.',
-  },
-  {
-    num: '3',
-    title: '새가족 교육 (4주)',
-    desc: '공동체의 일원이 되기 위한 체계적인 교육 과정을 거치게 됩니다.',
-  },
-];
-
 export default function Home() {
   return (
     <div className="bg-[#f8f9fa] text-[#191c1d] font-['Manrope']">
@@ -102,21 +84,23 @@ export default function Home() {
               세움을 받아 교훈을 받은 대로 믿음에 굳게 서서 감사함을 넘치게 하라&rdquo;
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
-              <a
-                href="#sermon"
-                className="bg-[#0045bc] text-white px-7 py-3.5 rounded-full font-semibold flex items-center gap-2 hover:shadow-xl hover:shadow-[#0045bc]/20 transition-shadow"
-              >
-                <span
-                  className="material-symbols-outlined"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
+              {[
+                { href: '/sunday-sermon', label: '이번주설교' },
+                { href: '/discipleship#new-family', label: '새신자' },
+                { href: '/bulletin', label: '주보보기' },
+                { href: '/church-news-events', label: '공지사항' },
+              ].map((b) => (
+                <Link
+                  key={b.href}
+                  href={b.href}
+                  className="bg-white/80 backdrop-blur-sm text-[#0045bc] border border-[#0045bc]/20 px-6 py-3 rounded-full font-semibold hover:bg-[#0045bc] hover:text-white transition-colors"
                 >
-                  play_circle
-                </span>
-                최신 설교 보기
-              </a>
+                  {b.label}
+                </Link>
+              ))}
               <Link
                 href="/greeting"
-                className="bg-white/80 backdrop-blur-sm text-[#0045bc] border border-[#0045bc]/20 px-7 py-3.5 rounded-full font-semibold hover:bg-white transition-colors"
+                className="bg-[#0045bc] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#1b5ce6] transition-colors"
               >
                 교회 소개
               </Link>
@@ -308,58 +292,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* New Family */}
+      {/* New Family — 가로로 넓은 단일 카드 */}
       <section className="py-10 md:py-24 bg-white">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <div className="bg-white rounded-[40px] shadow-[0_40px_80px_rgba(0,0,0,0.04)] overflow-hidden border border-[#e1e3e4]">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="p-10 md:p-16 space-y-8">
-                <div className="space-y-3">
-                  <h2 className="text-3xl md:text-[32px] font-bold text-[#0045bc] leading-tight">
-                    처음 오셨나요?
-                  </h2>
-                  <p className="text-[#434655] text-base md:text-lg">
-                    물댄동산교회는 하나님의 사랑 안에서 여러분을 환영합니다. 함께 성장하는 기쁨을 누려보세요.
-                  </p>
-                </div>
+          <div className="relative overflow-hidden rounded-3xl md:rounded-[40px] bg-gradient-to-br from-[#dbe1ff] via-[#eef2ff] to-[#E0F5F0] border border-[#e1e3e4] shadow-[0_24px_60px_-16px_rgba(0,69,188,0.12)] p-7 md:p-12 lg:p-14">
+            {/* 데코 */}
+            <div className="absolute -bottom-12 -right-12 opacity-15 pointer-events-none">
+              <span
+                className="material-symbols-outlined text-[#0045bc]"
+                style={{ fontSize: '260px', fontVariationSettings: "'FILL' 1" }}
+              >
+                diversity_1
+              </span>
+            </div>
 
-                <div className="space-y-6">
-                  {NEW_FAMILY_STEPS.map((s) => (
-                    <div key={s.num} className="flex items-start gap-5">
-                      <div className="w-10 h-10 rounded-full bg-[#dbe1ff] text-[#0045bc] flex items-center justify-center font-bold shrink-0">
-                        {s.num}
-                      </div>
-                      <div>
-                        <h5 className="text-lg font-bold text-[#191c1d] mb-1">{s.title}</h5>
-                        <p className="text-[#434655] text-sm md:text-base">{s.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <Link
-                  href="/discipleship#new-family"
-                  className="inline-flex items-center gap-3 text-[#0045bc] text-lg font-bold hover:underline decoration-2 underline-offset-8"
-                >
-                  새가족 안내 자세히 보기
-                  <span className="material-symbols-outlined">arrow_right_alt</span>
-                </Link>
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-10">
+              <div className="md:max-w-2xl">
+                <h2 className="text-2xl md:text-[36px] font-bold text-[#0045bc] leading-tight mb-3">
+                  처음 오셨나요?
+                </h2>
+                <p className="text-[#434655] text-sm md:text-lg leading-relaxed">
+                  물댄동산교회는 하나님의 사랑 안에서 여러분을 환영합니다. 함께 성장하는 기쁨을 누려보세요.
+                </p>
               </div>
-
-              <div className="bg-[#E0F5F0] relative hidden lg:block overflow-hidden min-h-[400px]">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-4 max-w-xs px-6">
-                    <span className="material-symbols-outlined text-[120px] text-[#0045bc]/25">
-                      diversity_1
-                    </span>
-                    <p className="text-[#0045bc]/70 text-lg italic leading-relaxed">
-                      &ldquo;우리는 사랑 안에서 하나되는 공동체입니다&rdquo;
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/40 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute -top-10 -left-10 w-48 h-48 bg-[#0045bc]/5 rounded-full blur-2xl pointer-events-none" />
-              </div>
+              <Link
+                href="/discipleship#new-family"
+                className="inline-flex items-center justify-center gap-2 bg-[#0045bc] text-white px-7 py-4 rounded-full font-bold text-sm md:text-base shadow-lg shadow-[#0045bc]/20 hover:bg-[#1b5ce6] hover:shadow-xl hover:shadow-[#0045bc]/30 transition-all shrink-0 whitespace-nowrap"
+              >
+                새가족 안내 자세히 보기
+                <span className="material-symbols-outlined">arrow_right_alt</span>
+              </Link>
             </div>
           </div>
         </div>
