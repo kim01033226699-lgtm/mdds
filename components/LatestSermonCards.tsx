@@ -132,7 +132,7 @@ export default function LatestSermonCards() {
   }, [paused, sermons.length]);
 
   return (
-    <section className="pt-8 md:pt-20 max-w-[1200px] mx-auto px-5 md:px-6">
+    <section className="pt-6 md:pt-12 max-w-[1200px] mx-auto px-5 md:px-6">
       {/* Carousel */}
       <div
         className="relative overflow-hidden rounded-3xl"
@@ -142,14 +142,14 @@ export default function LatestSermonCards() {
         onTouchEnd={() => setPaused(false)}
       >
         <div
-          className="flex transition-transform duration-700 ease-out"
+          className="flex items-stretch transition-transform duration-700 ease-out"
           style={{ transform: `translateX(-${idx * 100}%)` }}
         >
           {sermons.map((s, i) => {
             const t = THEMES[i % THEMES.length];
             return (
-              <div key={s.id || i} className="w-full shrink-0">
-                <div className={`${t.bg} rounded-3xl p-8 md:p-14 lg:p-16 relative overflow-hidden min-h-[300px] md:min-h-[360px]`}>
+              <div key={s.id || i} className="w-full shrink-0 flex">
+                <div className={`${t.bg} rounded-3xl p-8 md:p-14 lg:p-16 relative overflow-hidden w-full min-h-[300px] md:min-h-[360px]`}>
                   <div className="absolute -bottom-12 -right-12 opacity-[0.08] pointer-events-none">
                     <span
                       className="material-symbols-outlined"
