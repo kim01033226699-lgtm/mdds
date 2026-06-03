@@ -383,19 +383,47 @@ export default function HistoryPage() {
   const [timeline, setTimeline] = useState<YearGroup[]>(DEFAULT_TIMELINE);
 
   useEffect(() => {
-    fetch('/api/contents/history')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (d?.data?.stats)
-          setStats(
-            d.data.stats.map((s: StatApi) => ({
-              num: s.number ?? s.num ?? '',
-              label: s.label ?? '',
-            }))
+    let alive = true;
+    (async () => {
+      try {
+        const r = await fetch('/api/contents/history');
+        if (!r.ok) return;
+        const d = await r.json();
+        if (!alive) return;
+
+        if (Array.isArray(d?.data?.stats) && d.data.stats.length > 0) {
+          const next = (d.data.stats as StatApi[]).map((s) => ({
+            num: String(s.number ?? s.num ?? ''),
+            label: String(s.label ?? ''),
+          }));
+          if (next.length > 0) setStats(next);
+        }
+
+        if (Array.isArray(d?.data?.timeline)) {
+          const valid = (d.data.timeline as YearGroup[]).filter(
+            (g) =>
+              g &&
+              typeof g.year === 'string' &&
+              Array.isArray(g.events) &&
+              g.events.every(
+                (e) =>
+                  e &&
+                  typeof e.date === 'string' &&
+                  typeof e.title === 'string' &&
+                  (e.sections === undefined ||
+                    (Array.isArray(e.sections) &&
+                      e.sections.every((s) => s && Array.isArray(s.items))))
+              )
           );
-        if (d?.data?.timeline?.length) setTimeline(d.data.timeline);
-      })
-      .catch(() => {});
+          if (valid.length > 0) setTimeline(valid);
+        }
+      } catch {
+        // 검증 실패/네트워크 오류 → default 데이터 유지
+      }
+    })();
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (
