@@ -1,5 +1,5 @@
 import PageHeader from '@/components/PageHeader';
-import DriveBoard from '@/components/DriveBoard';
+import DriveAlbumBoard from '@/components/DriveAlbumBoard';
 
 export const metadata = { title: '교회행사앨범 - 물댄동산교회' };
 
@@ -9,12 +9,12 @@ export default function Page() {
       <PageHeader
         pill="성도의 교제"
         title="교회행사앨범"
-        subtitle="함께한 시간의 사진을 모았습니다."
+        subtitle="함께한 행사들의 사진을 앨범으로 만나보세요."
       />
 
       <section className="py-12 md:py-16 bg-[#f8f9fa]">
         <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-          <DriveBoard boardId="album" mode="gallery" emptyMessage="아직 등록된 사진이 없습니다." />
+          <DriveAlbumBoard boardId="album" basePath="/event-album-family" />
         </div>
       </section>
     </>
