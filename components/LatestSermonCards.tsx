@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type VerseLine = { verse: number; text: string };
 type Sermon = {
@@ -103,10 +103,138 @@ const THEMES = [
 
 const AUTO_SLIDE_MS = 6000;
 
-export default function LatestSermonCards() {
-  const [sermons, setSermons] = useState<Sermon[]>(FALLBACK);
+// 모바일 카드 1장당 최대 절 수. 초과 시 카드 분할 (다음 슬라이드)
+const MOBILE_MAX_VERSES = 3;
+
+function chunkSermon(s: Sermon, size: number): Sermon[] {
+  if (!s.verses || s.verses.length <= size) return [s];
+  const total = Math.ceil(s.verses.length / size);
+  return Array.from({ length: total }, (_, i) => ({
+    ...s,
+    id: `${s.id}-p${i + 1}`,
+    verseDisplay: `${s.verseDisplay || s.verse} (${i + 1}/${total})`,
+    verses: s.verses!.slice(i * size, (i + 1) * size),
+  }));
+}
+
+function chunkSermons(sermons: Sermon[], size: number): Sermon[] {
+  return sermons.flatMap((s) => chunkSermon(s, size));
+}
+
+function Carousel({ sermons }: { sermons: Sermon[] }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused || sermons.length <= 1) return;
+    const id = setInterval(() => {
+      setIdx((i) => (i + 1) % sermons.length);
+    }, AUTO_SLIDE_MS);
+    return () => clearInterval(id);
+  }, [paused, sermons.length]);
+
+  // sermons 길이 바뀔 때 idx 범위 벗어남 방지
+  useEffect(() => {
+    if (idx >= sermons.length) setIdx(0);
+  }, [sermons.length, idx]);
+
+  return (
+    <div
+      className="relative overflow-hidden rounded-3xl"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
+    >
+      <div
+        className="flex items-stretch transition-transform duration-700 ease-out"
+        style={{ transform: `translateX(-${idx * 100}%)` }}
+      >
+        {sermons.map((s, i) => {
+          const t = THEMES[i % THEMES.length];
+          return (
+            <div key={s.id || i} className="w-full shrink-0 flex">
+              <div
+                className={`${t.bg} rounded-3xl p-8 md:p-14 lg:p-16 relative overflow-hidden w-full min-h-[300px] md:min-h-[360px]`}
+              >
+                <div className="absolute -bottom-12 -right-12 opacity-[0.08] pointer-events-none">
+                  <span
+                    className="material-symbols-outlined"
+                    style={{
+                      fontSize: '320px',
+                      color: t.accent,
+                      fontVariationSettings: "'FILL' 1",
+                    }}
+                  >
+                    menu_book
+                  </span>
+                </div>
+                <div className="relative z-10 max-w-3xl mx-auto text-center md:text-left">
+                  <span
+                    className={`font-['Manrope'] inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-sm font-bold mb-6 ${t.label}`}
+                  >
+                    <span
+                      className="material-symbols-outlined text-base"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      menu_book
+                    </span>
+                    {s.verseDisplay || s.verse}
+                  </span>
+                  {s.verses && s.verses.length > 0 ? (
+                    <ol className={`space-y-3 ${t.body}`}>
+                      {s.verses.map((v) => (
+                        <li
+                          key={v.verse}
+                          className="flex gap-3 items-baseline font-['Manrope'] text-base md:text-lg lg:text-xl leading-relaxed font-medium"
+                        >
+                          <span
+                            className={`shrink-0 font-extrabold tabular-nums ${t.label}`}
+                            style={{ minWidth: '1.5em' }}
+                          >
+                            {v.verse}.
+                          </span>
+                          <span>{v.text}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : s.verseText ? (
+                    <blockquote
+                      className={`font-['Manrope'] text-lg md:text-2xl lg:text-[26px] leading-relaxed font-medium ${t.body}`}
+                    >
+                      &ldquo;{s.verseText}&rdquo;
+                    </blockquote>
+                  ) : (
+                    <p className={`${t.body} text-base`}>본문 구절을 불러오는 중입니다…</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {sermons.length > 1 && (
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
+          {sermons.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`${i + 1}번째 슬라이드`}
+              onClick={() => setIdx(i)}
+              className={`h-2 rounded-full transition-all ${
+                i === idx ? 'w-8 bg-[#0045bc]' : 'w-2 bg-[#0045bc]/30 hover:bg-[#0045bc]/50'
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function LatestSermonCards() {
+  const [sermons, setSermons] = useState<Sermon[]>(FALLBACK);
 
   useEffect(() => {
     let alive = true;
@@ -123,102 +251,19 @@ export default function LatestSermonCards() {
     };
   }, []);
 
-  useEffect(() => {
-    if (paused || sermons.length <= 1) return;
-    const id = setInterval(() => {
-      setIdx((i) => (i + 1) % sermons.length);
-    }, AUTO_SLIDE_MS);
-    return () => clearInterval(id);
-  }, [paused, sermons.length]);
+  // 모바일은 3절 초과 시 카드 분할
+  const mobileSermons = useMemo(
+    () => chunkSermons(sermons, MOBILE_MAX_VERSES),
+    [sermons]
+  );
 
   return (
     <section className="pt-6 md:pt-12 max-w-[1200px] mx-auto px-5 md:px-6">
-      {/* Carousel */}
-      <div
-        className="relative overflow-hidden rounded-3xl"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={() => setPaused(true)}
-        onTouchEnd={() => setPaused(false)}
-      >
-        <div
-          className="flex items-stretch transition-transform duration-700 ease-out"
-          style={{ transform: `translateX(-${idx * 100}%)` }}
-        >
-          {sermons.map((s, i) => {
-            const t = THEMES[i % THEMES.length];
-            return (
-              <div key={s.id || i} className="w-full shrink-0 flex">
-                <div className={`${t.bg} rounded-3xl p-8 md:p-14 lg:p-16 relative overflow-hidden w-full min-h-[300px] md:min-h-[360px]`}>
-                  <div className="absolute -bottom-12 -right-12 opacity-[0.08] pointer-events-none">
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: '320px', color: t.accent, fontVariationSettings: "'FILL' 1" }}
-                    >
-                      menu_book
-                    </span>
-                  </div>
-                  <div className="relative z-10 max-w-3xl mx-auto text-center md:text-left">
-                    <span
-                      className={`font-['Manrope'] inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-sm font-bold mb-6 ${t.label}`}
-                    >
-                      <span
-                        className="material-symbols-outlined text-base"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        menu_book
-                      </span>
-                      {s.verseDisplay || s.verse}
-                    </span>
-                    {s.verses && s.verses.length > 0 ? (
-                      <ol className={`space-y-3 ${t.body}`}>
-                        {s.verses.map((v) => (
-                          <li
-                            key={v.verse}
-                            className="flex gap-3 items-baseline font-['Manrope'] text-base md:text-lg lg:text-xl leading-relaxed font-medium"
-                          >
-                            <span
-                              className={`shrink-0 font-extrabold tabular-nums ${t.label}`}
-                              style={{ minWidth: '1.5em' }}
-                            >
-                              {v.verse}.
-                            </span>
-                            <span>{v.text}</span>
-                          </li>
-                        ))}
-                      </ol>
-                    ) : s.verseText ? (
-                      <blockquote
-                        className={`font-['Manrope'] text-lg md:text-2xl lg:text-[26px] leading-relaxed font-medium ${t.body}`}
-                      >
-                        &ldquo;{s.verseText}&rdquo;
-                      </blockquote>
-                    ) : (
-                      <p className={`${t.body} text-base`}>본문 구절을 불러오는 중입니다…</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Dots */}
-        {sermons.length > 1 && (
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
-            {sermons.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`${i + 1}번째 슬라이드`}
-                onClick={() => setIdx(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === idx ? 'w-8 bg-[#0045bc]' : 'w-2 bg-[#0045bc]/30 hover:bg-[#0045bc]/50'
-                }`}
-              />
-            ))}
-          </div>
-        )}
+      <div className="md:hidden">
+        <Carousel sermons={mobileSermons} />
+      </div>
+      <div className="hidden md:block">
+        <Carousel sermons={sermons} />
       </div>
     </section>
   );
