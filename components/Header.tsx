@@ -75,11 +75,31 @@ export default function Header() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [live, setLive] = useState<{ live: boolean; url: string } | null>(null);
 
   useEffect(() => {
     const close = () => setOpenMenu(null);
     document.addEventListener('click', close);
     return () => document.removeEventListener('click', close);
+  }, []);
+
+  // 유튜브 라이브 상태 폴링 (60초마다)
+  useEffect(() => {
+    let alive = true;
+    const check = () => {
+      fetch('/api/youtube/live')
+        .then((r) => r.json())
+        .then((d: { live?: boolean; url?: string }) => {
+          if (alive) setLive({ live: !!d.live, url: d.url || 'https://www.youtube.com/@mdds/live' });
+        })
+        .catch(() => {});
+    };
+    check();
+    const t = setInterval(check, 60000);
+    return () => {
+      alive = false;
+      clearInterval(t);
+    };
   }, []);
 
   // 모바일 메뉴 열림 시 body 스크롤 잠금
@@ -184,12 +204,28 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3 shrink-0">
-          <Link
-            href="/sunday-sermon"
-            className="hidden lg:block text-sm font-semibold text-[#00488d] hover:underline"
-          >
-            라이브
-          </Link>
+          {live?.live ? (
+            <a
+              href={live.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-[#e53935] text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-[#c62828] transition-colors"
+              aria-label="유튜브 라이브 시청"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-white opacity-75 animate-ping" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+              </span>
+              라이브 ON
+            </a>
+          ) : (
+            <Link
+              href="/sunday-sermon"
+              className="hidden lg:block text-sm font-semibold text-[#00488d] hover:underline"
+            >
+              라이브
+            </Link>
+          )}
           <Link
             href="/discipleship#new-family"
             className="hidden md:inline-block bg-[#00488d] text-white px-4 py-2 rounded text-sm font-semibold hover:bg-[#005fb8] transition-colors"

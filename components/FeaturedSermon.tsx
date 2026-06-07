@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type Sermon = {
   id: string;
@@ -61,10 +61,21 @@ const FALLBACK: Sermon[] = [
   },
 ];
 
+// "2026.05.31" → { key: "2026.05", label: "2026년 5월" }
+function monthOf(date?: string): { key: string; label: string } {
+  if (!date) return { key: '기타', label: '기타' };
+  const m = date.match(/(\d{4})[.\-/](\d{1,2})/);
+  if (!m) return { key: '기타', label: '기타' };
+  return { key: `${m[1]}.${m[2].padStart(2, '0')}`, label: `${m[1]}년 ${Number(m[2])}월` };
+}
+
+type MonthGroup = { key: string; label: string; items: Sermon[] };
+
 export default function FeaturedSermon() {
   const [sermons, setSermons] = useState<Sermon[]>(FALLBACK);
   const [featuredIdx, setFeaturedIdx] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [monthPage, setMonthPage] = useState(0);
 
   useEffect(() => {
     let alive = true;
@@ -81,10 +92,22 @@ export default function FeaturedSermon() {
     };
   }, []);
 
-  const featured = sermons[featuredIdx];
-  const past = sermons.filter((_, i) => i !== featuredIdx).slice(0, 4);
+  // 설교를 월별로 묶음 (최신 월이 먼저)
+  const months: MonthGroup[] = useMemo(() => {
+    const map = new Map<string, MonthGroup>();
+    for (const s of sermons) {
+      const { key, label } = monthOf(s.date);
+      if (!map.has(key)) map.set(key, { key, label, items: [] });
+      map.get(key)!.items.push(s);
+    }
+    return Array.from(map.values()).sort((a, b) => b.key.localeCompare(a.key));
+  }, [sermons]);
 
+  const featured = sermons[featuredIdx];
   if (!featured) return null;
+
+  const safePage = Math.min(monthPage, Math.max(0, months.length - 1));
+  const currentMonth = months[safePage];
 
   const selectSermon = (idx: number) => {
     setFeaturedIdx(idx);
@@ -179,46 +202,109 @@ export default function FeaturedSermon() {
             </div>
           </div>
 
-          {/* Sidebar: 지난 설교 (최대 4개) */}
-          <aside className="lg:col-span-4 space-y-4">
-            <h4 className="text-base md:text-lg font-bold border-b border-[#c3c6d7] pb-3">
-              지난 설교
-            </h4>
-            <div className="space-y-2">
-              {past.map((s) => {
-                const trueIdx = sermons.findIndex((x) => x.id === s.id);
-                return (
+          {/* Sidebar: 최근 설교 말씀 (월별 목록 + 화살표 이동) */}
+          <aside className="lg:col-span-4">
+            <div className="bg-[#f8f9ff] rounded-3xl p-5 md:p-6 border border-[#e1e6ff]">
+              {/* 헤더: 아이콘 + 제목 + 화살표 */}
+              <div className="flex items-center justify-between gap-3 mb-5">
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="w-10 h-10 rounded-xl bg-[#dbe1ff] inline-flex items-center justify-center shrink-0">
+                    <span
+                      className="material-symbols-outlined text-[#0045bc] text-xl"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      auto_stories
+                    </span>
+                  </span>
+                  <div className="min-w-0">
+                    <h4 className="text-base md:text-lg font-extrabold text-[#0b1c30] leading-tight truncate">
+                      최근 설교 말씀
+                    </h4>
+                    {currentMonth && (
+                      <p className="text-xs text-[#0045bc] font-semibold mt-0.5">{currentMonth.label}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
                   <button
-                    key={s.id}
                     type="button"
-                    onClick={() => selectSermon(trueIdx)}
-                    className="w-full flex gap-3 md:gap-4 p-3 md:p-4 rounded-2xl hover:bg-[#f3f4f5] transition-colors group text-left"
+                    onClick={() => setMonthPage((p) => Math.max(0, p - 1))}
+                    disabled={safePage === 0}
+                    aria-label="이전 달 설교"
+                    className="w-9 h-9 rounded-full bg-white border border-[#c2c6d4] inline-flex items-center justify-center text-[#0045bc] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#eff4ff] transition-colors"
                   >
-                    <div className="w-20 h-14 md:w-24 md:h-16 bg-[#edeeef] rounded-lg overflow-hidden flex-shrink-0 relative">
-                      <Image
-                        src={`https://i.ytimg.com/vi/${s.id}/mqdefault.jpg`}
-                        alt=""
-                        fill
-                        sizes="96px"
-                        className="object-cover opacity-70 group-hover:opacity-100 transition-opacity"
-                        unoptimized
-                      />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-[#0045bc] text-xs font-semibold mb-1">{s.date}</p>
-                      <p className="text-xs md:text-sm font-semibold text-[#191c1d] line-clamp-2">
-                        {s.title || '설교 영상'}
-                        {(s.verseDisplay || s.verse) && (
-                          <span className="text-[#737686] font-normal">
-                            {' '}
-                            ({s.verseDisplay || s.verse})
-                          </span>
-                        )}
-                      </p>
-                    </div>
+                    <span className="material-symbols-outlined text-xl">chevron_left</span>
                   </button>
-                );
-              })}
+                  <button
+                    type="button"
+                    onClick={() => setMonthPage((p) => Math.min(months.length - 1, p + 1))}
+                    disabled={safePage >= months.length - 1}
+                    aria-label="다음 달 설교"
+                    className="w-9 h-9 rounded-full bg-white border border-[#c2c6d4] inline-flex items-center justify-center text-[#0045bc] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#eff4ff] transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-xl">chevron_right</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* 해당 월 설교 목록 */}
+              <div className="space-y-2">
+                {currentMonth?.items.map((s) => {
+                  const trueIdx = sermons.findIndex((x) => x.id === s.id);
+                  const isActive = trueIdx === featuredIdx;
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => selectSermon(trueIdx)}
+                      className={`w-full flex gap-3 md:gap-4 p-3 rounded-2xl transition-colors group text-left ${
+                        isActive ? 'bg-[#dbe1ff]' : 'bg-white hover:bg-[#eff4ff]'
+                      }`}
+                    >
+                      <div className="w-24 h-16 bg-[#edeeef] rounded-lg overflow-hidden flex-shrink-0 relative">
+                        <Image
+                          src={`https://i.ytimg.com/vi/${s.id}/mqdefault.jpg`}
+                          alt=""
+                          fill
+                          sizes="96px"
+                          className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                          unoptimized
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[#0045bc] text-xs font-semibold mb-1">{s.date}</p>
+                        <p className="text-xs md:text-sm font-semibold text-[#191c1d] line-clamp-2">
+                          {s.title || '설교 영상'}
+                          {(s.verseDisplay || s.verse) && (
+                            <span className="text-[#737686] font-normal">
+                              {' '}
+                              ({s.verseDisplay || s.verse})
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* 페이지네이션 점 (월) */}
+              {months.length > 1 && (
+                <div className="flex items-center justify-center gap-2 mt-5">
+                  {months.map((m, i) => (
+                    <button
+                      key={m.key}
+                      type="button"
+                      onClick={() => setMonthPage(i)}
+                      aria-label={`${m.label} 설교 보기`}
+                      aria-current={i === safePage}
+                      className={`h-2.5 rounded-full transition-all ${
+                        i === safePage ? 'w-6 bg-[#0045bc]' : 'w-2.5 bg-[#c2c6d4] hover:bg-[#a8c8ff]'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </aside>
         </div>
