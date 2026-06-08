@@ -75,6 +75,7 @@ export default function Header() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<number | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openCat, setOpenCat] = useState<string | null>(null);
   const [live, setLive] = useState<{ live: boolean; url: string } | null>(null);
 
   useEffect(() => {
@@ -110,6 +111,8 @@ export default function Header() {
       return () => {
         document.body.style.overflow = prev;
       };
+    } else {
+      setOpenCat(null); // 메뉴 닫히면 열린 카테고리 초기화
     }
   }, [mobileOpen]);
 
@@ -347,36 +350,48 @@ export default function Header() {
                     );
                   }
 
+                  const isOpen = openCat === menu.label;
                   return (
                     <li key={menu.label}>
-                      <details className="bg-white rounded-2xl overflow-hidden shadow-[0_2px_8px_rgba(11,28,48,0.04)] [&[open]_.chev]:rotate-90">
-                        <summary className="list-none cursor-pointer flex items-center gap-3 px-4 py-3.5">
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-[0_2px_8px_rgba(11,28,48,0.04)]">
+                        <button
+                          type="button"
+                          onClick={() => setOpenCat(isOpen ? null : menu.label)}
+                          aria-expanded={isOpen}
+                          className="w-full list-none cursor-pointer flex items-center gap-3 px-4 py-3.5"
+                        >
                           <span className="w-10 h-10 rounded-full bg-[#dbe6f7] inline-flex items-center justify-center shrink-0">
                             <span className="material-symbols-outlined text-[#0045bc] text-xl">
                               {icon}
                             </span>
                           </span>
-                          <span className="flex-1 text-sm font-bold text-[#0b1c30]">
+                          <span className="flex-1 text-left text-sm font-bold text-[#0b1c30]">
                             {menu.label}
                           </span>
-                          <span className="chev material-symbols-outlined text-[#0045bc] transition-transform">
+                          <span
+                            className={`material-symbols-outlined text-[#0045bc] transition-transform ${
+                              isOpen ? 'rotate-90' : ''
+                            }`}
+                          >
                             chevron_right
                           </span>
-                        </summary>
-                        <ul className="bg-[#f6f9fc] border-t border-[#e1e8f0]">
-                          {menu.items?.map((item) => (
-                            <li key={item.href} className="border-t border-white first:border-t-0">
-                              <Link
-                                href={item.href}
-                                onClick={() => setMobileOpen(false)}
-                                className="block pl-[68px] pr-4 py-3 text-sm text-[#424752] active:bg-[#dbe1ff]"
-                              >
-                                {item.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
+                        </button>
+                        {isOpen && (
+                          <ul className="bg-[#f6f9fc] border-t border-[#e1e8f0]">
+                            {menu.items?.map((item) => (
+                              <li key={item.href} className="border-t border-white first:border-t-0">
+                                <Link
+                                  href={item.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="block pl-[68px] pr-4 py-3 text-sm text-[#424752] active:bg-[#dbe1ff]"
+                                >
+                                  {item.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     </li>
                   );
                 })}
