@@ -41,7 +41,7 @@ export default function Home() {
             { href: '/sunday-sermon', label: '이번주설교' },
             { href: '/discipleship#new-family', label: '새신자' },
             { href: '/bulletin', label: '주보보기' },
-            { href: '/church-news-events', label: '공지사항' },
+            { href: '/church-news-events', label: '교회소식' },
           ].map((b) => (
             <Link
               key={b.href}
@@ -88,7 +88,7 @@ export default function Home() {
                 { href: '/sunday-sermon', label: '이번주설교' },
                 { href: '/discipleship#new-family', label: '새신자' },
                 { href: '/bulletin', label: '주보보기' },
-                { href: '/church-news-events', label: '공지사항' },
+                { href: '/church-news-events', label: '교회소식' },
               ].map((b) => (
                 <Link
                   key={b.href}

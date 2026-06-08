@@ -59,7 +59,7 @@ const menus = [
 const QUICK_MENU = [
   { href: '/sunday-sermon', icon: 'mic', label: '이번주설교' },
   { href: '/bulletin', icon: 'menu_book', label: '주보' },
-  { href: '/church-news-events', icon: 'campaign', label: '공지사항' },
+  { href: '/church-news-events', icon: 'campaign', label: '교회소식' },
 ];
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -302,12 +302,9 @@ export default function Header() {
                 >
                   {q.icon}
                 </span>
-                <div className="flex items-center justify-between gap-1">
-                  <span className="text-sm font-bold text-[#0b1c30] truncate">{q.label}</span>
-                  <span className="material-symbols-outlined text-base text-[#0045bc] shrink-0">
-                    chevron_right
-                  </span>
-                </div>
+                <span className="text-sm font-bold text-[#0b1c30] leading-tight">
+                  {q.label}
+                </span>
               </Link>
             ))}
           </div>
