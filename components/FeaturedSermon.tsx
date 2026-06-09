@@ -116,7 +116,7 @@ export default function FeaturedSermon() {
 
   return (
     <section id="sermon" className="py-6 md:py-12 bg-white">
-      <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+      <div className="max-w-[960px] mx-auto px-5 md:px-6">
         <div className="mb-8 md:mb-12">
           <span className="font-['Manrope'] text-xs md:text-sm font-bold text-[#0045bc] uppercase tracking-widest">
             주일 메시지

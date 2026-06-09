@@ -258,7 +258,7 @@ export default function LatestSermonCards() {
   );
 
   return (
-    <section className="pt-6 md:pt-12 max-w-[1200px] mx-auto px-5 md:px-6">
+    <section className="pt-6 md:pt-12 max-w-[960px] mx-auto px-5 md:px-6">
       <div className="md:hidden">
         <Carousel sermons={mobileSermons} />
       </div>

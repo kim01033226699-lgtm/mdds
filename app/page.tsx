@@ -21,8 +21,53 @@ export default function Home() {
   return (
     <div className="bg-[#f8f9fa] text-[#191c1d] font-['Manrope']">
       {/* Mobile-only top: 제목 + 말씀 + 바로가기 버튼 (md 이상에선 숨김) */}
-      <section className="md:hidden bg-white pt-6 pb-6 px-5 border-b border-[#e1e3e4]">
-        <div className="text-center mb-6">
+      <section className="md:hidden relative overflow-hidden bg-white pt-6 pb-6 px-5 border-b border-[#e1e3e4]">
+        {/* 배경: 동산 위 교회(우상단) + 교회를 끼고 흐르는 시냇물(좌하단) — 연필 스케치풍 라인 드로잉 */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 390 240"
+          preserveAspectRatio="xMidYMid meet"
+          className="pointer-events-none absolute inset-0 w-full h-full text-[#0045bc] opacity-[0.16]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {/* 동산(언덕) */}
+          <path d="M192 156 C232 106 268 82 314 84 C350 86 374 102 390 120" />
+          {/* 교회 — 본당 */}
+          <path d="M313 86 L313 70 L343 70 L343 86" />
+          <path d="M309 70 L328 56 L347 70" />
+          {/* 교회 — 종탑 */}
+          <path d="M299 86 L299 60 L313 60" />
+          <path d="M296 60 L306 47 L316 60" />
+          {/* 십자가 */}
+          <path d="M306 47 L306 39" />
+          <path d="M302 43 L310 43" />
+          {/* 문/창문/바닥선 */}
+          <path d="M324 86 L324 77 Q328 72 332 77 L332 86" />
+          <circle cx="338" cy="78" r="2.4" />
+          <circle cx="306" cy="69" r="1.8" />
+          <path d="M295 87 L349 87" />
+          {/* 잔디 */}
+          <path d="M318 88 l-1 4 M321 88 l0 4 M324 89 l1 4" />
+          {/* 동산의 나무 */}
+          <path d="M362 100 L362 92" />
+          <path d="M362 92 q-7 -3 -5 -10 q2 -7 9 -6 q8 1 7 9 q-1 7 -11 7 z" />
+          <path d="M285 100 L285 93" />
+          <path d="M285 93 q-6 -2 -4 -9 q3 -6 9 -5 q7 2 5 9 q-2 6 -10 5 z" />
+          {/* 시냇물 (두 줄기 강둑) */}
+          <path d="M250 150 C208 165 190 192 146 202 C104 212 66 218 18 236" />
+          <path d="M259 159 C221 173 201 200 157 210 C119 219 80 225 32 238" />
+          {/* 물결 무늬 */}
+          <path d="M206 172 q6 4 12 0" />
+          <path d="M166 190 q6 4 12 0" />
+          <path d="M120 204 q6 4 12 0" />
+          <path d="M74 219 q6 4 12 0" />
+        </svg>
+
+        <div className="relative z-10 text-center mb-6">
           <h1 className="font-['Manrope'] text-2xl font-extrabold text-[#0045bc] leading-[1.25] mb-3 tracking-tight">
             복음으로 다시
             <br />
@@ -36,7 +81,7 @@ export default function Home() {
             — 골로새서 2:6-7
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="relative z-10 grid grid-cols-4 gap-2">
           {[
             { href: '/sunday-sermon', label: '이번주설교' },
             { href: '/discipleship#new-family', label: '새신자' },
@@ -66,7 +111,7 @@ export default function Home() {
             }}
           />
         </div>
-        <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-6 w-full py-8 md:py-16">
+        <div className="relative z-10 max-w-[960px] mx-auto px-5 md:px-6 w-full py-8 md:py-16">
           <div className="max-w-2xl space-y-6">
             <div className="inline-flex items-center bg-white/60 backdrop-blur-sm px-4 py-1.5 rounded-full border border-[#0045bc]/15">
               <span className="text-[#0045bc] text-[13px] font-semibold tracking-[0.08em]">
@@ -113,7 +158,7 @@ export default function Home() {
       <LatestSermonCards />
 
       {/* Quick Links Bento */}
-      <section className="py-6 md:py-12 max-w-[1200px] mx-auto px-5 md:px-6">
+      <section className="py-6 md:py-12 max-w-[960px] mx-auto px-5 md:px-6">
         <div className="grid grid-cols-2 gap-3 md:gap-6">
           {/* 우리의 예배 (mint) */}
           <Link
@@ -199,7 +244,7 @@ export default function Home() {
 
       {/* New Family — 가로로 넓은 단일 카드 (예배안내 바로 아래) */}
       <section className="py-6 md:py-12 bg-white">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+        <div className="max-w-[960px] mx-auto px-5 md:px-6">
           <div className="relative overflow-hidden rounded-3xl md:rounded-[40px] bg-gradient-to-br from-[#dbe1ff] via-[#eef2ff] to-[#E0F5F0] border border-[#e1e3e4] shadow-[0_24px_60px_-16px_rgba(0,69,188,0.12)] p-7 md:p-12 lg:p-14">
             <div className="absolute -bottom-12 -right-12 opacity-15 pointer-events-none">
               <span
@@ -236,7 +281,7 @@ export default function Home() {
 
       {/* Church News + Location */}
       <section className="py-6 md:py-12 bg-[#f8f9fa]">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-6">
+        <div className="max-w-[960px] mx-auto px-5 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* News */}
             <div className="space-y-8">
