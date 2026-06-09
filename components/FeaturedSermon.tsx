@@ -93,15 +93,18 @@ export default function FeaturedSermon() {
   }, []);
 
   // 설교를 월별로 묶음 (최신 월이 먼저)
+  // 단, "이번주 설교 영상"에 재생 중인 설교는 목록에서 제외
   const months: MonthGroup[] = useMemo(() => {
+    const featuredId = sermons[featuredIdx]?.id;
     const map = new Map<string, MonthGroup>();
     for (const s of sermons) {
+      if (s.id === featuredId) continue;
       const { key, label } = monthOf(s.date);
       if (!map.has(key)) map.set(key, { key, label, items: [] });
       map.get(key)!.items.push(s);
     }
     return Array.from(map.values()).sort((a, b) => b.key.localeCompare(a.key));
-  }, [sermons]);
+  }, [sermons, featuredIdx]);
 
   const featured = sermons[featuredIdx];
   if (!featured) return null;
