@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 
 type VerseLine = { verse: number; text: string };
 type Sermon = {
@@ -124,31 +124,74 @@ function chunkSermons(sermons: Sermon[], size: number): Sermon[] {
 function Carousel({ sermons }: { sermons: Sermon[] }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const startX = useRef(0);
+  const startY = useRef(0);
+  const axis = useRef<'x' | 'y' | null>(null);
 
+  const SWIPE_THRESHOLD = 40;
+
+  // 자동 슬라이드 (마우스 호버 / 터치 중에는 멈춤)
   useEffect(() => {
-    if (paused || sermons.length <= 1) return;
+    if (paused || dragging || sermons.length <= 1) return;
     const id = setInterval(() => {
       setIdx((i) => (i + 1) % sermons.length);
     }, AUTO_SLIDE_MS);
     return () => clearInterval(id);
-  }, [paused, sermons.length]);
+  }, [paused, dragging, sermons.length]);
 
   // sermons 길이 바뀔 때 idx 범위 벗어남 방지
   useEffect(() => {
     if (idx >= sermons.length) setIdx(0);
   }, [sermons.length, idx]);
 
+  // 터치 스와이프
+  const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    if (sermons.length <= 1) return;
+    startX.current = e.touches[0].clientX;
+    startY.current = e.touches[0].clientY;
+    axis.current = null;
+    setDragging(true); // 손가락 닿는 동안 자동 슬라이드 정지
+    setPaused(true);
+  };
+  const onTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+    if (!dragging) return;
+    const dx = e.touches[0].clientX - startX.current;
+    const dy = e.touches[0].clientY - startY.current;
+    if (axis.current === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      axis.current = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    }
+    if (axis.current === 'x') setDragX(dx); // 좌우 스와이프만 손가락 따라 이동 (세로는 페이지 스크롤 유지)
+  };
+  const endDrag = () => {
+    if (axis.current === 'x' && Math.abs(dragX) > SWIPE_THRESHOLD) {
+      if (dragX < 0) setIdx((i) => (i + 1) % sermons.length);
+      else setIdx((i) => (i - 1 + sermons.length) % sermons.length);
+    }
+    setDragX(0);
+    setDragging(false);
+    setPaused(false);
+    axis.current = null;
+  };
+
   return (
     <div
       className="relative overflow-hidden rounded-3xl"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      onTouchStart={() => setPaused(true)}
-      onTouchEnd={() => setPaused(false)}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={endDrag}
+      onTouchCancel={endDrag}
     >
       <div
-        className="flex items-stretch transition-transform duration-700 ease-out"
-        style={{ transform: `translateX(-${idx * 100}%)` }}
+        className="flex items-stretch"
+        style={{
+          transform: `translateX(calc(-${idx * 100}% + ${dragX}px))`,
+          transition: dragging ? 'none' : 'transform 0.7s ease-out',
+          touchAction: 'pan-y',
+        }}
       >
         {sermons.map((s, i) => {
           const t = THEMES[i % THEMES.length];
@@ -169,7 +212,7 @@ function Carousel({ sermons }: { sermons: Sermon[] }) {
                     menu_book
                   </span>
                 </div>
-                <div className="relative z-10 max-w-3xl mx-auto text-center md:text-left">
+                <div className="relative z-10 max-w-3xl mx-auto text-left">
                   <span
                     className={`font-['Manrope'] inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-sm font-bold mb-6 ${t.label}`}
                   >
