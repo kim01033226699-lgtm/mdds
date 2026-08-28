@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import SermonVideoPlayer from '@/components/SermonVideoPlayer';
 
 export const metadata = { title: '주일설교 - 물댄동산교회' };
 
@@ -18,16 +19,7 @@ export default function SundaySermonPage() {
         <div className="grid grid-cols-4 md:grid-cols-12 gap-3 md:gap-5">
           {/* 영상 플레이어 (12 col, 전체 폭) */}
           <div className="col-span-4 md:col-span-12 bg-white border border-[#c2c6d4] rounded-xl overflow-hidden">
-            <div className="aspect-video bg-[#0b1c30]">
-              <iframe
-                width="100%"
-                height="100%"
-                src={`https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}`}
-                title="주일설교 재생목록"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+            <SermonVideoPlayer />
           </div>
 
           {/* YouTube 채널 이동 버튼 — 영상 바로 아래 */}
