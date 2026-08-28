@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 
 const menus = [
   { label: 'HOME', href: '/' },
+  { label: 'HOME2', href: '/home2' },
   {
     label: '교회소개',
     items: [
@@ -63,6 +64,7 @@ const QUICK_MENU = [
 ];
 
 const CATEGORY_ICONS: Record<string, string> = {
+  HOME2: 'home',
   '교회소개': 'church',
   '말씀과 찬양': 'music_note',
   '양육/훈련': 'school',
