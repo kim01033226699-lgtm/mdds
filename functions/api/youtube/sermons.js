@@ -168,6 +168,14 @@ function walk(obj, out) {
     const id = v.videoId || '';
     if (id && title) out.push({ id, title });
   }
+  // YouTube's current playlist markup (2026) uses lockupViewModel.
+  // Keep the legacy renderer above as a fallback for gradual rollouts.
+  if (obj.lockupViewModel) {
+    const v = obj.lockupViewModel;
+    const id = v.contentId || '';
+    const title = v.metadata?.lockupMetadataViewModel?.title?.content || '';
+    if (id && title && !out.some((item) => item.id === id)) out.push({ id, title });
+  }
   for (const k of Object.keys(obj)) walk(obj[k], out);
 }
 

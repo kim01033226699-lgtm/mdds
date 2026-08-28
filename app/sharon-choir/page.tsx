@@ -1,17 +1,10 @@
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
+import ChoirVideos from '@/components/ChoirVideos';
 
 export const metadata = { title: '샤론찬양대 - 물댄동산교회' };
 
 const PLAYLIST_ID = 'PLuyd60PWgGd0ELm4cbBubqZHCeHRkvN-Y';
-
-const RECENT_VIDEOS = [
-  { id: '0dNCPu4X9b0', title: '예수를 나의 구주 삼고', date: '2025.12.14' },
-  { id: 'pdf-DB3ibZs', title: '나의 입술 찬양', date: '2025.11.30' },
-  { id: '0F7ZspYR6m8', title: '하나님의 사랑 주님의 눈물', date: '2025.11.23' },
-  { id: 'PZVcwXqHfe0', title: '나의 피난처 예수', date: '2025.11.16' },
-  { id: 'T_1v-pgd0NU', title: '내게 능력 주시는 자', date: '2025.11.09' },
-];
 
 export default function SharonChoirPage() {
   return (
@@ -26,16 +19,7 @@ export default function SharonChoirPage() {
         <div className="grid grid-cols-4 md:grid-cols-12 gap-3 md:gap-5">
           {/* 영상 플레이어 (8 col) */}
           <div className="col-span-4 md:col-span-8 bg-white border border-[#c2c6d4] rounded-xl overflow-hidden">
-            <div className="aspect-video bg-[#0b1c30]">
-              <iframe
-                width="100%"
-                height="100%"
-                src={`https://www.youtube.com/embed/videoseries?list=${PLAYLIST_ID}`}
-                title="샤론찬양대 재생목록"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+            <ChoirVideos choir="샤론찬양대" mode="player" />
             <div className="p-6 md:p-8 border-t border-[#c2c6d4]">
               <div className="flex items-center gap-2 mb-3 text-[#00488d]">
                 <span className="material-symbols-outlined">play_circle</span>
@@ -44,8 +28,8 @@ export default function SharonChoirPage() {
                 샤론찬양대 찬양 영상
               </h2>
               <p className="text-sm text-[#424752] leading-relaxed">
-                주일예배에서 드린 샤론찬양대의 찬양이 순서대로 재생됩니다.
-                플레이어 우측 상단의 목록 아이콘으로 회차를 선택할 수 있습니다.
+                주일예배에서 드린 샤론찬양대의 최신 찬양을 재생합니다.
+                다른 찬양은 최근 영상 목록에서 확인할 수 있습니다.
               </p>
             </div>
           </div>
@@ -73,24 +57,7 @@ export default function SharonChoirPage() {
               <span className="font-['JetBrains_Mono'] text-xs font-medium tracking-wider text-[#00488d] uppercase block mb-3">
                 최근 영상
               </span>
-              <ul className="space-y-2">
-                {RECENT_VIDEOS.map((v, idx) => (
-                  <li key={v.id}>
-                    <Link
-                      href={`https://www.youtube.com/watch?v=${v.id}&list=${PLAYLIST_ID}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-baseline gap-2 text-sm text-[#0b1c30] hover:text-[#00488d] transition-colors group"
-                    >
-                      <span className="font-['JetBrains_Mono'] text-[10px] text-[#424752] tabular-nums shrink-0">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
-                      <span className="flex-1 truncate group-hover:underline">{v.title}</span>
-                      <span className="font-['JetBrains_Mono'] text-[10px] text-[#424752] shrink-0">{v.date}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <ChoirVideos choir="샤론찬양대" mode="list" />
             </div>
 
             <Link
