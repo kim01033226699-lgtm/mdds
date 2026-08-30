@@ -90,10 +90,10 @@ export default function Home2Page() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0c2318]/90 via-[#0c2318]/55 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0c2318]/50 via-transparent to-transparent" />
 
-          <div className="relative max-w-[1200px] mx-auto min-h-[680px] md:min-h-[760px] px-5 md:px-6 py-20 md:py-28 flex items-end md:items-center">
-            <div className="max-w-3xl text-white pb-8 md:pb-0">
+          <div className="relative z-10 max-w-[1200px] mx-auto min-h-[680px] md:min-h-[760px] px-5 md:px-6 pt-20 pb-32 md:pt-28 md:pb-44 flex items-end md:items-center">
+            <div className="max-w-3xl text-white">
               <p className="mb-6 text-sm md:text-base font-bold tracking-[0.22em] uppercase text-[#d9e9d5]">
-                Welcome to MDD Church
+                Welcome to MDDS Church
               </p>
               <h1 className="text-[42px] sm:text-6xl md:text-7xl lg:text-[84px] font-black leading-[1.02] tracking-[-0.045em] text-balance">
                 복음으로 다시
@@ -122,9 +122,21 @@ export default function Home2Page() {
               </div>
             </div>
           </div>
+
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 1440 180"
+            preserveAspectRatio="none"
+            className="absolute z-20 -bottom-px left-0 h-[105px] md:h-[170px] w-full"
+          >
+            <path
+              d="M0 76C315 124 650 154 936 126C1120 108 1288 65 1440 20V180H0V76Z"
+              fill="#f7f5f0"
+            />
+          </svg>
         </section>
 
-        <section className="relative z-10 -mt-7 md:-mt-12 px-5 md:px-6">
+        <section className="relative z-30 -mt-7 md:-mt-12 px-5 md:px-6">
           <div className="max-w-[1080px] mx-auto bg-white rounded-2xl md:rounded-3xl shadow-[0_18px_60px_rgba(23,35,27,0.13)] grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#e5e2d8] overflow-hidden">
             {[
               {

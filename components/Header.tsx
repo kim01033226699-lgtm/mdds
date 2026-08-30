@@ -11,6 +11,7 @@ const menus = [
     label: '교회소개',
     items: [
       { label: '인사말', href: '/greeting' },
+      { label: '인사말2', href: '/greeting2' },
       { label: '교회발자취', href: '/history' },
       { label: '섬기는사람들', href: '/serving' },
       { label: '예배안내', href: '/worship-guide' },
@@ -127,8 +128,8 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-[#c2c6d4] sticky top-0 z-50 font-['Inter']">
-      <div className="max-w-[1200px] mx-auto px-5 md:px-6 h-16 flex justify-between items-center gap-4">
+    <header className="sticky top-0 z-50 py-3 bg-transparent font-['Inter']">
+      <div className="w-[calc(100%-24px)] xl:w-[85%] mx-auto px-5 md:px-6 h-16 flex justify-between items-center gap-3 bg-white/95 backdrop-blur-md border border-[#c2c6d4] rounded-2xl shadow-[0_10px_30px_rgba(11,28,48,0.10)]">
         <Link
           href="/"
           className="font-['Hanken_Grotesk'] text-lg font-bold text-[#00488d] tracking-tight whitespace-nowrap shrink-0"
@@ -136,7 +137,7 @@ export default function Header() {
           물댄동산교회
         </Link>
 
-        <nav className="hidden md:flex items-center gap-5 lg:gap-6">
+        <nav className="hidden md:flex items-center gap-3 xl:gap-5">
           {menus.map((menu, i) => {
             const active = isActive(menu);
             return (
