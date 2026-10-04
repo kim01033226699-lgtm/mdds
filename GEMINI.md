@@ -1,4 +1,3 @@
-@AGENTS.md
 
 
 <!-- BEGIN PROJECT-HANDOFF v1 -->
